@@ -1,47 +1,52 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deo IA V3 - Vraie IA</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deo IA V4 - Totale</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#0f172a;color:white;height:100vh;display:flex;flex-direction:column}
-header{background:#1e293b;padding:14px;text-align:center;border-bottom:1px solid #334155}
-header h1{font-size:22px} header p{font-size:13px;opacity:.7}
-#chat{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
-.msg{max-width:88%;padding:12px 15px;border-radius:18px;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
-.user{align-self:flex-end;background:#3b82f6;border-bottom-right-radius:4px}
-.bot{align-self:flex-start;background:#1e293b;border:1px solid #334155;border-bottom-left-radius:4px}
-.typing{opacity:.6;font-style:italic}
-.bar{background:#1e293b;padding:12px;display:flex;gap:8px;border-top:1px solid #334155}
-#input{flex:1;padding:13px 18px;border-radius:25px;border:1px solid #334155;background:#0f172a;color:white;outline:none}
-#send{background:#3b82f6;border:none;padding:12px 18px;border-radius:25px;color:white;font-weight:bold}
+body{background:#0a1020;color:#fff;height:100vh;display:flex;flex-direction:column}
+header{background:#162040;padding:12px;text-align:center}
+#menu{display:flex;gap:6px;overflow:auto;padding:8px;background:#111c36}
+#menu button{white-space:nowrap;padding:6px 10px;border-radius:15px;border:1px solid #34477a;background:#1c2d5a;color:#fff;font-size:11px}
+#chat{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:92%;padding:11px 14px;border-radius:16px;font-size:14px;line-height:1.5;white-space:pre-wrap}
+.user{align-self:flex-end;background:#3b82f6}.bot{align-self:flex-start;background:#1a274e;border:1px solid #2e4378}
+.bar{background:#162040;padding:10px;display:flex;gap:6px}
+#input{flex:1;padding:12px 16px;border-radius:22px;border:1px solid #34477a;background:#0a1020;color:#fff;outline:none}
+#send{background:#3b82f6;border:none;padding:11px 16px;border-radius:22px;color:#fff;font-weight:bold}
 </style>
 </head>
 <body>
-<header><h1>🤖 Deo IA V3</h1><p>Intelligence de Kinshasa - Pose tout</p></header>
-<div id="chat"><div class="msg bot">Mbote Deo! Je suis maintenant une vraie IA 🧠 Pose ta question sur Gaston Jèze, l'impôt, tout!</div></div>
-<div class="bar"><input id="input" placeholder="Définition impôt selon Gaston Jèze" onkeypress="if(event.key==='Enter')send()"><button id="send" onclick="send()">Envoyer</button></div>
+<header><h1>🎓 Deo IA V4</h1><p>Histoire + Gouvernement RDC + Tous Cours</p></header>
+<div id="menu">
+<button onclick="ask('Gaston Jèze définition')">Gaston Jèze</button>
+<button onclick="ask('Histoire RDC')">Histoire RDC</button>
+<button onclick="ask('Gouvernement RDC actuel 2026')">Gouvernement</button>
+<button onclick="ask('Comptabilité analytique')">Compta</button>
+<button onclick="ask('Maths financières')">Maths Fin</button>
+<button onclick="ask('ECOPOL')">ECOPOL</button>
+</div>
+<div id="chat"><div class="msg bot">Mbote Deo! V4 prête! Je connais tout: histoire monde, RDC, gouvernement actuel, et tous tes cours (Fiscale, Compta, Maths, Droit, etc). Teste-moi!</div></div>
+<div class="bar"><input id="input" placeholder="Pose ta question..." onkeypress="if(event.key==='Enter')send()"><button id="send" onclick="send()">Envoyer</button></div>
 <script>
-const chat=document.getElementById('chat'), inp=document.getElementById('input'), btn=document.getElementById('send');
+const chat=document.getElementById('chat'), inp=document.getElementById('input');
 function add(t,c){let d=document.createElement('div');d.className='msg '+c;d.innerText=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;return d}
+function ask(t){inp.value=t;send();}
 async function send(){
  let q=inp.value.trim(); if(!q) return;
- add(q,'user'); inp.value=''; btn.disabled=true;
- let loading=add('Deo IA réfléchit... ⏳','bot typing');
+ add(q,'user'); inp.value='';
+ let loading=add('⏳ Deo IA V4 cherche...','bot');
  try{
-   let prompt=encodeURIComponent(`Tu es Deo IA, créée par Deo à Kinshasa. Réponds en français simple. Question: ${q}`);
-   let res=await fetch(`https://text.pollinations.ai/${prompt}?model=openai`);
-   let text=await res.text();
-   loading.remove();
-   add(text,'bot');
- }catch(e){
-   loading.remove();
-   add("Connexion faible. Réessaie. Ta question était: "+q,"bot");
- }
- btn.disabled=false;
+   let base=`Tu es Deo IA V4, prof expert de Kinshasa. Gaston Jèze=prestation pécuniaire requise des particuliers par voie d'autorité, à titre définitif et sans contrepartie, pour charges publiques. Gouvernement RDC 2026: Président Tshisekedi, PM Judith Suminwa. Connais tous cours: fiscale, compta, maths fin, ECODEV, ECOPOL, droit, ECM, etc. Réponds en français simple. Question: ${q}`;
+   let r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(base)}?model=openai`);
+   let t=await r.text(); loading.remove();
+   if(q.toLowerCase().includes('gaston')||q.toLowerCase().includes('jese')||q.toLowerCase().includes('jeze')){
+     t="📚 GASTON JÈZE (Définition examen):\n\"L'impôt est une prestation pécuniaire requise des particuliers par voie d'autorité, à titre définitif et sans contrepartie, en vue de la couverture des charges publiques.\"\n\n"+t;
+   }
+   add(t,'bot');
+ }catch(e){loading.remove();add("Erreur réseau. Réessaie. Je connais Gaston Jèze par coeur.",'bot');}
 }
 </script>
 </body>
-</html>
+                </html>
