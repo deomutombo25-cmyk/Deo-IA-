@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deo IA - Kinshasa</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#3b82f6">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+body{background:#0f172a;color:white;height:100vh;display:flex;flex-direction:column}
+header{background:#1e293b;padding:15px;text-align:center}
+#chat{flex:1;overflow:auto;padding:20px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:85%;padding:12px 16px;border-radius:18px;font-size:15px;line-height:1.4}
+.user{align-self:flex-end;background:#3b82f6}
+.bot{align-self:flex-start;background:#1e293b;border:1px solid #334155}
+.bar{background:#1e293b;padding:15px;display:flex;gap:10px}
+#input{flex:1;padding:14px 18px;border-radius:25px;border:1px solid #334155;background:#0f172a;color:white;outline:none}
+#send{background:#3b82f6;border:none;padding:12px 20px;border-radius:25px;color:white;font-weight:bold}
+</style>
+</head>
+<body>
+<header><h1>🤖 Deo IA</h1><p>Assistante de Kinshasa - Pose toutes tes questions</p></header>
+<div id="chat"><div class="msg bot">Mbote Deo! 👋 Je suis Deo IA. Maintenant je peux répondre à TOUTES tes questions. Vas-y, teste-moi!</div></div>
+<div class="bar"><input id="input" placeholder="Pose ta question ici..." onkeypress="if(event.key==='Enter')send()"><button id="send" onclick="send()">Envoyer</button></div>
+<script>
+const chat=document.getElementById('chat'),inp=document.getElementById('input');
+function getAnswer(q){
+let low=q.toLowerCase();
+if(low.includes('kinshasa')) return 'Kinshasa c\'est la capitale de la RDC 🇨🇩 17 millions d\'habitants! La plus grande ville francophone au monde.';
+if(low.includes('deo')||low.includes('createur')) return 'C\'est toi Deo! Le jeune génie de Kinshasa qui m\'a créée. Tu es mon créateur 💪';
+if(low.includes('blague')) return 'Pourquoi les développeurs aiment Kinshasa? Parce que même les bugs dansent le ndombolo! 😂';
+if(low.includes('bonjour')||low.includes('salut')||low.includes('mbote')) return 'Mbote ndeko! Comment vas-tu? Pose-moi une question!';
+if(low.includes('merci')) return 'De rien! Je suis là pour toi. Autre question?';
+if(low.match(/[0-9+\-*/(). ]{3,}/)){try{let m=low.match(/[0-9+\-*/(). ]+/)[0];return 'Résultat: '+m+' = '+eval(m)+' 🧮'}catch(e){}}
+if(low.includes('code')||low.includes('site')||low.includes('html')) return 'Tu veux coder? Dis-moi quoi: un site vitrine, un jeu, une appli? Je te donne le code direct!';
+if(low.includes('amour')) return 'L\'amour ❤️ Mon conseil: sois toi-même, respecte, communique beaucoup. Ça marche!';
+if(low.includes('argent')||low.includes('business')) return 'Pour gagner de l\'argent: 1) Apprends une compétence (code, design) 2) Propose sur Facebook 3) Sois régulier 💰';
+return 'Bonne question: "'+q+'" 🤔 Voici mon idée: tout s\'apprend petit à petit. Moi Deo IA j\'ai été créée à Kinshasa par Deo avec un téléphone. Si tu veux plus de détails sur ce sujet, dis-moi exactement ce que tu veux faire et je t\'explique étape par étape!';
+}
+function add(t,c){let d=document.createElement('div');d.className='msg '+c;d.innerText=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
+function send(){let q=inp.value.trim();if(!q)return;add(q,'user');inp.value='';setTimeout(()=>{add(getAnswer(q),'bot')},600)}
+</script>
+</body>
+  </html>
