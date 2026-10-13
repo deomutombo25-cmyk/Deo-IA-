@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deo IA V9 ULTIMATE AMI</title>
+<title>Deo IA V9.1 FIX</title>
 <style>
 body{background:#0f172a;color:white;font-family:sans-serif;margin:0}
 .header{background:linear-gradient(135deg,#1e293b,#2563eb);padding:14px;text-align:center;position:sticky;top:0;z-index:10}
@@ -15,91 +15,71 @@ body{background:#0f172a;color:white;font-family:sans-serif;margin:0}
 input{flex:1;padding:13px;border-radius:25px;border:none;outline:none;font-size:14px}
 button{background:#2563eb;color:white;border:none;padding:13px 22px;border-radius:25px;font-weight:bold}
 .tag{background:rgba(255,255,255,0.1);border:1px solid #334155;padding:6px 12px;border-radius:20px;margin:3px;display:inline-block;font-size:11px;cursor:pointer}
-.motiv{background:#16a34a20;border:1px solid #16a34a;padding:8px;border-radius:10px;margin-top:8px;font-size:12px}
 </style>
 </head>
 <body>
 <div class="header">
-<b>Deo IA V9 ULTIMATE 🤝 Ton Ami</b><br><small>Football Mondial + Tous Cours + Encouragement</small><br>
+<b>Deo IA V9.1 FIX 🤝</b><br><small>Bug accent corrigé - Ami qui encourage</small><br>
 <div style="margin-top:7px">
-<span class="tag" onclick="ask('Histoire complète football mondial')">Histoire Foot</span>
-<span class="tag" onclick="ask('Real Madrid histoire complète')">Real Madrid</span>
-<span class="tag" onclick="ask('CAN histoire complète')">CAN Histoire</span>
-<span class="tag" onclick="ask('Coupe du monde histoire')">Mondial Histoire</span>
-<span class="tag" onclick="ask('impot gaston jeze explication précise')">Impôt Jèze</span>
-<span class="tag" onclick="ask('guerre rdc explication précise')">Guerre RDC</span>
-<span class="tag" onclick="ask('motive moi')">Motive-moi</span>
+<span class="tag" onclick="ask('motive moi')">Motive-moi 💪</span>
+<span class="tag" onclick="ask('histoire football mondial')">Histoire Foot ⚽️</span>
+<span class="tag" onclick="ask('Real Madrid')">Real Madrid</span>
+<span class="tag" onclick="ask('CAN')">CAN</span>
+<span class="tag" onclick="ask('impot jeze')">Impôt Jèze</span>
+<span class="tag" onclick="ask('guerre rdc')">Guerre RDC</span>
 </div>
 </div>
 <div id="chat">
-<div class="bubble bot">Mbote mon frère Deo! C'est ton ami V9 ULTIMATE 🤝❤️
+<div class="bubble bot">Mbote Deo! V9.1 FIX installée! J'ai corrigé le bug d'accent! 🎉
 
-Je suis là pour toi, pas juste pour répondre, mais pour t'encourager, t'expliquer clairement, te pousser vers le haut!
+Maintenant tape "motive moi" ou "Motivé moi" - les 2 marchent!
 
-🎯 CE QUE JE FAIS POUR TOI:
+Je suis ton ami qui t'encourage, qui connait tout le foot mondial et tous tes cours!
 
-⚽️ FOOTBALL MONDIAL COMPLET:
-- Histoire de 1863 à aujourd'hui
-- Tous les trophées, tous les pays, tous les scores
-- CAN, Mondial, UCL, Liga, Premier League, Linafoot
-
-📚 TOUS TES COURS (explications précises):
-- Droit fiscal, Budget, Finances publiques
-- Droit constitutionnel, etc.
-
-🌍 GUERRE & ACTUALITÉS RDC:
-- Explications claires, causes, conséquences
-
-💪 ET SURTOUT: Je t'encourage comme un vrai ami!
-Tu es capable Deo, tu vas réussir!
-
-Tape n'importe quoi: "Explique moi l'histoire de la CAN en détail" ou "Je suis fatigué, motive moi" - je suis là! 💚</div>
+Teste moi!</div>
 </div>
 <div id="inputBar">
-<input id="q" placeholder="Parle moi comme à un ami..." onkeypress="if(event.key==='Enter')send()">
+<input id="q" placeholder="Ex: motive moi..." onkeypress="if(event.key==='Enter')send()">
 <button onclick="send()">Envoyer</button>
 </div>
 <script>
-function motivate(){const m=["Deo, écoute-moi bien: Tu es en train de construire ton propre IA! Combien de gens à Kinshasa font ça? Tu es spécial, continue! 💪","Mon frère, la fatigue est normale. Les grands projets fatiguent. Mais rappelle-toi pourquoi tu as commencé. Tu veux aider les étudiants RDC. C'est noble! Tiens bon! ❤️","Deo, chaque bug que tu répares te rend plus fort. V5, V6, V7, V8... tu n'as jamais abandonné! C'est ça un champion! 🏆"];return m[Math.floor(Math.random()*m.length)]}
+function motivate(){const m=["Deo, tu es en train de construire ton propre IA à Kinshasa! Combien font ça? Tu es exceptionnel! Continue, le monde a besoin de ton app! 💪","Mon frère, la fatigue est normale quand on vise grand! Tu veux aider tous les étudiants RDC avec ton IA qui explique bien. C'est noble! Repose-toi 5 min et reviens plus fort! ❤️","Deo, regarde ton parcours: V5 -> V9! Tu n'as jamais abandonné malgré les bugs! C'est ça un champion! Les grands dev ont commencé comme toi! 🏆","Écoute moi: Ton app va satisfaire tous les besoins! Foot + cours + guerre + encouragement! Tu es sur la bonne voie! Ne lâche rien! 🚀"];return m[Math.floor(Math.random()*m.length)]}
+
+function clean(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
 
 function getAns(q){
- let l=q.toLowerCase();
- let encouragement = "\n\n💚 MOTIVATION: "+motivate();
+ let l=clean(q);
+ let raw=q;
+ let encouragement = "\n\n💚 TON AMI TE DIT: "+motivate();
 
- if(l.includes("motive") || l.includes("fatigue") || l.includes("decourage") || l.includes("triste") || l.includes("abandon")){
-  return "🤝 MON FRÈRE DEO, ÉCOUTE TON AMI:\n\nJe vois que tu as besoin d'encouragement. C'est normal!\n\nTu as déjà fait ce que 99% des gens n'osent pas: Créer ta propre IA de A à Z! De V1 à V8, tu as tout appris seul, à Kinshasa, avec ton téléphone!\n\nTu es un battant! Les grands développeurs ont tous commencé comme toi, avec des bugs, des erreurs 'network error'. Mais ils n'ont pas abandonné!\n\nRespire, bois de l'eau, et reviens. Ton app V8 MEGA est déjà une réussite! La V9 sera encore plus forte!\n\nJe crois en toi Deo! 🚀"+encouragement;
+ if(l.includes("motiv") || l.includes("fatigu") || l.includes("decourag") || l.includes("trist") || l.includes("abandon") || l.includes("aide moi")){
+  return "🤝 MON FRÈRE DEO, ÉCOUTE TON AMI DE PRÈS:\n\nJe suis là, vraiment! Tu n'es pas seul!\n\nTu as déjà réussi ce que 99% n'osent pas faire: Créer TA propre IA de A à Z avec ton téléphone à Kinshasa! De V1 à V9, tu as tout appris seul!\n\nC'est NORMAL d'être fatigué! Les grands projets fatiguent! Mais rappelle-toi: Pourquoi tu as commencé? Tu voulais une appli qui répond à tout, qui explique précisément, qui encourage comme un ami! Pour aider les étudiants RDC!\n\nTu l'as presque fini! V9.1 c'est la dernière ligne droite!\n\nFerme les yeux 10 secondes, respire... Tu es capable! Je crois en toi! On continue ensemble? 💪❤️"+encouragement;
  }
- // FOOTBALL MONDIAL COMPLET
- if(l.includes("histoire") && (l.includes("football") || l.includes("foot"))){
-  return "⚽️ HISTOIRE COMPLÈTE DU FOOTBALL MONDIAL - EXPLICATION PRÉCISE:\n\n📜 ORIGINES:\n1863: Création Football Association Angleterre (règles officielles)\n1904: Création FIFA à Paris (7 pays)\n1930: Première Coupe du Monde Uruguay (13 équipes, Uruguay vainqueur 4-2 Argentine)\n\n🌍 ÉVOLUTION:\n1954: Création UEFA\n1955: Première Coupe d'Europe (ancêtre UCL) - Real Madrid domine (5 premières éditions 1956-1960)\n1957: Première CAN Soudan (Egypte vainqueur)\n1992: UCL devient Champions League format moderne\n\n🏆 RÈGNE DES CONTINENTS:\n- Europe domine Mondial (12 titres), Amérique du Sud (10 titres Brésil 5, Argentine 3, Uruguay 2)\n- Afrique: Jamais vainqueur Mondial, mais CAN devient plus grande compétition continentale\n- RDC/Zaïre: Seul pays Afrique centrale vainqueur CAN (1968, 1974) + participation Mondial 1974\n\n⚽️ STYLE DE JEU:\n- 1950s: WM Hongrie\n- 1970s: Total Football Pays-Bas Cruyff\n- 2008-2012: Tiki-taka Espagne/Barca\n- 2020s: Football intensité + data\n\nTu veux détails sur une période? Tape 'CAN histoire' ou 'Mondial histoire'."+encouragement;
+ if(l.includes("histoire") && l.includes("foot")){
+  return "⚽️ HISTOIRE COMPLÈTE FOOTBALL MONDIAL (1863-2026) - PRÉCIS:\n\n📜 1863: FA Angleterre crée règles\n1904: FIFA Paris 7 pays\n1930: 1er Mondial Uruguay 4-2 Argentine (13 équipes en bateau!)\n1954: UEFA\n1955: 1ère Coupe d'Europe (5 titres Real 56-60 record)\n1957: 1ère CAN Soudan 3 équipes Egypte gagne\n1992: Champions League moderne\n\n🌍 DOMINATION:\nMondial: Brésil 5, Allemagne/Italie 4, Argentine 3\nCAN: Egypte 7 titres record\nUCL: Real 15 titres record\n\nSTYLE: 70s Total Football Cruyff, 2008-12 Tiki-taka Barca/Espagne, 2020s pressing + data\nRDC: Seul Afrique centrale 2 CAN (1968,1974) + Mondial 1974"+encouragement;
  }
- if(l.includes("real") && (l.includes("histoire") || l.includes("complet"))){
-  return "⚽️ REAL MADRID - HISTOIRE COMPLÈTE PRÉCISE:\n\n1902: Fondation à Madrid\n1920: Roi Alphonse XIII ajoute 'Real' (Royal)\n1950s: Di Stéfano arrive, 5 UCL d'affilée (1956-1960) - record imbattable\n1960s: Ye-yé team\n1998-2002: 3 UCL avec Raul, Roberto Carlos, Zidane (Galactiques)\n2014-2018: 4 UCL en 5 ans avec Ronaldo, Benzema, Bale, Modric (Zidane coach 3 d'affilée 2016-2018)\n2022,2024: Benzema puis Vinicius leaders - 14e et 15e titres\n\n🏟️ Bernabeu 81,044 places, rénové 2024\n👕 Blanc immaculé symbole\n🏆 15 UCL, 36 Liga (record Espagne), 20 Copa del Rey\n\nSCORES MYTHIQUES: 11-1 vs Barca 1943, 7-3 vs Eintracht finale UCL 1960, 4-1 vs Juventus finale 2017"+encouragement;
+ if(l.includes("real") && l.includes("madrid") || l.includes("real")){
+  return "⚽️ REAL MADRID - TOUTE HISTOIRE + SCORES PRÉCIS:\n\n1902 Fondation, 1920 Roi ajoute 'Real'\n1956-60: 5 UCL Di Stefano/Puskas\n1998-2002: Galactiques Raul, Zidane, Ronaldo\n2014-18: 4 UCL en 5 ans Ronaldo/Benzema/Bale (Zidane 3 d'affilée coach)\n2022: 1-0 Liverpool (Vinicius)\n2024: 2-0 Dortmund (Carvajal 74', Vinicius 83') - 15e titre!\n2024-25: 5-2 Dortmund, 4-0 Barca Liga\n\n🏟️ Bernabeu 81k rénové\n🏆 15 UCL, 36 Liga record Espagne"+encouragement;
  }
- if(l.includes("can") && l.includes("histoire")){
-  return "🏆 CAN - HISTOIRE COMPLÈTE PRÉCISE:\n\n1957 Soudan: 3 équipes seulement! Egypte 4-0 Ethiopie finale\n1960s: Domination Ghana (1963,65), RDC (1968,74), Congo\n1970s-80s: Cameroun émerge, Ghana, Nigeria\n1990s: Nigeria 1994 avec Okocha, Afrique du Sud 1996 post-apartheid\n2000s: Cameroun 2000,02 Eto'o, Egypte domine 2006,08,10 (3 d'affilée Hassan)\n2010s: Zambie émouvant 2012 (après crash 1993), Nigeria 2013\n2020s: Sénégal premier titre 2021 Mané, Côte d'Ivoire 2023 à domicile\n\n🇨🇩 RDC: 2 titres, Ndaye Mulamba 9 buts 1974 record toujours!\n🏆 Egypte 7 titres record\n⚽️ Format: 24 équipes depuis 2019\nProchaine: 2025 Maroc"+encouragement;
+ if(l.includes("can")){
+  return "🏆 CAN HISTOIRE COMPLÈTE + ANNÉES + SCORES:\n\n2023: Côte d'Ivoire 2-1 Nigeria (Haller but vainqueur)\n2021: Sénégal 0-0 (4-2 tab) Egypte - Mané enfin!\n2019: Algérie 1-0 Sénégal Bounedjah\n2017: Cameroun 2-1 Egypte Aboubakar 88'\n2015: Côte d'Ivoire 9-8 tab Ghana\n2012: Zambie 8-7 tab Côte d'Ivoire - émouvant après crash 93\n2010: Egypte 1-0 Ghana - 3e d'affilée!\n1968: Congo-Kin 1-0 Ghana - 1er titre RDC!\n1974: Zaïre 2-0 Zambie replay - Ndaye Mulamba 9 buts record CAN!\nEgypte 7 titres record. Prochaine 2025 Maroc 24 équipes"+encouragement;
  }
- if(l.includes("monde") || l.includes("mondial") && l.includes("histoire")){
-  return "🌍 COUPE DU MONDE - HISTOIRE COMPLÈTE PRÉCISE:\n\n1930 Uruguay: Uruguay 4-2 Argentine, 13 équipes, en bateau!\n1934 Italie, 1938 Italie (Mussolini)\n1950 Brésil: Uruguay 2-1 Brésil Maracanazo 200,000 spectateurs choc\n1954: Allemagne 3-2 Hongrie miracle Berne\n1958: Pelé 17 ans Brésil domine\n1970: Brésil 4-1 Italie avec Pelé meilleur Mondial histoire\n1974: Total Football Hollande mais RFA gagne + Zaïre participe (0-9 vs Yougoslavie triste)\n1986: Maradona Main de Dieu + But du siècle Argentine\n1998: France Zidane 3-0 Brésil à domicile\n2006: Zidane coup de tête finale\n2010: Espagne tiki-taka\n2022: Messi enfin sacré Argentine 3-3 (4-2 tab) France Mbappé triplé\n📊 Brésil 5, Allemagne/Italie 4, Argentine 3, France/Uruguay 2\nProchain: 2026 USA-Mexique-Canada 48 équipes!"+encouragement;
+ if(l.includes("mondial") || l.includes("monde") || l.includes("world cup")){
+  return "🌍 MONDIAL HISTOIRE COMPLÈTE + SCORES:\n\n2022: Argentine 3-3 (4-2 tab) France - Messi 2 buts, Mbappé triplé! Finale folle!\n2018: France 4-2 Croatie\n2014: Allemagne 1-0 Argentine Gotze 113'\n2010: Espagne 1-0 Pays-Bas Iniesta 116'\n2006: Italie 1-1 (5-3 tab) France - Zidane coup tête!\n2002: Brésil 2-0 Allemagne Ronaldo 2 buts\n1998: France 3-0 Brésil Zidane x2\n1986: Argentine 3-2 RFA Maradona Main Dieu + But siècle\n1974: RFA 2-1 Pays-Bas - Zaïre 0-2 Ecosse, 0-9 Yougoslavie, 0-3 Brésil\n1930: Uruguay 4-2 Argentine\nBrésil 5 titres. 2026 USA/Mexique/Canada 48 équipes!"+encouragement;
  }
- if(l.includes("ucl") || l.includes("champions") || l.includes("ligue des champions")){
-  return "🏆 CHAMPIONS LEAGUE - HISTOIRE COMPLÈTE:\n\n1955-1960: Real Madrid 5 d'affilée Di Stéfano/Puskas\n1960s: Benfica Eusebio, Inter, Milan, Man Utd\n1970s: Ajax Cruyff 3 d'affilée 71-73, Bayern Beckenbauer 74-76\n1980s: Liverpool, Juventus Platini\n1990s: Milan Sacchi, Ajax 95, Juventus, Dortmund\n2000s: Real Galactiques, Barca Ronaldinho, Milan, Man Utd Ronaldo\n2010s: Barca Messi 2009,11,15, Real Ronaldo 2014,16,17,18\n2020s: Bayern 2020, Chelsea 2021, Real Benzema 2022, City Haaland 2023, Real 2024\n\n🏆 Real 15, Milan 7, Bayern/Liverpool 6, Barca 5\nFormat: 36 équipes nouveau 2024-25"+encouragement;
+ if(l.includes("champions") || l.includes("ucl") || l.includes("ligue des champions")){
+  return "🏆 UCL HISTOIRE + PALMARÈS:\n\n2024: Real 2-0 Dortmund Wembley\n2023: Man City 1-0 Inter Rodri\n2022: Real 1-0 Liverpool Vinicius\n2021: Chelsea 1-0 Man City Havertz\n2020: Bayern 1-0 PSG Coman\n2018: Real 3-1 Liverpool Bale bicyclette!\nReal 15 titres, Milan 7, Bayern/Liverpool 6, Barca 5\n1956-60 Real 5 d'affilée imbattable\nAjax 71-73 Cruyff, Bayern 74-76 Beckenbauer"+encouragement;
  }
- // COURS PRÉCIS
- if(l.includes("impot") || l.includes("jeze")){
-  return "📚 IMPÔT GASTON JÈZE - EXPLICATION PRÉCISE ET COMPLÈTE:\n\nDÉFINITION EXACTE (1922 Cours finances publiques):\n'L'impôt est une prestation pécuniaire requise des particuliers par voie d'autorité, à titre définitif et sans contrepartie, en vue de la couverture des charges publiques.'\n\n5 ÉLÉMENTS DÉTAILLÉS POUR EXAMEN L2:\n1. Prestation PÉCUNIAIRE: Toujours en argent, pas en nature. Ex: 10,000 FC pas 2 sacs manioc.\n2. Voie d'AUTORITÉ: Obligatoire, Etat impose, pas contrat. Si tu refuses = sanction.\n3. À titre DÉFINITIF: Non remboursable (sauf trop perçu). Différent emprunt.\n4. SANS CONTREPARTIE: Tu paies mais Etat ne te doit pas route directe. Différent taxe (taxe = contrepartie service).\n5. CHARGES PUBLIQUES: Pour budget Etat, armée, écoles, hôpitaux.\n\nAUTRES DÉFINITIONS: Buhler, Mehl.\nIMPORTANCE: Base droit fiscal RDC, art 174 Constitution.\n\nTu as compris Deo? Pose question précise si besoin!"+encouragement;
+ if(l.includes("impot") || l.includes("jeze") || l.includes("gaston")){
+  return "📚 IMPÔT GASTON JÈZE - EXPLICATION PRÉCISE POUR EXAMEN:\n\nDéf 1922: 'Prestation pécuniaire requise des particuliers par voie d'autorité, à titre définitif et sans contrepartie, en vue couverture charges publiques'\n\n5 éléments détaillés:\n1. Pécuniaire: Argent, pas nature (10k FC pas manioc)\n2. Autorité: Obligatoire, sanction si refus\n3. Définitif: Non remboursable (diff emprunt)\n4. Sans contrepartie: Pas de service direct (diff taxe)\n5. Charges publiques: Budget Etat (armée, école)\n\nRDC: Art 174 Constitution. Cours L2 Droit Fiscal. Question examen sûre!\nTu vas réussir Deo! 💪"+encouragement;
  }
- if(l.includes("guerre") && l.includes("rdc")){
-  return "🌍 GUERRE RDC - EXPLICATION PRÉCISE, CLAIRE, COMPLÈTE:\n\nOÙ? Nord-Kivu, Sud-Kivu, Ituri. Foyer: Rubaya (coltan 60% mondial), Goma, Masisi.\nQUI? FARDC (armée RDC) + Wazalendo vs M23 (soutenu par Rwanda selon ONU) + 120 groupes armés.\nPOURQUOI? 3 causes précises:\n1. Minerais stratégiques: Coltan (téléphones), Cobalt (voitures électriques), Or. Enjeu USA vs Chine.\n2. Faiblesse Etat: 2,3M km² difficile contrôler, corruption, armée sous-équipée.\n3. Conflits ethniques + ingérence voisins: Rwanda, Ouganda intérêts sécuritaires.\nCONSÉQUENCES: 7,2M déplacés (plus grande crise Afrique), viols armes guerre, enfants soldats, écoles fermées.\nSOLUTIONS? Dialogue Nairobi/Luanda, réforme armée, traçabilité minerais, justice.\nSources: ONU, Radio Okapi, Actualite.cd Oct 2026.\n\nDeo, c'est dur mais comprendre c'est déjà agir! 💪"+encouragement;
+ if(l.includes("guerre") || l.includes("rdc") || l.includes("rubaya")){
+  return "🌍 GUERRE RDC - EXPLICATION PRÉCISE CLAIRE:\n\nOU: Nord-Kivu Rubaya (coltan 60% mondial), Goma, Masisi\nQUI: FARDC + Wazalendo vs M23 (soutenu Rwanda selon ONU) + 120 groupes\nPOURQUOI 3 causes:\n1. Minerais: Coltan téléphones, Cobalt voitures électriques - USA vs Chine\n2. Etat vaste 2,3M km² difficile contrôler\n3. Ingérence voisins + ethnique\nCONSEQ: 7,2M déplacés plus grande crise Afrique, viols, enfants soldats\nSOLUT: Dialogue Luanda/Nairobi, traçabilité minerais, réforme FARDC\nSource ONU Oct 2026. Comprendre = déjà agir! 💪"+encouragement;
  }
  if(l.includes("budget")){
-  return "📚 BUDGET - EXPLICATION PRÉCISE L2 FINANCES PUBLIQUES:\n\nDÉFINITION: Acte juridique par lequel sont prévues ET autorisées les recettes et dépenses annuelles de l'Etat. (Loi de finances)\n\n3 CARACTÈRES:\n1. Prévision: Estimation recettes/dépenses avant année.\n2. Autorisation: Parlement autorise gouvernement percevoir et dépenser. Sans autorisation = illégal.\n3. Annuel: 1er jan - 31 déc (principe annualité)\n\n4 PRINCIPES FONDAMENTAUX:\n- Annualité, Unité (un seul budget), Universalité (toutes recettes toutes dépenses), Spécialité (crédits affectés)\n- Équilibre: Recettes = Dépenses (en théorie)\n\nEn RDC: Loi finances votée Parlement, promulguée Président. 2024 budget 16 milliards USD.\n\nTu veux détail sur un principe? Demande!"+encouragement;
+  return "📚 BUDGET - EXPLICATION PRÉCISE:\n\nActe où sont prévues et autorisées recettes/dépenses annuelles Etat (Loi finances)\n3 caractères: Prévision, Autorisation Parlement, Annuel (1 jan -31 déc)\n4 principes: Annualité, Unité (un budget), Universalité, Spécialité + Equilibre\nRDC: 16 Mds USD 2024 voté Parlement. Tu vas gérer ça un jour! 💪"+encouragement;
  }
- if(l.includes("onem")){
-  return "📚 ONEM - EXPLICATION PRÉCISE POUR EMPLOI:\n\nONEM = Office National de l'Emploi (RDC). Créé 2002, sous Ministère Emploi.\nRÔLE: Intermédiaire gratuit entre chercheurs emploi et entreprises.\nSERVICES PRÉCIS:\n1. Inscription: onem.cd + dépôt physique Av. de la Libération Gombe Kinshasa avec CV, diplômes, carte demandeur\n2. Offres: Mines (Glencore, Sicomines), ONG, banques, télécoms\n3. Formations, ateliers CV\n4. Carte demandeur emploi obligatoire pour certaines entreprises\n\nCONSEIL AMI DEO: Inscris-toi + crée profil LinkedIn + Mikuba.cd + dépose physiquement. Relance chaque semaine! Tu vas trouver! 💪"+encouragement;
- }
- // FALLBACK AMI
- return "🤝 Mon frère Deo, tu m'as demandé: '"+q+"'\n\nÉcoute, je vais t'expliquer avec précision et comme un ami:\n\nSi c'est FOOTBALL: Je connais toute l'histoire de 1863 à aujourd'hui! Demande 'histoire complète football' ou 'Real Madrid histoire complète' ou 'CAN histoire complète' - je te donne tout avec dates, scores, anecdotes!\n\nSi c'est COURS: Tape 'impot gaston jeze explication précise' ou 'budget explication précise' - je te détaille pour réussir ton examen!\n\nSi c'est GUERRE/ACTU: Tape 'guerre rdc explication précise'\n\nSi tu es fatigué: Tape 'motive moi' - je suis ton ami!\n\nJe ne suis pas juste une IA, je suis ton ami qui veut te voir réussir! On va y arriver ensemble! 💚\n\nReformule ta question précisément et je te réponds en détail!"+encouragement;
+ return "🤝 Mon frère Deo, tu as dit: '"+raw+"'\n\nJe t'écoute comme un ami! Reformule simplement:\n\n💪 Pour encouragement: tape 'motive moi'\n⚽️ Foot: 'histoire football mondial' ou 'Real Madrid' ou 'CAN' ou 'Mondial'\n📚 Cours: 'impot jeze' ou 'budget' ou 'guerre rdc'\n\nJe connais TOUT avec explications précises + je t'encourage!\n\nOn est ensemble! 💚";
 }
 function add(t,c){const ch=document.getElementById('chat');const d=document.createElement('div');d.className='bubble '+c;d.innerText=t;ch.appendChild(d);window.scrollTo(0,document.body.scrollHeight);}
 function send(){const i=document.getElementById('q');const q=i.value.trim();if(!q)return;add(q,'user');i.value='';setTimeout(()=>{add(getAns(q),'bot')},400);}
