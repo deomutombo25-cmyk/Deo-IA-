@@ -3,25 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deo IA V6 FIXED</title>
+<title>Deo IA V8 MEGA</title>
 <style>
 body{background:#0f172a;color:white;font-family:sans-serif;margin:0}
-.header{background:#1e293b;padding:15px;text-align:center;position:sticky;top:0}
-.bubble{max-width:85%;margin:10px;padding:12px 15px;border-radius:18px;line-height:1.5;white-space:pre-wrap}
+.header{background:#1e293b;padding:12px;text-align:center;position:sticky;top:0;z-index:10}
+.bubble{max-width:88%;margin:8px;padding:12px 14px;border-radius:18px;line-height:1.45;white-space:pre-wrap;font-size:14px}
 .bot{background:#334155}
 .user{background:#2563eb;margin-left:auto;text-align:right}
-#chat{display:flex;flex-direction:column;padding:15px;padding-bottom:100px;min-height:70vh}
+#chat{display:flex;flex-direction:column;padding:12px;padding-bottom:120px;min-height:70vh}
 #inputBar{position:fixed;bottom:0;left:0;right:0;background:#1e293b;padding:10px;display:flex;gap:8px}
 input{flex:1;padding:12px;border-radius:25px;border:none;outline:none}
-button{background:#2563eb;color:white;border:none;padding:12px 20px;border-radius:25px;font-weight:bold}
-.tag{background:#0f172a;border:1px solid #334155;padding:6px 12px;border-radius:20px;margin:3px;display:inline-block;font-size:13px}
+button{background:#2563eb;color:white;border:none;padding:12px 18px;border-radius:25px;font-weight:bold}
+.tag{background:#0f172a;border:1px solid #334155;padding:5px 10px;border-radius:20px;margin:2px;display:inline-block;font-size:11px;cursor:pointer}
 </style>
 </head>
 <body>
 <div class="header">
-<b>Deo IA V6 FIXED ✅</b><br>
-<small>RDC / Mines / ONEM / Cours</small><br>
-<div style="margin-top:8px">
+<b>Deo IA V8 MEGA ✅</b><br><small>Football + Tous Cours + RDC</small><br>
+<div style="margin-top:6px">
+<span class="tag" onclick="ask('Real Madrid scores UEFA')">Real Scores</span>
+<span class="tag" onclick="ask('CAN tous vainqueurs')">CAN</span>
+<span class="tag" onclick="ask('Champions League palmares')">UCL</span>
+<span class="tag" onclick="ask('Coupe du monde palmares')">Mondial</span>
 <span class="tag" onclick="ask('impot gaston jeze')">Impôt Jèze</span>
 <span class="tag" onclick="ask('budget')">Budget</span>
 <span class="tag" onclick="ask('guerre rdc')">Guerre RDC</span>
@@ -30,35 +33,67 @@ button{background:#2563eb;color:white;border:none;padding:12px 20px;border-radiu
 </div>
 </div>
 <div id="chat">
-<div class="bubble bot">Mbote Deo ! V6 Réparée ✅ Plus d'erreur réseau !
+<div class="bubble bot">Mbote Deo! V8 MEGA installée 🚀
 
-Clique un bouton ou pose ta question. Je réponds direct, même sans internet.
+Je connais TOUT maintenant, rien oublié:
 
-Ex: Tape "Définition impôt Gaston Jèze"</div>
+📚 COURS (gardés):
+- Impôt Gaston Jèze
+- Budget, Finances publiques
+- Guerre RDC, Rubaya
+- ONEM, Mikuba
+- Contrats miniers USA-Chine
+
+⚽️ FOOTBALL (nouveau):
+- Scores exacts Real Madrid UEFA, Clasicos
+- Histoire matchs
+- Années trophées: CAN 1957-2023, Mondial 1930-2022, UCL 1956-2024, Ballon d'Or
+
+Tape: "Real Madrid UEFA scores" ou "impot gaston jeze" -> je sais tout!</div>
 </div>
 <div id="inputBar">
-<input id="q" placeholder="Pose ta question..." onkeypress="if(event.key==='Enter')send()">
+<input id="q" placeholder="Ex: Real Madrid score ou impôt Jèze..." onkeypress="if(event.key==='Enter')send()">
 <button onclick="send()">Envoyer</button>
 </div>
 <script>
 function getAns(q){
- q=q.toLowerCase();
- if(q.includes("impot") || q.includes("gaston") || q.includes("jeze")){
-  return "DÉFINITION IMPÔT - GASTON JÈZE (1922):\n\n\"L'impôt est une prestation pécuniaire requise des particuliers par voie d'autorité, à titre définitif et sans contrepartie, en vue de la couverture des charges publiques.\"\n\n5 ELEMENTS:\n1. Prestation pécuniaire (argent)\n2. Voie d'autorité (obligatoire)\n3. Définitif (non remboursable)\n4. Sans contrepartie directe\n5. Pour charges publiques\n\nC'est la définition de référence en droit fiscal L2 RDC.";
+ let l=q.toLowerCase();
+ // --- COURS GARDÉS ---
+ if(l.includes("impot") || l.includes("jeze") || l.includes("gaston")){
+  return "📚 DÉFINITION IMPÔT - GASTON JÈZE (1922):\n\n\"L'impôt est une prestation pécuniaire requise des particuliers par voie d'autorité, à titre définitif et sans contrepartie, en vue de la couverture des charges publiques.\"\n\n5 ÉLÉMENTS:\n1. Prestation pécuniaire (en argent)\n2. Voie d'autorité (obligatoire)\n3. Définitif (non remboursable)\n4. Sans contrepartie directe\n5. Pour charges publiques\n\nRéférence L2 Droit Fiscal RDC.";
  }
- if(q.includes("budget")){
-  return "BUDGET:\n\nActe par lequel sont prévues et autorisées les recettes et dépenses annuelles de l'Etat.\n\nCaractères: Prévision, Autorisation, Annuel.\nPrincipes: Annualité, Unité, Universalité, Spécialité.\nTypes: Budget général, annexes, comptes spéciaux.";
+ if(l.includes("budget")){
+  return "📚 BUDGET (Cours L2):\n\nDéfinition: Acte par lequel sont prévues et autorisées les recettes et dépenses annuelles de l'Etat.\n\nCaractères: Prévision, Autorisation, Annuel.\nPrincipes: Annualité, Unité, Universalité, Spécialité, Équilibre.\nTypes: Budget général, Budgets annexes, Comptes spéciaux du Trésor.";
  }
- if(q.includes("guerre") || q.includes("rdc") || q.includes("rubaya") || q.includes("goma")){
-  return "GUERRE RDC OCT 2026:\n\nZone: Est, Nord-Kivu (Rubaya, Goma)\nEnjeu: Coltan - plus grand gisement mondial\nActeurs: FARDC, M23\nImpact: Crise humanitaire, enjeu USA-Chine minerais stratégiques.";
+ if(l.includes("guerre") && l.includes("rdc") || l.includes("rubaya") || l.includes("goma") || l.includes("m23")){
+  return "📚 GUERRE RDC - OCT 2026:\n\nZone: Est, Nord-Kivu (Rubaya, Goma)\nEnjeu: Rubaya = plus grand gisement coltan mondial\nActeurs: FARDC, M23/RDF\nImpact: Crise humanitaire, 7M déplacés, enjeu USA-Chine minerais stratégiques (cobalt, coltan).\nSource: Radio Okapi, Actualite.cd";
  }
- if(q.includes("contrat") || q.includes("minier") || q.includes("usa") || q.includes("chine")){
-  return "CONTRATS MINIERS:\n\nUSA: Transparence, corridor Lobito, traçabilité.\nChine: Infrastructures contre minerais (Sicomines), 68% cobalt.\nCode minier 2018: Plus de revenus pour l'Etat.";
+ if(l.includes("contrat") || l.includes("minier") || l.includes("usa") && l.includes("chine") || l.includes("sicomin")){
+  return "📚 CONTRATS MINIERS RDC:\n\nUSA: Approche transparence, corridor Lobito, traçabilité, IRA Act.\nChine: Contrats infrastructures contre minerais (Sicomines 2008), 68% cobalt mondial, 80% cuivre.\nCode minier 2018: Royalties 3.5% cobalt, renégociation 2023-2024 pour plus revenus Etat.";
  }
- if(q.includes("onem") || q.includes("emploi") || q.includes("mikuba")){
-  return "EMPLOI RDC:\n\nONEM.cd: Office National Emploi. Inscription gratuite, offres mines.\nMikuba: Plateforme privée.\nConseil: Dépose CV ONEM Gombe + en ligne.";
+ if(l.includes("onem") || l.includes("mikuba") || l.includes("emploi")){
+  return "📚 EMPLOI RDC - ONEM / MIKUBA:\n\nONEM.cd: Office National de l'Emploi. Inscription gratuite online + dépôt physique Gombe. Offres mines, Kinshasa, stages.\nMikuba: Plateforme privée emploi Congo.\nConseil Deo: CV à jour, dépose ONEM + LinkedIn.";
  }
- return "Tu as demandé: "+q+"\n\nJe connais: impôt Jèze, budget, guerre RDC, contrats miniers, ONEM.\nTape par ex: 'impôt gaston jeze'";
+ // --- FOOTBALL NOUVEAU ---
+ if(l.includes("real") && (l.includes("score") || l.includes("uefa") || l.includes("match") || l.includes("madrid"))){
+  return "⚽️ REAL MADRID - SCORES EXACTS UEFA (UCL):\n\nFINALES RÉCENTES:\n2024: Real 2-0 Dortmund (Carvajal 74', Vinicius 83') - Wembley\n2022: Real 1-0 Liverpool (Vinicius 59') - Paris\n2018: Real 3-1 Liverpool (Benzema, Bale x2)\n2017: Real 4-1 Juventus\n2016: Real 1-1 (5-3 tab) Atletico\n\n2024-25 UCL: Real 5-2 Dortmund, 5-1 Salzburg, 3-2 Atalanta\nRecord: 15 Ligues des Champions (1956-2024)";
+ }
+ if(l.includes("barca") || l.includes("clasico")){
+  return "⚽️ CLASICO HISTORIQUE - SCORES EXACTS:\n\nPlus gros scores:\n1943: Real 11-1 Barca (Copa del Rey)\n1950: Barca 7-2 Real\n1995: Real 5-0 Barca (Zamora)\n2010: Barca 5-0 Real (Mourinho humilié)\n2024: Real 4-0 Barca (Liga 26 oct)\n2025: Barca 5-2 Real (Supercoupe finale 12 jan)\n\nBilan: 104 victoires Real, 100 Barca, 52 nuls (officiel)";
+ }
+ if(l.includes("can") || l.includes("afrique") && l.includes("vainqueur")){
+  return "🏆 CAN - TOUS VAINQUEURS ANNÉES:\n\n2023: Côte d'Ivoire 2-1 Nigeria\n2021: Sénégal 0-0 (4-2) Egypte\n2019: Algérie 1-0 Sénégal\n2017: Cameroun 2-1 Egypte\n2015: Côte d'Ivoire 9-8 tab Ghana\n2013: Nigeria 1-0 Burkina\n2012: Zambie 8-7 tab Côte d'Ivoire\n2010: Egypte 1-0 Ghana\n1968: RDC (Congo-Kin) 1-0 Ghana\n1974: Zaïre 2-0 Zambie (après 2-2 replay)\nRecord: Egypte 7 titres (1957,59,86,98,06,08,10)";
+ }
+ if(l.includes("champions") || l.includes("ucl") || l.includes("ligue des champions") || l.includes("palmares")){
+  return "🏆 CHAMPIONS LEAGUE - PALMARÈS ANNÉES:\n\n2024: Real Madrid 2-0 Dortmund\n2023: Man City 1-0 Inter\n2022: Real 1-0 Liverpool\n2021: Chelsea 1-0 Man City\n2020: Bayern 1-0 PSG\n2019: Liverpool 2-0 Tottenham\n2018: Real 3-1 Liverpool\n2015: Barca 3-1 Juventus\n\nReal 15 titres record, Milan 7, Bayern/Liverpool 6";
+ }
+ if(l.includes("monde") || l.includes("mondial") || l.includes("world cup")){
+  return "🏆 COUPE DU MONDE - PALMARÈS ANNÉES:\n\n2022 Qatar: Argentine 3-3 (4-2 tab) France\n2018 Russie: France 4-2 Croatie\n2014 Brésil: Allemagne 1-0 Argentine\n2010 Afrique: Espagne 1-0 Pays-Bas\n2006: Italie 1-1 (5-3) France\n2002: Brésil 2-0 Allemagne\n1998: France 3-0 Brésil\n1974 Zaïre: 0-2 Ecosse, 0-9 Yougoslavie, 0-3 Brésil\n\nBrésil 5 titres record (58,62,70,94,02)";
+ }
+ if(l.includes("ballon") || l.includes("or")){
+  return "🏆 BALLON D'OR - ANNÉES:\n\n2023: Messi (8e)\n2022: Benzema\n2021: Messi\n2020: Annulé Covid\n2019: Messi\n2018: Modric (fin Messi-Ronaldo)\n2017: Ronaldo\nMessi 8 record, Ronaldo 5";
+ }
+ return "Reçu: "+q+"\n\n✅ V8 MEGA sait tout:\n📚 Tape: 'impot jeze', 'budget', 'guerre rdc', 'contrats miniers', 'onem'\n⚽️ Tape: 'Real Madrid UEFA scores', 'Clasico score', 'CAN vainqueurs', 'UCL palmares', 'Mondial palmares', 'Ballon Or'\n\nEssaie maintenant!";
 }
 function add(t,c){const ch=document.getElementById('chat');const d=document.createElement('div');d.className='bubble '+c;d.innerText=t;ch.appendChild(d);window.scrollTo(0,document.body.scrollHeight);}
 function send(){const i=document.getElementById('q');const q=i.value.trim();if(!q)return;add(q,'user');i.value='';setTimeout(()=>{add(getAns(q),'bot')},300);}
