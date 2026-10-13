@@ -1,0 +1,13 @@
+{
+  "name": "Deo IA V5 - Monde Live",
+  "short_name": "Deo IA",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#080e1f",
+  "theme_color": "#121f44",
+  "icons": [{
+    "src": "https://cdn-icons-png.flaticon.com/512/4712/4712109.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
+}
