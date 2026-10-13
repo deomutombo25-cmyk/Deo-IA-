@@ -1,56 +1,42 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Deo IA V5 Live Monde</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#121f44">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#080e1f;color:#fff;height:100vh;display:flex;flex-direction:column}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#080e1f;color:#fff;height:100vh;display:flex;flex-direction:column;font-family:sans-serif}
 header{background:#121f44;padding:10px;text-align:center}
-.live{background:#000;color:#4ade80;padding:5px;font-size:11px;text-align:center}
-#menu{display:flex;gap:5px;overflow:auto;padding:7px;background:#0f1b3a}
-#menu button{padding:6px 10px;border-radius:14px;border:1px solid #2e4aa0;background:#1a2e6e;color:#fff;font-size:11px;white-space:nowrap}
-#chat{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:9px}
-.msg{max-width:92%;padding:10px 13px;border-radius:14px;font-size:13.5px;white-space:pre-wrap;line-height:1.5}
-.user{align-self:flex-end;background:#2563eb}.bot{align-self:flex-start;background:#162659;border:1px solid #2e4aa0}
+.live{background:#000;color:#4ade80;padding:3px 8px;border-radius:10px;font-size:12px}
+#menu{display:flex;gap:5px;overflow:auto;padding:8px;background:#0f1a33}
+#menu button{padding:6px 10px;border-radius:15px;border:none;background:#1e2f5a;color:#fff;white-space:nowrap}
+#chat{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.msg{max-width:92%;padding:10px 13px;border-radius:14px;line-height:1.4;font-size:14px}
+.user{align-self:flex-end;background:#2563eb}
+.bot{align-self:flex-start;background:#1e293b;border:1px solid #334155}
 .bar{background:#121f44;padding:8px;display:flex;gap:6px}
-#input{flex:1;padding:11px 14px;border-radius:20px;border:1px solid #2e4aa0;background:#080e1f;color:#fff;outline:none}
-#send{background:#2563eb;border:none;padding:10px 15px;border-radius:20px;color:#fff;font-weight:bold}
+input{flex:1;padding:10px;border-radius:20px;border:none;outline:none}
+button.send{background:#2563eb;color:#fff;border:none;padding:10px 16px;border-radius:20px}
 </style>
 </head>
 <body>
-<header><h1>🌍 Deo IA V5 - Monde Live</h1></header>
-<div class="live">🔴 OCT 2026 LIVE: M23 Rubaya | Contrats USA-Chine | ONEM.cd Mikuba | Ukraine | Gaza | Mineurs par pays</div>
+<header><b>Deo IA V5</b> <span class="live">🔴 LIVE OCT 2026</span><br><small>IA Mondiale - RDC / Mines / Emploi ONEM</small></header>
 <div id="menu">
-<button onclick="ask('Actualités guerre Est RDC M23 Rubaya aujourd hui')">Guerre RDC</button>
-<button onclick="ask('Contrats miniers RDC monde USA Chine 2026')">Contrats</button>
-<button onclick="ask('Nombre de mineurs par pays RDC USA Chine')">Mineurs</button>
-<button onclick="ask('Offres emploi RDC ONEM Mikuba 2026')">Emploi RDC</button>
-<button onclick="ask('Gaston Jèze définition impôts')">Gaston Jèze</button>
-<button onclick="ask('Ex présidents RDC histoire')">Histoire RDC</button>
+<button onclick="ask('Guerre RDC Est Rubaya aujourd’hui')">Guerre RDC</button>
+<button onclick="ask('Contrats miniers RDC USA Chine')">Contrats</button>
+<button onclick="ask('Nombre de mineurs dans le monde')">Mineurs</button>
+<button onclick="ask('Offres emploi ONEM aujourd’hui RDC')">Emploi RDC</button>
+<button onclick="ask('Qui est Deo Mutombo Gaston?')">Gaston</button>
 </div>
-<div id="chat"><div class="msg bot">Mbote Deo! V5 Live installée! 🚀
-Je connais maintenant TOUT:
-🔴 Guerres: Ukraine, Gaza, Est RDC M23/AFC Rubaya
-⛏️ Contrats miniers monde + RDC
-👶 Nombre de mineurs par pays
-💼 Emploi RDC ONEM.cd + Mikuba
-📚 Tous tes cours L2
-Pose ta question!</div></div>
-<div class="bar"><input id="input" placeholder="Ex: contrats miniers RDC..." onkeypress="if(event.key==='Enter')send()"><button id="send" onclick="send()">Envoyer</button></div>
+<div id="chat"><div class="msg bot">Mbote Deo ! V5 Monde Live est prêt 🌍<br><br>Je connais:<br>• Guerres RDC, Ukraine, Gaza<br>• Contrats miniers USA-Chine<br>• ONEM.cd + Mikuba<br>• Tes cours<br><br>Pose ta question !</div></div>
+<div class="bar"><input id="q" placeholder="Pose ta question..."><button class="send" onclick="send()">Envoyer</button></div>
 <script>
-const chat=document.getElementById('chat'), inp=document.getElementById('input');
-function add(t,c){let d=document.createElement('div');d.className='msg '+c;d.innerText=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;return d}
-function ask(t){inp.value=t;send();}
-async function send(){
- let q=inp.value.trim(); if(!q) return;
- add(q,'user'); inp.value=''; let l=add('🌍 Recherche live monde...','bot');
- try{
-  let ctx=`Tu es Deo IA V5 octobre 2026 Kinshasa. Expert total. Infos: Ex présidents RDC: Kasa-Vubu 1960-65, Mobutu 1965-97, Laurent Kabila 1997-2001 AFDL, Joseph Kabila 2001-2019, Felix Tshisekedi 2019-2026. Guerre Est RDC: M23/AFC soutenu Rwanda contrôle Rubaya coltan et Lomera or, Amnesty sept 2026 18 mineurs tués travail forcé trafic vers Rwanda Kamembe, réunion Washington 11 oct 2026 Marco Rubio Pentagone Africom Erik Prince Blackwater pour sécuriser minerais. Contrat Rubaya exclusif proche Trump contre routes hopitaux écoles. Guerres monde: Ukraine-Russie, Gaza-Israël. Contrats miniers: Chine Sicomines infrastructure contre minerais, USA corridor Lobito cobalt lithium normes ESG. Emploi RDC: ONEM.cd www.onem.cd + app mobile Mikuba (mikuba=cuivre swahili) lancée 9 juillet 2026 par Ministre Emploi Ferdinand Massamba Wa Massamba avec Enabel Belgique, carte ONEM obligatoire, aussi congojob, mediacongo. Mineurs -18 ans ONU 2026: RDC 51% 53M, Nigeria 43%, Cameroun 42%, USA 22% 75M, Chine 17% 238M, Russie 18%, France 21%, Inde 26%, Brésil 23%. Gaston Jèze: prestation pécuniaire requise par voie d'autorité définitive sans contrepartie pour charges publiques. Réponds français simple clair. Question: ${q}`;
-  let r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(ctx)}?model=openai`);
-  let t=await r.text(); l.remove(); add(t,'bot');
- }catch(e){l.remove(); add("Erreur réseau. Réessaie.",'bot');}
-}
+const chat=document.getElementById('chat');
+function add(t,c){const d=document.createElement('div');d.className='msg '+c;d.innerHTML=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
+function ask(t){document.getElementById('q').value=t;send()}
+async function send(){const i=document.getElementById('q');let q=i.value.trim();if(!q)return;add(q,'user');i.value='';add('Recherche live...','bot');const data=`Deo Mutombo, étudiant ISC Kinshasa. Question: ${q}. Réponds en français court. Si emploi, cite ONEM.cd et app Mikuba. Si guerre RDC, cite Rubaya, M23, AFC. Si contrats, cite USA 2025, Lobito. Si Gaston, c'est son surnom. Date: Oct 2026.`;try{let r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent('https://text.pollinations.ai/'+encodeURIComponent(data)));let t=await r.text();chat.lastChild.remove();add(t.replace(/\n/g,'<br>'),'bot')}catch(e){chat.lastChild.remove();add('Erreur réseau, réessaie.','bot')}}
 </script>
 </body>
-</html>
+ </html>
