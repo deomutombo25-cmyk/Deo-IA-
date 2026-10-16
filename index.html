@@ -1,51 +1,56 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Deo IA V18 Universel</title><style>body{margin:0;background:#0f172a;color:#fff;font-family:sans-serif} .h{background:#1e293b;padding:10px;text-align:center;position:sticky;top:0} .b{max-width:92%;margin:8px;padding:14px;border-radius:14px;background:#334155;white-space:pre-wrap;font-size:13px;line-height:1.7} .u{background:#2563eb;margin-left:auto;text-align:right} #chat{padding:10px;padding-bottom:95px} #bar{position:fixed;bottom:0;left:0;right:0;background:#1e293b;padding:10px;display:flex;gap:8px} #q{flex:1;padding:13px;border-radius:22px;border:0} button{padding:13px 18px;border-radius:22px;border:0;background:#2563eb;color:#fff;font-weight:bold} .tag{border:1px solid #555;padding:6px 10px;border-radius:16px;margin:3px;display:inline-block;font-size:10px;cursor:pointer}</style></head><body><div class="h"><b>Deo IA V18 UNIVERSELLE 🧠✅</b><br><small>Comme Meta AI - Répond à TOUTES les questions sans erreur</small><br><div style="margin-top:6px"><span class="tag" onclick="go('droit des affaires composition')">Droit Affaires</span><span class="tag" onclick="go('droit commercial')">Droit Commercial</span><span class="tag" onclick="go('droit civil')">Droit Civil</span><span class="tag" onclick="go('droit penal')">Droit Pénal</span><span class="tag" onclick="go('economie politique')">Economie</span><span class="tag" onclick="go('comptabilite generale')">Comptabilite</span><span class="tag" onclick="go('budget compose')">Budget</span><span class="tag" onclick="go('collecte impots taxes')">Collecte Impots</span><span class="tag" onclick="go('societe commerciale OHADA')">Societe OHADA</span><span class="tag" onclick="go('contrat')">Contrat</span></div></div><div id="chat"><div id="msgs"><div class="b">V18 UNIVERSELLE installée 🧠✅
+<html><head><meta charset="UTF-8"><title>Deo IA V20 ULTRA</title></head>
+<body>
+<script>
+// C'EST LE CERVEAU PRÉCIS
+const GROQ_KEY = "METS_TA_CLE_ICI"; // <-- Mets ta clé gsk_ ici
+const SYSTEM_PROMPT = `
+Tu es Deo IA V20 ULTRA, professeur expert UNIKIN L1 L2 L3 Droit et Economie.
+Ta mission : Répondre avec PRÉCISION ABSOLUE, pas de blabla.
 
-Je suis comme Meta AI maintenant - Je réponds à TOUTES les questions même si tu tapes un cours que je n'ai pas prévu!
+RÈGLES OBLIGATOIRES pour chaque réponse :
+1. DÉFINITION PRÉCISE : 2 phrases max, claire.
+2. BASE LÉGALE / SOURCE : Article, loi, OHADA, Code, livre exact.
+3. COMPOSITION / ÉLÉMENTS : Si on demande "de quoi est composé", liste numérotée.
+4. EXEMPLE CONCRET RDC.
+5. Aucune invention. Si tu ne sais pas, dis "Je vérifie dans le livre".
 
-Teste ta question qui buguait: "De quoi est composé droit des affaires" - Maintenant vraie réponse complète!
+Tu connais par cœur : Droit des affaires, Commercial, Civil, Pénal, Judiciaire, Travail, Minier, OHADA, Comptabilité, Economie, Fiscalité.
 
-Tape n'importe quel cours: droit des affaires, droit minier, droit du travail, compta, economie, philosophie droit, tout!
+Style : Comme un prof qui corrige un examen. Précis, direct, utile.
+`;
 
-</div></div></div><div id="bar"><input id="q" placeholder="Tape n'importe quel cours..."><button onclick="send()">Envoyer</button></div><script>
-function add(t,c){var d=document.createElement('div');d.className='b '+c;d.textContent=t;document.getElementById('msgs').appendChild(d);window.scrollTo(0,document.body.scrollHeight);}
-function clean(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
-function getAns(q){
- var l=clean(q);
- var orig=q;
+async function repondrePrecis(question){
+  const res = await fetch("https://api.groq.com/openai/v1/chat/completions",{
+    method:"POST",
+    headers:{"Authorization":"Bearer "+GROQ_KEY,"Content-Type":"application/json"},
+    body: JSON.stringify({
+      model:"llama-3.3-70b-versatile",
+      messages:[{role:"system",content:SYSTEM_PROMPT},{role:"user",content:question}],
+      temperature:0.1
+    })
+  });
+  const data = await res.json();
+  return data.choices[0].message.content;
+}
+</script>
 
- // MOTEUR UNIVERSEL - répond à TOUT
+<!-- DESIGN CHATGPT -->
+<div id="chat"></div>
+<input id="q" placeholder="Pose ta question de cours..."><button onclick="send()">Envoyer</button>
 
- // 1. DROIT DES AFFAIRES - la question qui buguait
- if(l.includes('affaires') || (l.includes('droit') && l.includes('affaire'))){
-  return "📚 DROIT DES AFFAIRES - DE QUOI EST COMPOSÉ? - EXPLICATION COMPLÈTE SANS ERREUR:\n\nDÉFINITION PRÉCISE: Branche du droit privé qui régit l'ensemble des règles juridiques applicables aux activités économiques et commerciales des entreprises et des commerçants. C'est le droit de l'entreprise.\n\nDE QUOI EST COMPOSÉ? 7 MATIÈRES PRINCIPALES:\n\n1. DROIT COMMERCIAL GÉNÉRAL (Acte uniforme OHADA Droit commercial 2010):\n - Commerçant: Personne qui fait actes de commerce par nature à titre professionnel (art 2)\n - Acte de commerce par nature: Achat pour revendre, transport, banque, assurance, industrie\n - Fonds de commerce: Clientèle, enseigne, droit au bail, matériel, marchandises\n\n2. DROIT DES SOCIÉTÉS (Acte uniforme OHADA Sociétés 2014 révisé):\n - SARL: 1-100 associés, capital mini 100.000 FC RDC, responsabilité limitée apports, gérant\n - SA: Capital mini 10.000.000 FC, conseil administration, PDG, actionnaires\n - SAS: Très souple, président, liberté statuts, très utilisée startups\n - SNC: Tous associés commerçants responsables indéfiniment solidairement\n - SCS, SARLU, SASU\n - Création: Statuts notariés + RCCM + publication JAL\n\n3. DROIT DES CONTRATS COMMERCIAUX:\n - Vente commerciale, bail commercial, contrat transport, contrat distribution, franchise\n - Contrat international: Incoterms, crédit documentaire\n\n4. DROIT DES SÛRETÉS (Acte uniforme OHADA Sûretés 2010):\n - Sûretés personnelles: Cautionnement, garantie autonome\n - Sûretés réelles: Gage matériel, nantissement fonds commerce, hypothèque immeuble, propriété retenue\n\n5. DROIT DES PROCÉDURES COLLECTIVES (Acte uniforme OHADA Procédures collectives 2015):\n - Prévention: Médiation, conciliation, règlement préventif\n - Redressement judiciaire: Sauver entreprise en difficulté, plan continuation\n - Liquidation biens: Si irrémédiablement compromise, vente actifs payer créanciers\n\n6. DROIT DE LA CONCURRENCE ET DISTRIBUTION:\n - Ententes interdites, abus position dominante\n - Concurrence déloyale: Imitation, dénigrement, parasitisme\n - Droit consommation protection consommateur\n\n7. DROIT FISCAL DES AFFAIRES ET COMPTA:\n - IBP 30% sociétés, TVA 16%, IPR salariés, DGI DGE\n - SYSCOHADA comptabilité: Bilan, compte résultat, TAFIRE\n - Droit bancaire, droit bourse\n\nBASE LÉGALE RDC: OHADA 17 États Afrique applicable directement RDC depuis 2012 + Code commerce + Loi finances. Cours L2-L3 Droit Économique UNIKIN. Sans erreur explication claire comme professeur.";
+<script>
+async function send(){
+  const question = document.getElementById('q').value;
+  document.getElementById('chat').innerHTML += `<p><b>Toi:</b> ${question}</p><p id="load">🧠 Deo IA V20 analyse le livre...</p>`;
+  const rep = await repondrePrecis(question);
+  document.getElementById('load').remove();
+  document.getElementById('chat').innerHTML += `<p><b>Deo IA V20:</b><br>${rep.replace(/\n/g,'<br>')}</p>`;
+}
+</script>
+</body></html>
+Charges publiques budget armée police écoles hôpitaux routes. Art174 Constitution pas impôt sans loi. Examen 90%. Sans erreur.";
  }
-
- // 2. DROIT COMMERCIAL
- if(l.includes('commercial') && !l.includes('affaires')){
-  return "📚 DROIT COMMERCIAL - COMPOSITION SANS ERREUR:\n\nDéfinition: Branche droit privé qui régit les commerçants et les actes de commerce.\n\nComposé de:\n1. Commerçants: Conditions - faire actes commerce par nature, à titre professionnel, indépendant. Capacité, immatriculation RCCM obligatoire, obligations comptables livre journal grand livre inventaire, compte bancaire.\n2. Actes de commerce par nature (art 3 AUDC): Achat biens meubles pour revendre, opérations banque bourse change courtage, transport, assurance, exploitation industrielle, location meubles.\nPar accessoire: Actes faits par commerçant pour commerce.\nPar forme: Lettre change billet ordre SA SARL.\n3. Fonds de commerce: Ensemble biens affectés activité - clientèle élément essentiel, achalandage, enseigne, nom commercial, droit bail, matériel, marchandises, brevets. Vente fonds: acte écrit, enregistrement, publication.\n4. Bail commercial: Durée 2 ans min, droit renouvellement, loyer révisable, pas congé sans motif.\n5. Contrats commerciaux: Vente commerciale, commission, courtage, transport.\nOHADA Droit commercial 2010. Sans erreur.";
- }
-
- // 3. DROIT CIVIL
- if(l.includes('civil')){
-  return "📚 DROIT CIVIL - COMPOSITION SANS ERREUR:\n\nDéfinition: Branche droit privé qui régit rapports entre particuliers personnes physiques et morales. Pilier droit.\n\nComposé de 5 parties:\n1. Personnes et famille: Personnalité juridique naissance à mort, état civil, mariage, divorce, filiation, adoption, tutelle.\n2. Biens: Classification biens meubles immeubles, propriété droit le plus absolu art 544, usufruit, servitude, possession.\n3. Obligations: Contrat accord volontés art 1101 4 conditions consentement capacité objet cause, responsabilité civile délictuelle faute art 258 CCCLIII, quasi-contrats, paiement, extinction.\n4. Sûretés: Caution hypothèque gage.\n5. Successions et libéralités: Héritage légal, testament, donation.\nCode civil Livre I II III - Code famille RDC. Sans erreur.";
- }
-
- // 4. BUDGET
- if(l.includes('budget')){
-  return "📚 BUDGET - COMPOSITION DÉFINITION SANS ERREUR:\n\nDéfinition: Acte juridique prévoyant et autorisant recettes et dépenses annuelles Etat = Loi finances. 3 caractères: Prévision avant année, Autorisation Parlement autorise, Annuel 1 jan-31 déc.\n\nComposition 2 parties:\n\n1. RECETTES - Ce que Etat encaisse:\nA) Recettes fiscales: Impôts directs IBP 30% (40% mines) IPR 3-30% IRL 20% + Impôts indirects TVA 16% + Douanes DGDA 5% mat prem 10% inter 20% finis 40% luxe + Accises carburant tabac 40%\nB) Recettes non fiscales: DGRAD passeport 99$ permis 50$ amendes + Domaine loyers terrains Etat + Participation dividendes Gécamines SNEL + Emprunts intérieur extérieur\nC) Dons et legs: Aide extérieure FMI Banque mondiale\n\n2. DÉPENSES - Ce que Etat dépense:\nA) Fonctionnement: Salaires fonctionnaires, fournitures, entretien\nB) Investissement: Routes, écoles, hôpitaux, barrages, ponts\nC) Dette: Remboursement capital + intérêts dette publique\nD) Transferts: Rétrocession provinces, bourses, subventions\n\n5 Principes: Annualité, Unité, Universalité non-affectation non-contraction, Spécialité, Équilibre + Sincérité. RDC 2024 16,6 Mds USD. Sans erreur claire.";
- }
-
- // 5. COLLECTE
- if(l.includes('collecte') || l.includes('administrations fiscales')){
-  return "📚 COLLECTE IMPÔTS TAXES - SANS ERREUR:\n3 Régies RDC: DGI IBP 30% IPR 3-30% TVA 16% 7,2 Mds 70% recettes Av Pumbu Gombe, DGDA douane 5-20% TVA import 16% accises 20-40% SYDONIA Matadi 4,8 Mds 40% budget, DGRAD passeport 99$ permis 50$ amendes royalties taxe bâtir loyers dividendes Gécamines 1,2 Md avec contrepartie service.\n4 Phases: Assiette déclaration bilan, Liquidation calcul taux légal note perception, Ordonnancement Ministre Finances ordonne, Recouvrement Amiable 15j banque BCC Rawbank TMB quittance SYGMAF pas pénalité + Forcé mise demeure 8j pénalité 10% intérêts 2% mois ATD banque bloque compte sans jugement saisie huissier biens fermeture scellés 30j publication défaillants prison 1 mois-2 ans fraude art98. Prescription 4 ans réclamation que si 50% payé. Sans erreur.";
- }
-
- // 6. IMPOT
- if(l.includes('impot') && l.length<80){
-  return "📚 IMPÔT - DÉFINITION GASTON JÈZE 1922 SANS ERREUR:\nCitation: Prestation pécuniaire requise particuliers par voie d'autorité à titre définitif et sans contrepartie en vue couverture charges publiques.\n5 éléments: 1 Pécuniaire argent pas nature, 2 Autorité unilatéral obligatoire sanction souveraineté, 3 Définitif non remboursable ≠ emprunt, 4 Sans contrepartie ≠ taxe redevance, 5 Charges publiques budget armée police écoles hôpitaux routes. Art174 Constitution pas impôt sans loi. Examen 90%. Sans erreur.";
- }
-
  // 7. TAXE REDEVANCE
  if(l.includes('taxe') && l.length<40){return "📚 TAXE: Prestation à l'occasion utilisation service public montant proportionnel service. 3 caractères: Contrepartie directe utilisation, Proportionnelle pas équivalent exact, Obligatoire si utilisation. Tableau: Impôt aucune contrepartie IBP TVA, Taxe contrepartie pas équivalent taxe aéroport 50$, Redevance prix exact SONAS 100%. Ex taxe bâtir étalage péage aéroport RVA. Sans erreur.";}
  if(l.includes('redevance')){return "📚 REDEVANCE: Somme contrepartie service public déterminé montant équivalent prix exact comme achat. Ex SONAS assurance RTNC OCC OGEFREM royalty 3,5% cobalt. Facultative si pas utilisation pas paie. Diff taxe proportionnelle pas équivalent, redevance équivalent exact. Sans erreur.";}
