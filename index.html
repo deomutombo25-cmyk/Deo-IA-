@@ -1,51 +1,54 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>Deo IA V20 ULTRA</title></head>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deo IA V21 - Comme ChatGPT</title>
+<style>
+body{margin:0;background:#212121;color:white;font-family:sans-serif;display:flex;height:100vh}
+#side{width:0;background:#171717;display:none}
+#main{flex:1;display:flex;flex-direction:column;max-width:900px;margin:auto;width:100%}
+#chat{flex:1;overflow:auto;padding:20px}
+.msg{margin:12px 0;padding:14px 18px;border-radius:18px;line-height:1.5;max-width:90%}
+.user{background:#2f2f2f;align-self:flex-end;margin-left:auto}
+.bot{background:#303030}
+#bar{display:flex;gap:10px;padding:15px;background:#212121}
+#bar input{flex:1;padding:14px 18px;border-radius:25px;border:none;background:#2f2f2f;color:white}
+#bar button{background:white;color:black;border:none;border-radius:50%;width:48px;height:48px;font-weight:bold}
+h1{font-size:22px}
+</style>
+</head>
 <body>
-<script>
-// C'EST LE CERVEAU PRÉCIS
-const GROQ_KEY = "METS_TA_CLE_ICI"; // <-- Mets ta clé gsk_ ici
-const SYSTEM_PROMPT = `
-Tu es Deo IA V20 ULTRA, professeur expert UNIKIN L1 L2 L3 Droit et Economie.
-Ta mission : Répondre avec PRÉCISION ABSOLUE, pas de blabla.
-
-RÈGLES OBLIGATOIRES pour chaque réponse :
-1. DÉFINITION PRÉCISE : 2 phrases max, claire.
-2. BASE LÉGALE / SOURCE : Article, loi, OHADA, Code, livre exact.
-3. COMPOSITION / ÉLÉMENTS : Si on demande "de quoi est composé", liste numérotée.
-4. EXEMPLE CONCRET RDC.
-5. Aucune invention. Si tu ne sais pas, dis "Je vérifie dans le livre".
-
-Tu connais par cœur : Droit des affaires, Commercial, Civil, Pénal, Judiciaire, Travail, Minier, OHADA, Comptabilité, Economie, Fiscalité.
-
-Style : Comme un prof qui corrige un examen. Précis, direct, utile.
-`;
-
-async function repondrePrecis(question){
-  const res = await fetch("https://api.groq.com/openai/v1/chat/completions",{
-    method:"POST",
-    headers:{"Authorization":"Bearer "+GROQ_KEY,"Content-Type":"application/json"},
-    body: JSON.stringify({
-      model:"llama-3.3-70b-versatile",
-      messages:[{role:"system",content:SYSTEM_PROMPT},{role:"user",content:question}],
-      temperature:0.1
-    })
-  });
-  const data = await res.json();
-  return data.choices[0].message.content;
-}
-</script>
-
-<!-- DESIGN CHATGPT -->
-<div id="chat"></div>
-<input id="q" placeholder="Pose ta question de cours..."><button onclick="send()">Envoyer</button>
-
+<div id="main">
+<div id="chat">
+<div class="msg bot"><h1>🧠 Deo IA V21 ULTRA</h1><br>Je connais TOUS tes livres UNIKIN L1 L2 L3.<br>Je réponds PRÉCIS, sans blabla, comme ChatGPT.<br><br>Teste-moi :<br>- De quoi est composé droit des affaires ?<br>- Définition de l'information ?<br>- Droit commercial ?<br>- Comptabilité générale ?</div>
+</div>
+<div id="bar">
+<input id="q" placeholder="Pose ton cours ici...">
+<button onclick="send()">↑</button>
+</div>
+</div>
 <script>
 async function send(){
-  const question = document.getElementById('q').value;
-  document.getElementById('chat').innerHTML += `<p><b>Toi:</b> ${question}</p><p id="load">🧠 Deo IA V20 analyse le livre...</p>`;
-  const rep = await repondrePrecis(question);
-  document.getElementById('load').remove();
-  document.getElementById('chat').innerHTML += `<p><b>Deo IA V20:</b><br>${rep.replace(/\n/g,'<br>')}</p>`;
+  const input=document.getElementById('q');
+  const question=input.value.trim();
+  if(!question) return;
+  const chat=document.getElementById('chat');
+  chat.innerHTML+=`<div class="msg user">${question}</div>`;
+  input.value='';
+  const id=Date.now();
+  chat.innerHTML+=`<div class="msg bot" id="${id}">🧠 Deo IA analyse le cours...</div>`;
+  chat.scrollTop=chat.scrollHeight;
+  try{
+    const prompt=encodeURIComponent(`Tu es Deo IA V21 ULTRA, prof UNIKIN expert Droit & Economie. Réponds en français avec PRECISION ABSOLUE, pas de blabla. Format obligatoire: 1. Définition précise (2 phrases) 2. Base légale / Articles / OHADA 3. Composition / Eléments listés 4. Exemple RDC concret. Question: ${question}`);
+    const res=await fetch("https://text.pollinations.ai/"+prompt);
+    const text=await res.text();
+    document.getElementById(id).innerHTML=text.replace(/\n/g,"<br>");
+  }catch(e){
+    document.getElementById(id).innerHTML="❌ Vérifie ta connexion internet et réessaie.";
+  }
+  chat.scrollTop=chat.scrollHeight;
 }
+document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')send()});
 </script>
-</body></html>
+</body>
+</html>
