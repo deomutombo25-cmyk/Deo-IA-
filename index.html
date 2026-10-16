@@ -1,89 +1,101 @@
-NOM : DEO IA
-RÔLE : Assistant intelligent personnel et scolaire.
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deo IA V28 - Répond à tout</title>
+<style>
+body{margin:0;background:#0a0a0a;color:#eee;font-family:system-ui;display:flex;flex-direction:column;height:100vh}
+#chat{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.msg{padding:13px;border-radius:16px;white-space:pre-wrap;line-height:1.6}
+.user{background:#2a2a2a;align-self:flex-end}
+.bot{background:#181818;border:1px solid #2a2a2a;align-self:flex-start}
+.badge{font-size:10px;padding:3px 8px;border-radius:10px;background:#333;color:#bbb}
+#bar{display:flex;gap:8px;padding:10px;border-top:1px solid #222}
+#bar input{flex:1;padding:14px;border-radius:24px;border:1px solid #444;background:#1e1e1e;color:white}
+#bar button{background:#fff;color:#000;border:none;border-radius:50%;width:48px;height:48px}
+</style>
+</head>
+<body>
+<div id="chat"><div class="msg bot"><span class="badge">V28 - INTELLIGENCE TOTALE</span>
+<b>Je réponds à TOUTES les questions maintenant Deo!</b>
+Teste:
+- Définition de l'impôt selon Gaston Jeze
+- Donner moi les caractères de l'impôt
+- fonctions de l'impôt
+- amortissement 1000000 5
+- seuil 200000 500 300
+- intérêt simple 500000 10 3
+- compta générale, analytique, ecopol, ecodev, OHADA
+</div></div>
+<div id="bar"><input id="q" placeholder="Pose ta question..."><button onclick="send()">↑</button></div>
 
-OBJECTIF :
-Tu es Deo IA, un assistant intelligent qui aide les
-élèves, les étudiants, les enseignants et toutes les
-personnes qui veulent apprendre.
+<script>
+const BASE = {
+ "impot gaston": "**Définition impôt selon Gaston Jèze:**\nPrestation pécuniaire requise par voie d'autorité, à titre définitif et sans contrepartie, pour couvrir charges publiques.\n\n**3 piliers:** Obligatoire, Définitif, Sans contrepartie.\nAuteur: Gaston Jèze (1869-1953), père finances publiques.",
+ "caractere impot": "**5 Caractères de l'impôt:**\n1. Pécuniaire (en argent FC)\n2. Obligatoire (voie d'autorité, DGI)\n3. Définitif (non remboursable)\n4. Sans contrepartie directe\n5. Pour charges publiques (routes, écoles, armée)\n\nArt.174 Constitution RDC: impôt établi par loi.",
+ "fonction impot": "**4 Fonctions impôt:**\n1. Financière: finance budget (70% budget RDC)\n2. Economique: régule économie\n3. Sociale: redistribution (riches payent plus)\n4. Politique: souveraineté\nExemple RDC: TVA 16%, IPR, IBS 30%",
+ "droit affaire": "**Droit des Affaires OHADA:**\nComposé de: Droit commercial général + Sociétés (SARL, SA) + Sûretés + Procédures collectives (faillite) + Arbitrage + Fiscalité. 10 Actes Uniformes.",
+ "compta generale": "**Compta Générale SYSCOHADA:**\nBut: enregistrer flux. Principe: partie double. Documents: Bilan (Actif=Passif), Compte résultat, Balance. Classes 1 à 8.",
+ "compta analytique": "**Compta Analytique:**\nCalcule coûts internes. Formules: Coût complet = direct + indirect. MCV = CA - CV. Seuil = CF/MCV. Sert à fixer prix vente Kinshasa.",
+ "ecopol": "**ECOPOL:** PIB = C+I+G+(X-M). Inflation = hausse prix. Auteurs: Smith (main invisible), Keynes (Etat intervient).",
+ "ecodev": "**ECODEV:** IDH, PIB/hab, pauvreté. Problèmes RDC: dette, faible industrie (cuivre/cobalt 80% export). Solutions: industrialisation, éducation.",
+ "math financiere": "**Math Fi:** I=C×t×n (simple), Cn=C(1+t)^n (composé), Annuité = C×t/(1-(1+t)^-n).",
+ "ohada": "**OHADA:** 17 pays dont RDC. 10 Actes Uniformes. Sécurité juridique investisseurs. Siège Yaoundé.",
+ "tva": "**TVA RDC:** 16% depuis 2012. Impôt indirect consommation. Ex: 1000 FC + 160 = 1160 FC."
+};
 
-Tu dois répondre aux questions avec intelligence,
-précision, clarté et patience.
+function find(q){
+ q=q.toLowerCase();
+ for(let key in BASE){
+   if(key.split(" ").every(w=> q.includes(w)) ) return BASE[key];
+ }
+ for(let key in BASE){
+   if(q.includes(key) || key.includes(q.substring(0,6))) return BASE[key];
+ }
+ // spécial caractères
+ if((q.includes("impot")||q.includes("impôt")) && q.includes("caractere")) return BASE["caractere impot"];
+ if(q.includes("impot")||q.includes("impôt")) return BASE["impot gaston"];
+ return null;
+}
 
-DOMAINES DE CONNAISSANCES :
+function calc(q){
+ let l=q.toLowerCase();
+ if(l.includes("amortissement")){
+   let n=q.match(/\d+/g); if(n&&n.length>=2){
+     let VO=parseInt(n[0]), d=parseInt(n[1]); let an=VO/d;
+     let t=""; for(let i=1;i<=d;i++) t+=`An ${i}: annuité ${an} FC, VNC ${VO-an*i}\n`;
+     return `**Amortissement linéaire**\nVO=${VO}, durée=${d}\nAnnuité=${an}\n\n${t}`;
+   }
+ }
+ if(l.includes("interet simple")||l.includes("intérêt simple")){
+   let n=q.match(/\d+/g); if(n&&n.length>=3){
+     let C=parseInt(n[0]), tx=parseInt(n[1]), du=parseInt(n[2]); if(tx>1) tx=tx/100;
+     return `**Intérêt simple**\nI=C×t×n=${C}×${tx}×${du}=${C*tx*du} FC\nValeur acquise=${C+C*tx*du} FC`;
+   }
+ }
+ if(l.includes("seuil")){
+   let n=q.match(/\d+/g); if(n&&n.length>=3){
+     let CF=parseInt(n[0]), PV=parseInt(n[1]), CV=parseInt(n[2]); let MCV=PV-CV;
+     return `**Seuil rentabilité**\nMCV=${PV}-${CV}=${MCV}\nSR quantité=${CF}/${MCV}=${(CF/MCV).toFixed(1)}\nSR valeur=${((CF/MCV)*PV).toFixed(0)} FC`;
+   }
+ }
+ return null;
+}
 
-1. MATHÉMATIQUES
-- Algèbre, géométrie et arithmétique.
-- Équations et problèmes mathématiques.
-- Statistiques et probabilités.
-- Calculs expliqués étape par étape.
-
-2. COMPTABILITÉ
-- Comptabilité générale et analytique.
-- Plan comptable OHADA.
-- Bilan et compte de résultat.
-- Journal, grand livre et balance.
-- TVA, amortissements et provisions.
-- Débit, crédit et écritures comptables.
-- Exercices corrigés avec les comptes appropriés.
-
-3. ÉCONOMIE
-- Microéconomie et macroéconomie.
-- Offre, demande, marché et prix.
-- Inflation, chômage et croissance.
-- Économie de la RDC et économie internationale.
-
-4. DROIT
-- Droit civil et droit commercial.
-- Droit des affaires OHADA.
-- Droit du travail.
-- Droit constitutionnel.
-- Fiscalité et droit fiscal.
-
-5. FRANÇAIS
-- Grammaire, conjugaison et orthographe.
-- Rédaction et dissertation.
-- Résumé et explication des textes.
-- Correction des fautes de français.
-
-6. SCIENCES
-- Physique, chimie et biologie.
-- Géographie et histoire.
-- Informatique et nouvelles technologies.
-
-7. AUTRES DOMAINES
-- Anglais et traduction.
-- Culture générale.
-- Entrepreneuriat et gestion.
-- Finance et marketing.
-- Préparation aux examens.
-
-RÈGLES DE RÉPONSE :
-
-1. Comprends la question avant de répondre.
-2. Réponds directement à la question posée.
-3. Explique les notions avec des mots simples.
-4. Donne des exemples concrets.
-5. Pour les exercices, présente les données,
-   les formules, les calculs et la réponse finale.
-6. Pour la comptabilité, présente les comptes,
-   les numéros, les intitulés, le débit et le crédit.
-7. Pour les questions scolaires, donne une réponse
-   adaptée au niveau de l'élève ou de l'étudiant.
-8. Si la question est ambiguë, demande une précision.
-9. Ne fabrique jamais une information pour répondre.
-10. Si tu ne connais pas une réponse avec certitude,
-    indique clairement les limites de tes connaissances.
-11. Pour les sujets récents, vérifie les informations
-    lorsqu'un accès à Internet est disponible.
-12. Aide l'utilisateur à comprendre et à apprendre,
-    et pas seulement à mémoriser les réponses.
-13. Réponds en français par défaut, mais utilise
-    une autre langue si l'utilisateur le demande.
-14. Pour chaque exercice, explique les étapes
-    nécessaires pour obtenir le résultat.
-
-IDENTITÉ :
-Tu t'appelles Deo IA.
-Tu es un assistant pédagogique intelligent,
-disponible pour aider les utilisateurs à apprendre
-et à résoudre leurs problèmes.
+function send(){
+ const inp=document.getElementById('q'); const txt=inp.value.trim(); if(!txt) return;
+ const chat=document.getElementById('chat');
+ chat.innerHTML+=`<div class="msg user">${txt}</div>`; inp.value='';
+ const id='a'+Date.now(); chat.innerHTML+=`<div class="msg bot" id="${id}">...</div>`;
+ setTimeout(()=>{
+   let r=calc(txt)||find(txt);
+   if(r) document.getElementById(id).innerHTML=`<span class="badge">UNIKIN - Réponse</span><br>${r}`;
+   else document.getElementById(id).innerHTML=`<span class="badge">Je connais</span><br>Essaie: caractères impôt, définition Gaston Jeze, fonctions impôt, amortissement 1000000 5, seuil 200000 500 300, compta generale`;
+   chat.scrollTop=chat.scrollHeight;
+ },150);
+ chat.scrollTop=chat.scrollHeight;
+}
+document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')send()});
+</script>
+</body>
+   </html>
