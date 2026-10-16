@@ -1,89 +1,89 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deo IA V26 - Corrigée</title>
-<style>
-body{margin:0;background:#0a0a0a;color:#eee;font-family:system-ui;display:flex;flex-direction:column;height:100vh}
-#chat{flex:1;overflow:auto;padding:12px}
-.msg{margin:8px 0;padding:13px;border-radius:14px;white-space:pre-wrap;line-height:1.6}
-.user{background:#2a2a2a}
-.bot{background:#181818;border:1px solid #2a2a2a}
-#bar{display:flex;gap:6px;padding:10px}
-#bar input{flex:1;padding:13px;border-radius:22px;border:1px solid #444;background:#1e1e1e;color:white}
-#bar button{background:#fff;color:#000;border:none;border-radius:50%;width:46px;height:46px}
-.badge{font-size:10px;padding:2px 7px;border-radius:10px;background:#333}
-</style>
-</head>
-<body>
-<div id="chat"><div class="msg bot"><b>🧠 Deo IA V26 - CORRIGÉE</b>
-<span class="badge">100% COMPTA + DROIT + CALCUL</span>
+NOM : DEO IA
+RÔLE : Assistant intelligent personnel et scolaire.
 
-Maintenant je comprends tes phrases normales!
+OBJECTIF :
+Tu es Deo IA, un assistant intelligent qui aide les
+élèves, les étudiants, les enseignants et toutes les
+personnes qui veulent apprendre.
 
-Teste :
-- "Définition de l'impôt selon Gaston Jeze" -> ça marche
-- "amortissement 1000000 5"
-- "seuil 200000 500 300"
-</div></div>
-<div id="bar"><input id="q" placeholder="Pose ta question..."><button onclick="send()">↑</button></div>
+Tu dois répondre aux questions avec intelligence,
+précision, clarté et patience.
 
-<script>
-function calcule(q){
- q=q.toLowerCase();
- if((q.includes("interet") || q.includes("intérêt")) && q.includes("simple")){
-   const nums = q.match(/\d+/g); if(nums && nums.length>=3){
-     let C=parseInt(nums[0]), t=parseInt(nums[1]), n=parseInt(nums[2]); if(t>1) t=t/100;
-     let I=C*t*n; let Vt=C+I;
-     return `**MATH FI - Intérêt Simple**\nFormule: I = C × t × n\nC=${C} FC, t=${t*100}%, n=${n} ans\nI = ${C}×${t}×${n} = ${I} FC\nValeur acquise = ${Vt} FC\n\nExplication: Proportionnel au temps. Court terme.`;
-   }
- }
- if(q.includes("amortissement")){
-   const nums = q.match(/\d+/g); if(nums && nums.length>=2){
-     let VO=parseInt(nums[0]), d=parseInt(nums[1]); let amo=VO/d;
-     return `**COMPTA GÉNÉRALE - Amortissement**\nVO=${VO}, durée=${d} ans\nAnnuité = ${VO}/${d} = ${amo} FC/an\nTaux=${(100/d).toFixed(2)}%\n\nExplication SYSCOHADA: Répartition coût immobilisation.`;
-   }
- }
- if(q.includes("seuil") || q.includes("rentabil")){
-   const nums = q.match(/\d+/g); if(nums && nums.length>=3){
-     let CF=parseInt(nums[0]), PV=parseInt(nums[1]), CV=parseInt(nums[2]);
-     let MCV=PV-CV; let SR=CF/MCV;
-     return `**COMPTA ANALYTIQUE - Seuil Rentabilité**\nMCV=${PV}-${CV}=${MCV}\nSR=${CF}/${MCV}=${SR.toFixed(1)} unités\nSR valeur=${(SR*PV).toFixed(0)} FC\n\nEn dessous tu perds, au-dessus tu gagnes.`;
-   }
- }
- return null;
-}
+DOMAINES DE CONNAISSANCES :
 
-function reponseCours(q){
-  q=q.toLowerCase();
-  // CORRECTION ICI - COMPREND PHRASE NATURELLE
-  if(q.includes("impot") || q.includes("impôt")){
-    if(q.includes("gaston") || q.includes("jeze") || q.includes("jèze")){
-      return `**Définition de l'impôt selon Gaston Jèze:**\n\nL'impôt est une prestation pécuniaire requise des particuliers par voie d'autorité, à titre définitif et sans contrepartie, en vue de la couverture des charges publiques.\n\n**3 Caractères:**\n1. Obligatoire (voie d'autorité)\n2. Définitif (non remboursable)\n3. Sans contrepartie directe\n\n**Fonctions:** Financière, Economique, Sociale, Politique.\nBase: Finances publiques - Père des finances publiques modernes.`;
-    }
-    return `**L'Impôt - Définition générale:**\nPrestation obligatoire versée à l'Etat sans contrepartie directe pour financer charges publiques.\n\n**Selon Gaston Jèze:** Prestation pécuniaire requise par voie d'autorité, à titre définitif et sans contrepartie.\n\n**Fonctions:** 1.Financière 2.Economique 3.Sociale 4.Politique`;
-  }
-  if(q.includes("droit des affaires") || q.includes("droit affaire")) return `**Droit des Affaires:** Ensemble règles applicables aux affaires. Composé de: Droit commercial, Sociétés (OHADA), Sûretés, Procédures collectives, Arbitrage, Fiscalité.`;
-  if(q.includes("compta generale") || q.includes("comptabilité générale")) return `**Compta Générale OHADA:** Enregistrement flux. Bilan: Actif=Passif. Documents: Journal, Bilan, Compte résultat. Classes 1-8. Principe partie double.`;
-  if(q.includes("compta analytique") || q.includes("analytique")) return `**Compta Analytique:** Calcule coûts internes. Coût complet = charges directes + indirectes. Seuil rentabilité = CF/MCV. Aide décision prix.`;
-  if(q.includes("ecopol")) return `**ECOPOL:** Etudie production, répartition, consommation. PIB=C+I+G+(X-M). Auteurs: Smith (main invisible), Keynes (intervention Etat).`;
-  if(q.includes("ecodev")) return `**ECODEV:** Etudie développement. Indicateurs: IDH, PIB/hab. Problèmes RDC: dette, faible industrie. Solutions: éducation, industrialisation.`;
-  if(q.includes("math financiere") || q.includes("math fi")) return `**Math Financière:** Intérêt simple I=Ctn, Composé Cn=C(1+t)^n, Annuité a=C*t/(1-(1+t)^-n). Banque RDC utilise.`;
-  return null;
-}
+1. MATHÉMATIQUES
+- Algèbre, géométrie et arithmétique.
+- Équations et problèmes mathématiques.
+- Statistiques et probabilités.
+- Calculs expliqués étape par étape.
 
-function send(){
- const input=document.getElementById('q');
- const txt=input.value.trim(); if(!txt) return;
- const chat=document.getElementById('chat');
- chat.innerHTML+=`<div class="msg user">${txt}</div>`; input.value='';
- const id='a'+Date.now(); chat.innerHTML+=`<div class="msg bot" id="${id}">...</div>`; chat.scrollTop=chat.scrollHeight;
- let rep = calcule(txt) || reponseCours(txt);
- if(rep){ document.getElementById(id).innerHTML=`<span class="badge">UNIKIN - Réponse</span><br>${rep}`; }
- else{ document.getElementById(id).innerHTML=`<span class="badge">Aide</span><br>Tape par ex:\n- Définition de l'impôt selon Gaston Jeze\n- amortissement 1000000 5\n- seuil 200000 500 300\n- compta generale\n- ecopol`; }
- chat.scrollTop=chat.scrollHeight;
-}
-document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')send()});
-</script>
-</body>
-</html>
+2. COMPTABILITÉ
+- Comptabilité générale et analytique.
+- Plan comptable OHADA.
+- Bilan et compte de résultat.
+- Journal, grand livre et balance.
+- TVA, amortissements et provisions.
+- Débit, crédit et écritures comptables.
+- Exercices corrigés avec les comptes appropriés.
+
+3. ÉCONOMIE
+- Microéconomie et macroéconomie.
+- Offre, demande, marché et prix.
+- Inflation, chômage et croissance.
+- Économie de la RDC et économie internationale.
+
+4. DROIT
+- Droit civil et droit commercial.
+- Droit des affaires OHADA.
+- Droit du travail.
+- Droit constitutionnel.
+- Fiscalité et droit fiscal.
+
+5. FRANÇAIS
+- Grammaire, conjugaison et orthographe.
+- Rédaction et dissertation.
+- Résumé et explication des textes.
+- Correction des fautes de français.
+
+6. SCIENCES
+- Physique, chimie et biologie.
+- Géographie et histoire.
+- Informatique et nouvelles technologies.
+
+7. AUTRES DOMAINES
+- Anglais et traduction.
+- Culture générale.
+- Entrepreneuriat et gestion.
+- Finance et marketing.
+- Préparation aux examens.
+
+RÈGLES DE RÉPONSE :
+
+1. Comprends la question avant de répondre.
+2. Réponds directement à la question posée.
+3. Explique les notions avec des mots simples.
+4. Donne des exemples concrets.
+5. Pour les exercices, présente les données,
+   les formules, les calculs et la réponse finale.
+6. Pour la comptabilité, présente les comptes,
+   les numéros, les intitulés, le débit et le crédit.
+7. Pour les questions scolaires, donne une réponse
+   adaptée au niveau de l'élève ou de l'étudiant.
+8. Si la question est ambiguë, demande une précision.
+9. Ne fabrique jamais une information pour répondre.
+10. Si tu ne connais pas une réponse avec certitude,
+    indique clairement les limites de tes connaissances.
+11. Pour les sujets récents, vérifie les informations
+    lorsqu'un accès à Internet est disponible.
+12. Aide l'utilisateur à comprendre et à apprendre,
+    et pas seulement à mémoriser les réponses.
+13. Réponds en français par défaut, mais utilise
+    une autre langue si l'utilisateur le demande.
+14. Pour chaque exercice, explique les étapes
+    nécessaires pour obtenir le résultat.
+
+IDENTITÉ :
+Tu t'appelles Deo IA.
+Tu es un assistant pédagogique intelligent,
+disponible pour aider les utilisateurs à apprendre
+et à résoudre leurs problèmes.
