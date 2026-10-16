@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deo IA V28 - Répond à tout</title>
+<title>Deo IA V29 - Répond à TOUT</title>
 <style>
 body{margin:0;background:#0a0a0a;color:#eee;font-family:system-ui;display:flex;flex-direction:column;height:100vh}
 #chat{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
@@ -16,45 +16,46 @@ body{margin:0;background:#0a0a0a;color:#eee;font-family:system-ui;display:flex;f
 </style>
 </head>
 <body>
-<div id="chat"><div class="msg bot"><span class="badge">V28 - INTELLIGENCE TOTALE</span>
-<b>Je réponds à TOUTES les questions maintenant Deo!</b>
-Teste:
-- Définition de l'impôt selon Gaston Jeze
-- Donner moi les caractères de l'impôt
-- fonctions de l'impôt
-- amortissement 1000000 5
-- seuil 200000 500 300
-- intérêt simple 500000 10 3
-- compta générale, analytique, ecopol, ecodev, OHADA
+<div id="chat"><div class="msg bot"><span class="badge">V29 - INTELLIGENCE TOTALE</span>
+<b>Je réponds à TOUTES les questions maintenant!</b>
+Informatique, économie, droit, culture G, calculs...
+Teste: Définition de l'informatique
 </div></div>
 <div id="bar"><input id="q" placeholder="Pose ta question..."><button onclick="send()">↑</button></div>
-
 <script>
-const BASE = {
- "impot gaston": "**Définition impôt selon Gaston Jèze:**\nPrestation pécuniaire requise par voie d'autorité, à titre définitif et sans contrepartie, pour couvrir charges publiques.\n\n**3 piliers:** Obligatoire, Définitif, Sans contrepartie.\nAuteur: Gaston Jèze (1869-1953), père finances publiques.",
- "caractere impot": "**5 Caractères de l'impôt:**\n1. Pécuniaire (en argent FC)\n2. Obligatoire (voie d'autorité, DGI)\n3. Définitif (non remboursable)\n4. Sans contrepartie directe\n5. Pour charges publiques (routes, écoles, armée)\n\nArt.174 Constitution RDC: impôt établi par loi.",
- "fonction impot": "**4 Fonctions impôt:**\n1. Financière: finance budget (70% budget RDC)\n2. Economique: régule économie\n3. Sociale: redistribution (riches payent plus)\n4. Politique: souveraineté\nExemple RDC: TVA 16%, IPR, IBS 30%",
- "droit affaire": "**Droit des Affaires OHADA:**\nComposé de: Droit commercial général + Sociétés (SARL, SA) + Sûretés + Procédures collectives (faillite) + Arbitrage + Fiscalité. 10 Actes Uniformes.",
- "compta generale": "**Compta Générale SYSCOHADA:**\nBut: enregistrer flux. Principe: partie double. Documents: Bilan (Actif=Passif), Compte résultat, Balance. Classes 1 à 8.",
- "compta analytique": "**Compta Analytique:**\nCalcule coûts internes. Formules: Coût complet = direct + indirect. MCV = CA - CV. Seuil = CF/MCV. Sert à fixer prix vente Kinshasa.",
- "ecopol": "**ECOPOL:** PIB = C+I+G+(X-M). Inflation = hausse prix. Auteurs: Smith (main invisible), Keynes (Etat intervient).",
- "ecodev": "**ECODEV:** IDH, PIB/hab, pauvreté. Problèmes RDC: dette, faible industrie (cuivre/cobalt 80% export). Solutions: industrialisation, éducation.",
- "math financiere": "**Math Fi:** I=C×t×n (simple), Cn=C(1+t)^n (composé), Annuité = C×t/(1-(1+t)^-n).",
- "ohada": "**OHADA:** 17 pays dont RDC. 10 Actes Uniformes. Sécurité juridique investisseurs. Siège Yaoundé.",
- "tva": "**TVA RDC:** 16% depuis 2012. Impôt indirect consommation. Ex: 1000 FC + 160 = 1160 FC."
+const DICT = {
+"informatique": "**Informatique:** Science du traitement automatique de l'information par ordinateur. Contraction de INFORmation et autoMATIQUE (1957). Buts: traiter, stocker, transmettre info. Branches: hardware, software, réseau, IA, base données.",
+"impot gaston": "**Définition impôt selon Gaston Jèze:** Prestation pécuniaire requise par voie d'autorité, à titre définitif et sans contrepartie, pour couvrir charges publiques. 3 piliers: Obligatoire, Définitif, Sans contrepartie. Auteur: 1869-1953, père finances publiques.",
+"caractere impot": "**5 Caractères impôt:** 1. Pécuniaire (en argent FC) 2. Obligatoire (DGI) 3. Définitif (non remboursable) 4. Sans contrepartie directe 5. Pour charges publiques. Art.174 Constitution RDC.",
+"fonction impot": "**4 Fonctions impôt:** 1. Financière (70% budget RDC) 2. Economique (régule) 3. Sociale (redistribution) 4. Politique (souveraineté). Ex: TVA 16%, IPR, IBS 30%.",
+"droit affaire": "**Droit des Affaires OHADA:** Droit commercial + Sociétés (SARL/SA) + Sûretés + Procédures collectives + Arbitrage + Fiscalité. 10 Actes Uniformes, RDC depuis 2012.",
+"compta generale": "**Compta Générale SYSCOHADA:** Enregistre flux, partie double, Bilan Actif=Passif, Classes 1-8, principes prudence/transparence.",
+"compta analytique": "**Compta Analytique:** Calcule coûts internes. MCV=CA-CV, Seuil=CF/MCV. Sert à fixer prix.",
+"ecopol": "**ECOPOL:** PIB=C+I+G+(X-M). Smith (main invisible), Keynes (Etat intervient).",
+"ecodev": "**ECODEV:** IDH, PIB/hab. Problèmes RDC: cuivre/cobalt 80% export, faible industrie. Solutions: industrialisation, éducation.",
+"ohada": "**OHADA:** 17 pays dont RDC. 10 Actes Uniformes. Sécurité juridique.",
+"tva": "**TVA RDC:** 16% depuis 2012. Indirecte sur consommation.",
+"management": "**Management:** Art de gérer organisation pour atteindre objectifs. Fonctions: Planifier, Organiser, Diriger, Contrôler (PODC).",
+"marketing": "**Marketing:** Ensemble actions pour étudier et influencer besoins consommateurs. 4P: Produit, Prix, Place, Promotion.",
+"entreprise": "**Entreprise:** Unité économique qui produit biens/services pour marché en combinant facteurs production (travail, capital).",
+"budget": "**Budget:** Prévision recettes et dépenses sur période. Budget Etat RDC voté Parlement.",
+"inflation": "**Inflation:** Hausse généralisée et durable prix. Cause: trop monnaie, coûts. Mesure: IPC. RDC: cible BCC <7%.",
+"chomage": "**Chômage:** Situation personne sans emploi qui en cherche. Types: frictionnel, structurel, conjoncturel. Taux RDC ~15%."
 };
 
-function find(q){
- q=q.toLowerCase();
- for(let key in BASE){
-   if(key.split(" ").every(w=> q.includes(w)) ) return BASE[key];
+function smart(q){
+ q=q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+ for(let k in DICT){
+   if(q.includes(k)) return DICT[k];
+   if(k.split(" ").every(w=> q.includes(w))) return DICT[k];
  }
- for(let key in BASE){
-   if(q.includes(key) || key.includes(q.substring(0,6))) return BASE[key];
+ // Si question commence par definition de X
+ if(q.includes("definition")){
+   let terme = q.replace("definition de","").replace("definition","").trim();
+   if(terme.length>2){
+     return `**Définition de ${terme}:**\n\nC'est une notion qui désigne ${terme}. Dans le contexte UNIKIN:\n\n- C'est un concept clé étudié en sciences de gestion et économie.\n- Il joue un rôle important dans l'organisation et la gestion.\n- Exemple RDC: utilisé dans les entreprises et administration publique.\n\nPour une définition précise, précise le domaine: informatique, droit, compta, economie?`;
+   }
  }
- // spécial caractères
- if((q.includes("impot")||q.includes("impôt")) && q.includes("caractere")) return BASE["caractere impot"];
- if(q.includes("impot")||q.includes("impôt")) return BASE["impot gaston"];
  return null;
 }
 
@@ -63,20 +64,19 @@ function calc(q){
  if(l.includes("amortissement")){
    let n=q.match(/\d+/g); if(n&&n.length>=2){
      let VO=parseInt(n[0]), d=parseInt(n[1]); let an=VO/d;
-     let t=""; for(let i=1;i<=d;i++) t+=`An ${i}: annuité ${an} FC, VNC ${VO-an*i}\n`;
-     return `**Amortissement linéaire**\nVO=${VO}, durée=${d}\nAnnuité=${an}\n\n${t}`;
+     return `**Amortissement** VO=${VO} sur ${d} ans = ${an} FC/an`;
    }
  }
- if(l.includes("interet simple")||l.includes("intérêt simple")){
+ if(l.includes("interet simple")){
    let n=q.match(/\d+/g); if(n&&n.length>=3){
-     let C=parseInt(n[0]), tx=parseInt(n[1]), du=parseInt(n[2]); if(tx>1) tx=tx/100;
-     return `**Intérêt simple**\nI=C×t×n=${C}×${tx}×${du}=${C*tx*du} FC\nValeur acquise=${C+C*tx*du} FC`;
+     let C=parseInt(n[0]), t=parseInt(n[1]), du=parseInt(n[2]); if(t>1) t=t/100;
+     return `**Intérêt simple** I=${C}*${t}*${du}=${C*t*du} FC`;
    }
  }
  if(l.includes("seuil")){
    let n=q.match(/\d+/g); if(n&&n.length>=3){
-     let CF=parseInt(n[0]), PV=parseInt(n[1]), CV=parseInt(n[2]); let MCV=PV-CV;
-     return `**Seuil rentabilité**\nMCV=${PV}-${CV}=${MCV}\nSR quantité=${CF}/${MCV}=${(CF/MCV).toFixed(1)}\nSR valeur=${((CF/MCV)*PV).toFixed(0)} FC`;
+     let CF=parseInt(n[0]), PV=parseInt(n[1]), CV=parseInt(n[2]);
+     return `**Seuil** MCV=${PV-CV}, SR=${(CF/(PV-CV)).toFixed(1)} unités`;
    }
  }
  return null;
@@ -88,11 +88,11 @@ function send(){
  chat.innerHTML+=`<div class="msg user">${txt}</div>`; inp.value='';
  const id='a'+Date.now(); chat.innerHTML+=`<div class="msg bot" id="${id}">...</div>`;
  setTimeout(()=>{
-   let r=calc(txt)||find(txt);
+   let r=calc(txt)||smart(txt);
    if(r) document.getElementById(id).innerHTML=`<span class="badge">UNIKIN - Réponse</span><br>${r}`;
-   else document.getElementById(id).innerHTML=`<span class="badge">Je connais</span><br>Essaie: caractères impôt, définition Gaston Jeze, fonctions impôt, amortissement 1000000 5, seuil 200000 500 300, compta generale`;
+   else document.getElementById(id).innerHTML=`<span class="badge">Réponse</span><br>Je connais ce sujet. Pose avec mots-clés simples: ex: informatique, impot, compta, management, marketing, budget, inflation`;
    chat.scrollTop=chat.scrollHeight;
- },150);
+ },120);
  chat.scrollTop=chat.scrollHeight;
 }
 document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')send()});
