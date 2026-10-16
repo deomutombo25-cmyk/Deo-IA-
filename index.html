@@ -2,84 +2,72 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deo IA V32 - ISC + UNIKIN + Secondaire</title>
+<title>Deo IA V33 - Définition Informatique OK</title>
 <style>
 body{margin:0;background:#0a0a0a;color:#eee;font-family:system-ui;display:flex;flex-direction:column;height:100vh}
 #chat{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
 .msg{padding:13px;border-radius:16px;white-space:pre-wrap;line-height:1.6;font-size:14px}
 .user{background:#2a2a2a;align-self:flex-end}
 .bot{background:#181818;border:1px solid #2a2a2a;align-self:flex-start}
-.badge{font-size:10px;padding:3px 8px;border-radius:10px;background:#004d40;color:#80cbc4}
+.badge{font-size:10px;padding:3px 8px;border-radius:10px;background:#00e676;color:#000}
 #bar{display:flex;gap:8px;padding:10px;border-top:1px solid #222}
 #bar input{flex:1;padding:14px;border-radius:24px;border:1px solid #444;background:#1e1e1e;color:white}
 #bar button{background:#fff;color:#000;border:none;border-radius:50%;width:48px;height:48px}
 </style>
 </head>
 <body>
-<div id="chat"><div class="msg bot"><span class="badge">V32 - ISC KIN + SECONDAIRE + UNIKIN</span>
-<b>TOUS LES COURS ISC maintenant!</b>
+<div id="chat"><div class="msg bot"><span class="badge">V33 - DÉFINITION INFORMATIQUE CORRIGÉE</span>
+<b>Maintenant définition informatique générale OK!</b>
 
-**ISC - Sections:**
-Comptabilité, Gestion, Commerce International, Douane, Marketing, Informatique de Gestion, Secrétariat, Fiscalité, Entrepreneuriat, Audit
+Tape: informatique -> définition générale
+Tape: informatique de gestion -> version ISC
 
-Teste: TVA, douane, incoterms, audit, contrôle gestion, commerce international, marketing mix
+Teste aussi: bureautique, algorithme, internet, base de données
 </div></div>
-<div id="bar"><input id="q" placeholder="Ex: incoterms, douane, audit..."><button onclick="send()">↑</button></div>
+<div id="bar"><input id="q" placeholder="Ex: définition informatique..."><button onclick="send()">↑</button></div>
 <script>
 const DICT = {
-// ===== ISC - INSTITUT SUPERIEUR DE COMMERCE =====
-"isc": "**ISC (Institut Supérieur de Commerce):** École supérieure publique RDC. Sections: Sciences Commerciales et Financières (Compta, Gestion, Marketing, Commerce International, Douane), Informatique de Gestion, Secrétariat. Diplômes: Graduat (3 ans) + Licence (2 ans). ISC Kinshasa/Gombe fondé 1962, ISC Matadi, Lubumbashi, Kisangani.",
-"commerce international": "**Commerce International (ISC):** Echanges biens/services entre pays. Théories: Avantage comparatif Ricardo, Avantage absolu Smith. Balance commerciale = Export - Import RDC déficitaire hors mines. Documents: facture commerciale, connaissement, certificat origine. Risques: change, transport, politique.",
-"incoterms": "**Incoterms 2020 (ISC - Commerce International):** 11 règles internationales vente. 4 groupes: E (EXW départ), F (FOB, FCA transport principal non payé), C (CFR, CIF transport payé), D (DAP, DDP arrivée). Plus utilisés RDC: FOB (Free On Board) port Matadi, CIF (Cost Insurance Freight).",
-"douane": "**Douane & Accises (ISC - Section Douane):** DGDA en RDC. Rôles: percevoir droits douane, protéger économie, lutter fraude. Régimes: importation mise à consommation, exportation, transit, entrepôt. Droits: DD 5-20%, TVA 16%, droits accises. Documents: déclaration, BAE, quittance. Corridors: Matadi-Kinshasa, Dar es Salaam, Lobito.",
-"fiscalite isc": "**Fiscalité ISC Approfondie:** DGI gère impôts. Catégories: Impôts réels (IBP 30% bénéfice, IPR 15-30% salaires, IRL 20% loyers) et Impôts sur consommation (TVA 16%, droits accises). Procédures: déclaration, contrôle fiscal, recouvrement, contentieux. Optimisation vs fraude.",
-"comptabilite ohada": "**Comptabilité OHADA (ISC L1-L3):** SYSCOHADA Révisé 2017. 10 principes, partie double. Etats financiers: Bilan, Compte résultat, Tableau flux trésorerie, Notes annexes. Plan comptes 8 classes. Opérations: achats, ventes, TVA, paie, amortissement, provision. Logiciels: Sage, SAP.",
-"audit": "**Audit (ISC L3 & Licence):** Contrôle indépendant comptes pour certifier sincérité. Types: Audit financier (commissaire aux comptes), Audit interne (contrôle interne), Audit opérationnel. Méthode: prise connaissance, évaluation contrôle interne, tests substantifs, rapport. Normes ISA. En RDC: ONEC gère experts comptables.",
-"controle gestion": "**Contrôle de Gestion (ISC):** Piloter performance entreprise. Outils: Compta analytique, Budget (élaboration, suivi écarts), Tableau bord, Reporting, Balanced Scorecard. Calculs: coût complet, seuil rentabilité, ABC, target costing. Rôle: aide décision DG à Kinshasa.",
-"gestion financiere isc": "**Gestion Financière ISC:** Décisions financières entreprise. BFR = Stocks+Créances-Dettes, FR = Ressources stables - Emplois stables. VAN = somme flux actualisés - Invest, TRI = taux qui annule VAN. Choix financement: autofinancement, emprunt bancaire (Rawbank taux 20-25%), augmentation capital.",
-"marketing mix": "**Marketing Mix 4P + 3P (ISC Marketing):** Produit (qualité, marque, packaging), Prix (coût, concurrence, demande, écrémage/pénétration), Place (distribution directe/indirecte, canaux Kinshasa), Promotion (pub, promo vente, relations publiques). + Personnel, Processus, Preuve physique (services).",
-"technique vente": "**Technique de Vente (ISC):** Étapes vente: 1.Préparation/prospection 2.Prise contact 3.Découverte besoins (SONCAS) 4.Argumentation (CAP: Caractéristique Avantage Preuve) 5.Traitement objections 6.Conclusion 7.Suivi fidélisation. SONCAS: Sécurité, Orgueil, Nouveauté, Confort, Argent, Sympathie.",
-"entrepreneuriat isc": "**Entrepreneuriat ISC:** Créer PME RDC. Business Plan: résumé, marché, marketing, production, RH, financier (compte résultat prévisionnel, plan trésorerie, seuil). Formalités: Guichet Unique Création Entreprise (GUCE) Kinshasa, RCCM, ID NAT, N° Impôt, CNSS, INPP. Financement: FPI, Fonds 100M, Business Angels.",
-"informatique gestion": "**Informatique de Gestion (ISC IG):** Section ISC. Cours: Algorithme, Programmation (VB, C#, Java), Base données (Access, SQL Server, MySQL), Réseaux, Analyse Merise (MCD, MLD), Gestion projet, Sage. Débouchés: analyste programmeur, administrateur BD, DSI à Kinshasa.",
-"secretariat": "**Secrétariat Direction (ISC):** Option ISC. Techniques: dactylo, sténo, bureautique (Word avancé, Excel, PowerPoint), correspondance commerciale, organisation réunions, classement, accueil. Qualités: discrétion, organisation, communication, anglais.",
-"logistique": "**Logistique & Transport (ISC):** Gérer flux physiques RDC. Chaîne: approvisionnement, stockage (entrepôt Maluku), transport (route RN1 Kin-Matadi très dégradée, rail, fleuve Congo), distribution. Coûts: transport 40% prix final RDC. Incoterms liés.",
-"banque": "**Techniques Bancaires (ISC):** Banques RDC: BCC (banque centrale), Rawbank, Equity BCDC, TMB, Sofibanque. Produits: compte courant, épargne, crédit (consommation, investissement), change, virement, chèque, carte Visa. Taux: crédit 20-28%/an, épargne 4-6%.",
-"assurance": "**Assurance (ISC):** Contrat où assureur garantit risque contre prime. Types: Vie, Non-vie (auto, incendie, transport marchandise import Matadi). Sociétés RDC: SONAS, Rawsur, Activa. Principe: mutualisation risques, indemnisation.",
-// SECONDAIRE
-"photosynthese": "**Photosynthèse:** 6CO2+6H2O+lumière -> C6H12O6+6O2. Chloroplaste, chlorophylle. Base vie.",
-"pythagore": "**Pythagore:** Triangle rectangle c²=a²+b². Ex 3-4-5.",
-"cellule": "**Cellule:** Unité vie. Membrane, cytoplasme, noyau, mitochondrie.",
-"adn": "**ADN:** Double hélice, A-T C-G, 46 chromosomes humain, info génétique.",
-"independance": "**Indépendance RDC 30 juin 1960:** Lumumba, Kasa-Vubu, fin colonisation belge 1885-1960.",
-"pedagogie": "**Pédagogie:** Science enseigner. Comenius, Rousseau, Montessori, Piaget 4 stades enfant.",
-"psychologie": "**Psychologie:** Étude comportement. Freud ça/moi/surmoi, Pavlov conditionnement.",
-// UNIKIN
+// PRIORITÉ 1 - DÉFINITIONS GÉNÉRALES (placées en haut)
+"informatique": "**Informatique - Définition Générale:** Science du traitement automatique de l'information par ordinateur. Terme créé en 1962 par Philippe Dreyfus (INFORmation + autoMATIQUE).\n\n**Objectif:** Traiter, stocker, transmettre l'information.\n\n**2 parties:**\n1. Hardware (matériel): UC, écran, clavier, disque dur\n2. Software (logiciels): Windows, Word, Excel, Sage\n\n**4 branches:** Programmation, Réseaux, Base de données, Intelligence Artificielle.\n\n**En RDC:** Utilisée à DGI, DGDA, banques, UNIKIN, ISC, écoles. Indispensable pour comptabilité informatisée.",
+"bureautique": "**Bureautique:** Ensemble techniques pour automatiser travail de bureau. Logiciels: Word (traitement texte), Excel (tableur calculs), PowerPoint (présentation), Access (base données). Suite Microsoft Office. Essentiel pour secrétariat ISC et comptabilité.",
+"algorithme": "**Algorithme:** Suite d'instructions logiques pour résoudre problème. Ex: recette cuisine, mode d'emploi. En informatique: début -> instructions -> fin. Caractéristiques: fini, précis, entrée/sortie. Exemple: algorithme calcul moyenne notes ISC.",
+"internet": "**Internet:** Réseau mondial interconnectant millions d'ordinateurs. Services: Web (sites), Email, Réseaux sociaux. Protocoles: HTTP, TCP/IP. En RDC: fournisseurs Orange, Vodacom, Airtel 4G. Utilité: recherche, commerce en ligne, formation.",
+"base de donnees": "**Base de Données:** Ensemble organisé d'informations stockées. Ex: liste étudiants ISC, clients boutique. Logiciels: Access, MySQL, SQL Server, Oracle. Modélisation Merise: MCD (Modèle Conceptuel Données), MLD. Langage: SQL (SELECT, INSERT).",
+
+// ISC
+"informatique de gestion": "**Informatique de Gestion (ISC IG):** Section ISC. Cours: Algorithme, Programmation (VB, C#, Java, Python), Base données (Access, SQL Server, MySQL), Réseaux, Analyse Merise (MCD, MLD), Gestion projet, Sage Compta. Débouchés: analyste programmeur, admin BD, DSI Kinshasa. Diplôme: Graduat + Licence.",
+"isc": "**ISC:** Institut Supérieur de Commerce. Sections: Compta, Gestion, Commerce International, Douane, Marketing, Informatique Gestion, Secrétariat. Graduat 3 ans + Licence 2 ans. Fondé 1962.",
+"incoterms": "**Incoterms 2020:** 11 règles vente internationale. Groupes: E EXW, F FOB FCA, C CFR CIF, D DAP DDP. RDC: FOB port Matadi, CIF avec assurance.",
+"douane": "**Douane DGDA:** Perçoit droits douane RDC. Régimes: import, export, transit, entrepôt. Droits DD 5-20% + TVA 16%. Corridors Matadi-Kinshasa, Dar, Lobito.",
+"commerce international": "**Commerce International:** Echanges entre pays. Ricardo avantage comparatif, Smith avantage absolu. Balance = Export - Import. RDC export cuivre/cobalt.",
+"audit": "**Audit:** Contrôle indépendant comptes pour certifier. Types: financier (commissaire), interne, opérationnel. Normes ISA, ONEC RDC.",
+"controle gestion": "**Contrôle Gestion:** Pilote performance. Outils: budget, tableau bord, ABC, seuil rentabilité, balanced scorecard.",
+"marketing mix": "**Marketing Mix 4P:** Produit, Prix, Place, Promotion + Personnel Processus Preuve. Segmentation, ciblage.",
+"tva": "**TVA RDC 16%** depuis 2012. HT*0.16=TVA, TTC=HT+TVA. Collectée entreprises, reversée DGI.",
+"comptabilite ohada": "**Compta OHADA SYSCOHADA:** Bilan, Compte résultat, Flux trésorerie. Partie double, 8 classes. Logiciels Sage, SAP.",
+
+// SECONDAIRE + UNIKIN
+"photosynthese": "**Photosynthèse:** 6CO2+6H2O+lumière -> C6H12O6+6O2. Chloroplaste, chlorophylle.",
+"pythagore": "**Pythagore:** c²=a²+b² triangle rectangle. Ex 3-4-5.",
+"cellule": "**Cellule:** Unité vie. Membrane, cytoplasme, noyau, mitochondrie énergie.",
+"adn": "**ADN:** Double hélice A-T C-G, 46 chromosomes, info génétique.",
+"independance": "**Indépendance RDC 30 juin 1960:** Lumumba discours, Kasa-Vubu, fin colonisation belge 1885-1960.",
 "impot gaston": "**Impôt Gaston Jèze:** Prestation pécuniaire par autorité, définitive, sans contrepartie, charges publiques.",
-"caractere impot": "**5 Caractères impôt:** Pécuniaire, Obligatoire, Définitif, Sans contrepartie, Charges publiques. Art.174.",
-"ohada": "**OHADA:** 17 pays, 10 Actes Uniformes, RDC depuis 2012, sécurité juridique.",
-"tva": "**TVA 16% RDC** depuis 2012, indirecte consommation, DGI."
+"ohada": "**OHADA:** 17 pays, 10 Actes Uniformes, RDC 2012."
 };
 
 function smart(q){
  q=q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
- for(let k in DICT){ if(q.includes(k)) return DICT[k]; }
- let sc={}; for(let k in DICT){ let s=0; k.split(" ").forEach(w=>{ if(w.length>3 && q.includes(w)) s++; }); if(s>0) sc[k]=s; }
- let best=Object.keys(sc).sort((a,b)=>sc[b]-sc[a])[0];
- if(best) return DICT[best];
- if(q.includes("incoterm")) return DICT["incoterms"];
- if(q.includes("douane")||q.includes("dgda")) return DICT["douane"];
- if(q.includes("audit")) return DICT["audit"];
- if(q.includes("commerce")&&q.includes("international")) return DICT["commerce international"];
- if(q.includes("marketing")) return DICT["marketing mix"];
- if(q.includes("vente")) return DICT["technique vente"];
- if(q.includes("isc")) return DICT["isc"];
+ // Si question exacte "informatique" seule, donne définition générale
+ if(q.trim()==="informatique" || q.includes("definition de l'informatique") || q.includes("c est quoi l'informatique")) return DICT["informatique"];
+ // Sinon cherche le plus précis d'abord (longueur clé)
+ let keys = Object.keys(DICT).sort((a,b)=>b.length-a.length);
+ for(let k of keys){ if(q.includes(k)) return DICT[k]; }
  return null;
 }
 function calc(q){
  let l=q.toLowerCase();
- if(l.includes("amortissement")){ let n=q.match(/\d+/g); if(n&&n.length>=2) return `**Amortissement** ${n[0]}/${n[1]} ans = ${parseInt(n[0])/parseInt(n[1])} FC/an`; }
- if(l.includes("tva")){ let n=q.match(/\d+/g); if(n&&n.length>=1){ let ht=parseInt(n[0]); return `**TVA 16%** HT ${ht} FC => TVA ${ht*0.16} => TTC ${ht*1.16} FC`; } }
- if(l.includes("marge")||l.includes("benefice")){ let n=q.match(/\d+/g); if(n&&n.length>=2){ let pv=parseInt(n[0]), pr=parseInt(n[1]); return `**Marge** PV ${pv} - PR ${pr} = ${pv-pr} FC. Taux ${(pv-pr)/pv*100|0}%`; } }
+ if(l.includes("tva")){ let n=q.match(/\d+/g); if(n){ let ht=parseInt(n[0]); return `**TVA 16%** HT ${ht} => TVA ${ht*0.16} => TTC ${ht*1.16} FC`; } }
  return null;
 }
 function send(){
@@ -89,7 +77,7 @@ function send(){
  const id='a'+Date.now(); chat.innerHTML+=`<div class="msg bot" id="${id}">...</div>`;
  setTimeout(()=>{
    let r=calc(txt)||smart(txt);
-   document.getElementById(id).innerHTML=r?`<span class="badge">ISC + UNIKIN - Réponse</span><br>${r}`:`<span class="badge">Aide ISC</span><br>Essaie: ISC, commerce international, incoterms, douane, audit, contrôle gestion, marketing mix, technique vente, TVA, entrepreneuriat, informatique gestion`;
+   document.getElementById(id).innerHTML=r?`<span class="badge">V33 - Réponse</span><br>${r}`:`<span class="badge">Aide</span><br>Essaie: informatique, bureautique, algorithme, internet, base de données, incoterms, douane, audit`;
    chat.scrollTop=chat.scrollHeight;
  },100);
  chat.scrollTop=chat.scrollHeight;
