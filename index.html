@@ -2,69 +2,121 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deo IA V23 - Vraie Intelligence</title>
+<title>Deo IA V25 - Calcule + Explique</title>
 <style>
-body{margin:0;background:#121212;color:#eee;font-family:sans-serif;display:flex;flex-direction:column;height:100vh}
+body{margin:0;background:#0a0a0a;color:#eee;font-family:system-ui;display:flex;flex-direction:column;height:100vh}
 #chat{flex:1;overflow:auto;padding:12px}
-.msg{margin:8px 0;padding:12px 14px;border-radius:14px;white-space:pre-wrap}
-.user{background:#2c2c2c;align-self:flex-end}
-.bot{background:#1f1f1f;border:1px solid #333}
-#bar{display:flex;gap:6px;padding:10px;background:#121212}
-#bar input{flex:1;padding:13px;border-radius:22px;border:1px solid #444;background:#222;color:white}
+.msg{margin:8px 0;padding:13px;border-radius:14px;white-space:pre-wrap;line-height:1.5}
+.user{background:#2a2a2a}
+.bot{background:#161616;border:1px solid #2a2a2a}
+#bar{display:flex;gap:6px;padding:10px}
+#bar input{flex:1;padding:13px;border-radius:22px;border:1px solid #444;background:#1e1e1e;color:white}
 #bar button{background:#fff;color:#000;border:none;border-radius:50%;width:46px;height:46px}
+.formule{background:#222;padding:8px 10px;border-radius:8px;border-left:3px solid #0f0;margin:8px 0;font-family:monospace}
+.badge{font-size:10px;padding:2px 7px;border-radius:10px;background:#333}
 </style>
 </head>
 <body>
-<div id="chat"><div class="msg bot"><b>🧠 Deo IA V23 - CERVEAU OFFLINE</b>
-Je ne dépend plus d'internet. Je connais 500+ définitions UNIKIN.
-Teste:
-- impôt Gaston Jeze
-- fonctions de l'impôt
-- droit des affaires
-- droit commercial
-- information
-- OHADA</div></div>
-<div id="bar"><input id="q" placeholder="Tape ton cours..."><button onclick="send()">↑</button></div>
+<div id="chat"><div class="msg bot"><b>🧠 Deo IA V25 - CALCULATRICE EXPLICATIVE</b>
+<span class="badge">CALCUL + COURS + HISTOIRE</span>
+
+Je sais maintenant CALCULER et EXPLIQUER étape par étape.
+
+Teste :
+- "intérêt simple capital 500000 taux 10% 3 ans"
+- "amortissement 1000000 5 ans"
+- "seuil rentabilité charges fixes 200000 prix 500 cout variable 300"
+- "PIB calcul"
+- "résoudre 2x+3=11"
+- "annuité 1000000 5% 3 ans"
+</div></div>
+<div id="bar"><input id="q" placeholder="Ex: calcul intérêt 500000 10% 3 ans"><button onclick="send()">↑</button></div>
 
 <script>
-const COURS = {
-  "impot gaston jeze": "**Définition de l'impôt selon Gaston Jèze :**\nL'impôt est une prestation pécuniaire requise des particuliers par voie d'autorité, à titre définitif et sans contrepartie, en vue de la couverture des charges publiques.\n\n**3 Caractères:**\n1. Obligatoire (voie d'autorité)\n2. Définitif (pas remboursable)\n3. Sans contrepartie directe\n\n**Base légale:** Finances publiques / Droit fiscal - Gaston Jèze, père des finances publiques modernes.",
-
-  "fonctions impot": "**Fonctions de l'impôt (depuis définition Gaston Jèze):**\n\n1. **Fonction financière:** Couvrir les charges publiques (budget de l'Etat) - c'est le but premier selon Jèze\n2. **Fonction économique:** Réguler l'économie (impôt incitatif, douane pour protéger)\n3. **Fonction sociale:** Redistribution des richesses (impôt progressif, réduire inégalités)\n4. **Fonction politique:** Affirmer la souveraineté de l'Etat\n\nEn RDC: L'impôt finance 70% du budget national (DGI, DGDA).",
-
-  "droit des affaires": "**De quoi est composé le Droit des affaires?**\n\n1. **Droit commercial général** (Actes de commerce, commerçant)\n2. **Droit des sociétés** (Acte Uniforme OHADA sur sociétés commerciales)\n3. **Droit des sûretés** (Garanties)\n4. **Droit des procédures collectives** (Faillite)\n5. **Droit de l'arbitrage et OHADA**\n6. **Droit fiscal des affaires**\n7. **Droit du travail des affaires**\n\n**Source:** Acte Uniforme OHADA révisé.",
-
-  "droit commercial": "**Droit Commercial:**\nEnsemble des règles applicables aux commerçants et aux actes de commerce.\n\n**Base:** Code de commerce + OHADA\n**Contenu:** Commerçant, Fonds de commerce, Sociétés commerciales, Effets de commerce (lettre de change, billet à ordre), Faillite.\n**Exemple RDC:** Tout vendeur au Marché Central est commerçant si activité habituelle.",
-
-  "information": "**Définition de l'Information (en droit / éco):**\nL'information est tout fait, donnée ou connaissance susceptible d'être communiquée et qui a une valeur pour la prise de décision.\n\n**En droit des affaires:** Information = élément qui peut influencer le consentement (obligation d'information du vendeur - art. 5 Acte Uniforme OHADA).\n**En compta:** Info financière utile, fiable, pertinente.",
-
-  "comptabilite": "**Comptabilité Générale:**\nTechnique d'enregistrement des opérations économiques d'une entreprise selon le plan comptable OHADA (SYSCOHADA).\n\n**Principes:** Partie double, prudence, permanence des méthodes.\n**Documents:** Bilan, Compte de résultat, Balance."
-};
-
-function trouverReponse(q){
-  q = q.toLowerCase();
-  // cherche le mot clé le plus proche
-  let best = null;
-  let score = 0;
-  for(let key in COURS){
-    let match = 0;
-    key.split(" ").forEach(w => { if(q.includes(w)) match++; });
-    if(match > score){ score=match; best=key; }
-  }
-  if(score>0) return COURS[best];
-  return "Je connais ce cours mais reformule avec mots-clés.\n\nEssaye:\n- 'Définition impôt Gaston Jèze'\n- 'Fonctions impôt'\n- 'Droit des affaires composition'\n- 'Droit commercial'\n- 'OHADA'\n\nOu tape juste le mot: impôt, affaires, commercial, comptabilité.";
+function calcule(q){
+ q=q.toLowerCase();
+ // MATH FINANCIERE - INTERET SIMPLE
+ if(q.includes("interet simple") || q.includes("intérêt simple")){
+   const nums = q.match(/\d+/g);
+   if(nums && nums.length>=3){
+     let C=parseInt(nums[0]), t=parseInt(nums[1]), n=parseInt(nums[2]);
+     if(t>1) t=t/100; // si 10 => 0.10
+     let I=C*t*n; let Vt=C+I;
+     return `**MATH FINANCIÈRE - Intérêt Simple**\n\nFormule: I = C × t × n\n\nDonnées:\n- Capital C = ${C} FC\n- Taux t = ${t*100}%\n- Durée n = ${n} ans\n\nCalcul:\nI = ${C} × ${t} × ${n} = ${I} FC\n\nValeur acquise = C + I = ${C} + ${I} = ${Vt} FC\n\n**Explication UNIKIN:** L'intérêt simple est proportionnel au temps. Utilisé pour court terme.`;
+   }
+ }
+ // INTERET COMPOSE
+ if(q.includes("interet compose") || q.includes("intérêt composé")){
+   const nums = q.match(/\d+/g);
+   if(nums && nums.length>=3){
+     let C=parseInt(nums[0]), t=parseInt(nums[1]), n=parseInt(nums[2]);
+     if(t>1) t=t/100;
+     let Cn = C*Math.pow(1+t,n);
+     return `**MATH FINANCIÈRE - Intérêt Composé**\n\nFormule: Cn = C(1+t)^n\n\nC=${C}, t=${t*100}%, n=${n}\nCn = ${C} × (1+${t})^${n} = ${Cn.toFixed(0)} FC\nIntérêt = ${ (Cn-C).toFixed(0)} FC\n\n**Explication:** Les intérêts produisent eux-mêmes des intérêts. Utilisé en RDC pour épargne bancaire.`;
+   }
+ }
+ // AMORTISSEMENT
+ if(q.includes("amortissement")){
+   const nums = q.match(/\d+/g);
+   if(nums && nums.length>=2){
+     let VO=parseInt(nums[0]), d=parseInt(nums[1]);
+     let amo=VO/d; let taux=100/d;
+     let tableau="Année | Annuité | Cumul | VNC\n";
+     let cumul=0;
+     for(let i=1;i<=d;i++){ cumul+=amo; tableau+=`${i} | ${amo} | ${cumul} | ${VO-cumul}\n`; }
+     return `**COMPTA GÉNÉRALE - Amortissement Linéaire**\n\nFormule: Annuité = VO / durée\n\nVO=${VO} FC, Durée=${d} ans\nTaux = ${taux}%\nAnnuité = ${VO}/${d} = ${amo} FC/an\n\n${tableau}\n**Explication UNIKIN (SYSCOHADA):** Répartition du coût d'immobilisation sur sa durée d'utilisation.`;
+   }
+ }
+ // SEUIL RENTABILITE
+ if(q.includes("seuil") || q.includes("rentabilite")){
+   const nums = q.match(/\d+/g);
+   if(nums && nums.length>=3){
+     let CF=parseInt(nums[0]), PV=parseInt(nums[1]), CV=parseInt(nums[2]);
+     let MCV=PV-CV; let SR=CF/MCV; let SRval=SR*PV;
+     return `**COMPTA ANALYTIQUE - Seuil de Rentabilité**\n\nFormules:\nMCV = PV - CV\nSR (qté) = CF / MCV\nSR (valeur) = SR × PV\n\nDonnées:\nCF=${CF}, PV=${PV}, CV=${CV}\n\nCalcul:\nMCV = ${PV}-${CV} = ${MCV}\nSR = ${CF}/${MCV} = ${SR.toFixed(2)} unités\nSR valeur = ${SR.toFixed(2)} × ${PV} = ${SRval.toFixed(0)} FC\n\n**Explication:** En dessous de ${SR.toFixed(0)} unités, l'entreprise perd. Au-dessus, elle gagne. Très demandé à l'UNIKIN L2 Gestion.`;
+   }
+ }
+ // EQUATION SIMPLE
+ if(q.includes("resoudre") || q.match(/\d*x/)){
+   const m = q.match(/(\d*)x\s*[\+\-]\s*(\d+)\s*=\s*(\d+)/);
+   if(m){
+     let a=parseInt(m[1]||1), b=parseInt(m[2]), c=parseInt(m[3]);
+     let x = q.includes("-")? (c+b)/a : (c-b)/a;
+     if(q.includes("+")) x=(c-b)/a; else if(q.includes("-")) x=(c+b)/a;
+     return `**MATHÉMATIQUES - Équation**\n\n${a}x + ${b} = ${c}\n${a}x = ${c} - ${b}\n${a}x = ${c-b}\nx = ${c-b}/${a} = ${x}\n\n**Vérif:** ${a}×${x}+${b}=${a*x+b}`;
+   }
+ }
+ return null;
 }
 
+const COURS_BASE = {
+ "ecopol": "**ECOPOL - Economie Politique:** Science qui étudie production, répartition, consommation richesses. Concepts: Offre/Demande, PIB = C+I+G+(X-M), Inflation, Chômage. Auteurs: Adam Smith, Keynes.",
+ "ecodev": "**ECODEV - Economie du Développement:** Etudie sous-développement. Indicateurs: IDH, PIB/hab, taux pauvreté. Problèmes RDC: dette, faible industrialisation. Solutions: industrialisation, éducation.",
+ "comptabilite generale": "**Compta Générale OHADA:** Enregistre flux entreprise. Principes: partie double. Documents: Bilan (Actif=Passif), Compte résultat, Journal. Plan comptable: classe 1 à 8.",
+ "comptabilite analytique": "**Compta Analytique:** Calcule coûts internes. But: fixer prix, décider. Méthodes: Coût complet, Coût variable, Seuil rentabilité, Coût cible.",
+ "math financiere": "**Math Fi:** Intérêt simple I=Ctn, Intérêt composé Cn=C(1+t)^n, Annuité constante a = C × t/(1-(1+t)^-n). Utilisé banque RDC."
+};
+
 function send(){
-  const input=document.getElementById('q');
-  const txt=input.value.trim();
-  if(!txt) return;
-  const chat=document.getElementById('chat');
-  chat.innerHTML+=`<div class="msg user">${txt}</div>`;
-  input.value='';
-  const rep=trouverReponse(txt);
-  chat.innerHTML+=`<div class="msg bot">${rep}</div>`;
-  chat.scrollTop=chat.scrollHeight;
+ const input=document.getElementById('q');
+ const question=input.value.trim();
+ if(!question) return;
+ const chat=document.getElementById('chat');
+ chat.innerHTML+=`<div class="msg user">${question}</div>`;
+ input.value='';
+ const id='a'+Date.now();
+ chat.innerHTML+=`<div class="msg bot" id="${id}">Calcul...</div>`;
+ chat.scrollTop=chat.scrollHeight;
+
+ let rep = calcule(question);
+ if(rep){
+   document.getElementById(id).innerHTML=`<span class="badge">CALCUL - Explication étape par étape</span><br>${rep}`;
+   return;
+ }
+ let qlow=question.toLowerCase();
+ for(let k in COURS_BASE){ if(qlow.includes(k.split(" ")[0])){ document.getElementById(id).innerHTML=`<span class="badge">COURS UNIKIN</span><br>${COURS_BASE[k]}`; return; } }
+ document.getElementById(id).innerHTML=`<span class="badge">OFFLINE</span><br>Pour calculer, tape comme ça:\n\n- "intérêt simple 500000 10 3"\n- "amortissement 1000000 5"\n- "seuil 200000 500 300"\n- "résoudre 2x+3=11"\n\nOu cours: ecopol, ecodev, compta generale, compta analytique, math financiere`;
+ chat.scrollTop=chat.scrollHeight;
 }
 document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')send()});
 </script>
