@@ -2,45 +2,116 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deo IA V34 - Définitions Claires Tous Cours</title>
+<title>Deo IA V35 - Bouton Réparé</title>
 <style>
 body{margin:0;background:#0a0a0a;color:#eee;font-family:system-ui;display:flex;flex-direction:column;height:100vh}
 #chat{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
-.msg{padding:14px;border-radius:18px;white-space:pre-wrap;line-height:1.7;font-size:14px}
+.msg{padding:14px;border-radius:18px;white-space:pre-wrap;line-height:1.7;font-size:14px;max-width:92%}
 .user{background:#2a2a2a;align-self:flex-end}
-.bot{background:#181818;border:1px solid #2a2a2a;align-self:flex-start}
+.bot{background:#181818;border:1px solid #333;align-self:flex-start}
 .badge{font-size:10px;padding:4px 10px;border-radius:12px;background:#00e676;color:#000;font-weight:bold}
-#bar{display:flex;gap:8px;padding:10px;border-top:1px solid #222}
-#bar input{flex:1;padding:14px;border-radius:24px;border:1px solid #444;background:#1e1e1e;color:white}
-#bar button{background:#fff;color:#000;border:none;border-radius:50%;width:48px;height:48px}
+#bar{display:flex;gap:8px;padding:12px;border-top:1px solid #222;align-items:center}
+#bar input{flex:1;padding:15px;border-radius:24px;border:1px solid #555;background:#1e1e1e;color:white;outline:none}
+#sendBtn{background:#fff;color:#000;border:none;border-radius:50%;width:50px;height:50px;font-size:20px;cursor:pointer}
+#sendBtn:active{transform:scale(0.9)}
 </style>
 </head>
 <body>
-<div id="chat"><div class="msg bot"><span class="badge">V34 - DÉFINITIONS CLAIRES TOUS COURS</span>
-<b>Je connais toutes les définitions avec explication claire maintenant!</b>
+<div id="chat">
+<div class="msg bot"><span class="badge">V35 - BOUTON RÉPARÉ ✅</span>
+<b>Bouton envoi réparé!</b>
 
-Tape naturellement: 
-- définition impôt gaston jeze
-- définition informatique claire
-- c'est quoi la photosynthèse
-- explique la compta, le marketing, la douane
-</div></div>
-<div id="bar"><input id="q" placeholder="Tape ta définition..."><button onclick="send()">↑</button></div>
+Maintenant tape et clique sur ↑ ça marche!
+
+Teste: informatique, impôt gaston jeze, photosynthèse, Pythagore, TVA, OHADA, douane, marketing
+</div>
+</div>
+
+<div id="bar">
+<input id="q" type="text" placeholder="Tape ta question ici..." autocomplete="off">
+<button id="sendBtn">↑</button>
+</div>
+
 <script>
 const COURS = [
-{ keys: ["informatique","info"], def: "**INFORMATIQUE - Définition claire:**\nScience qui permet de traiter automatiquement l'information avec un ordinateur.\n\n**Origine:** INFORmation + autoMATIQUE (1962, Philippe Dreyfus).\n\n**2 parties:**\n• Hardware = parties qu'on touche (écran, clavier, unité centrale)\n• Software = programmes (Windows, Word, Sage)\n\n**À quoi ça sert en RDC?** Gérer les élèves d'une école, la compta d'une boutique à Kinshasa, les impôts à la DGI.\n\n**Exemple simple:** Quand tu tapes un texte dans Word, c'est l'informatique qui le traite." },
-{ keys: ["impot","gaston","jeze","jèze"], def: "**IMPÔT selon Gaston Jèze - Définition claire:**\nC'est une somme d'argent que l'Etat oblige tout le monde à payer pour faire fonctionner le pays.\n\n**Selon Gaston Jèze (prof français 1869-1953):**\n> \"Prestation pécuniaire requise par voie d'autorité, à titre définitif et sans contrepartie, en vue de couvrir les charges publiques.\"\n\n**En français simple:**\n• Prestation pécuniaire = tu payes en argent (FC)\n• Par voie d'autorité = c'est obligatoire, DGI te force\n• Définitif = on ne te rembourse pas\n• Sans contrepartie = tu ne reçois pas directement quelque chose en retour\n• Charges publiques = pour construire routes, écoles, hôpitaux\n\n**Exemple RDC:** TVA 16% quand tu achètes crédit Vodacom." },
-{ keys: ["caractere","caractère","impot"], def: "**5 CARACTÈRES de l'Impôt - Explication claire:**\n\n1. **Pécuniaire:** On paye en argent, pas en poule. Ex: 16.000 FC\n2. **Obligatoire:** DGI peut te poursuivre si tu ne payes pas. Art.174 Constitution RDC\n3. **Définitif:** L'argent ne revient pas. Pas comme une caution\n4. **Sans contrepartie directe:** Tu payes même si la route devant chez toi est trouée\n5. **Pour charges publiques:** L'argent sert à tous les Congolais\n\n**Astuce examen:** Retiens PEC-OBL-DEF-SANS-CHAR" },
-{ keys: ["fonction","impot"], def: "**4 FONCTIONS de l'Impôt - Clair:**\n\n1. **Financière (la plus importante):** Remplir la caisse de l'Etat. 70% du budget RDC vient des impôts\n2. **Économique:** L'Etat augmente ou baisse les impôts pour aider l'économie. Ex: baisse impôt pour entreprises qui créent emplois\n3. **Sociale:** Prendre aux riches pour aider les pauvres (redistribution). Ex: IPR progressif\n4. **Politique:** Montrer que l'Etat est puissant et souverain" },
-{ keys: ["tva"], def: "**TVA - Définition claire:**\nTaxe sur la Valeur Ajoutée. C'est l'impôt que tu payes chaque fois que tu achètes quelque chose.\n\n**Taux RDC:** 16% depuis 2012\n**Comment calculer:** Si pain = 1000 FC HT, TVA = 160 FC, tu payes 1160 FC TTC\n**Qui collecte?** Le vendeur (boutique) collecte pour la DGI\n**Pourquoi?** Impôt facile à collecter, rapporte beaucoup à l'Etat" },
-{ keys: ["ohada"], def: "**OHADA - Définition claire:**\nOrganisation qui a créé les mêmes lois commerciales pour 17 pays d'Afrique dont la RDC.\n\n**But:** Un investisseur à Dakar et à Kinshasa trouve les mêmes règles = confiance\n**Depuis quand RDC?** 2012\n**10 Actes Uniformes:** Droit commercial, Sociétés (SARL, SA), Sûretés, Procédures collectives, etc.\n**Cour:** Abidjan" },
-{ keys: ["photosynthese","photosynthèse"], def: "**PHOTOSYNTHÈSE - Définition claire (Biologie):**\nC'est comment les plantes fabriquent leur nourriture avec le soleil.\n\n**Formule simple:** Soleil + CO2 (air) + Eau -> Sucre + Oxygène\n**Où?** Dans les feuilles vertes, grâce à la chlorophylle (couleur verte)\n**Pourquoi important?** Sans ça, pas d'oxygène pour respirer, pas de nourriture. C'est la base de la vie.\n**Exemple RDC:** Manioc, maïs à Masina font photosynthèse" },
-{ keys: ["pythagore"], def: "**THÉORÈME PYTHAGORE - Définition claire (Maths):**\nDans un triangle avec un angle droit (90°), le grand côté (hypoténuse) au carré = somme des 2 petits côtés au carré.\n\n**Formule:** c² = a² + b²\n**Exemple le plus connu:** Triangle 3,4,5 car 5²=3²+4² (25=9+16)\n**À quoi ça sert à Kinshasa?** Vérifier si un mur est bien droit quand on construit maison" },
-{ keys: ["cellule"], def: "**CELLULE - Définition claire (Biologie):**\nC'est la plus petite brique qui compose tous les êtres vivants. Ton corps a 37.000 milliards de cellules!\n\n**Parties:** Membrane (peau), Cytoplasme (intérieur), Noyau (cerveau qui commande), Mitochondrie (pile qui donne énergie)\n**2 types:** Procaryote (bactérie, sans noyau) et Eucaryote (humain, avec noyau)" },
-{ keys: ["adn"], def: "**ADN - Définition claire:**\nC'est le livre d'instructions qui est dans chaque cellule de ton corps. Il dit si tu auras yeux noirs, taille grande.\n\n**Forme:** Double hélice (escalier en colimaçon)\n**Lettres:** A-T, C-G qui s'assemblent\n**Humain:** 46 chromosomes (23 de papa, 23 de maman)\n**Où?** Dans noyau cellule" },
-{ keys: ["compta","comptabilite","comptabilité"], def: "**COMPTABILITÉ - Définition claire (ISC/UNIKIN):**\nC'est noter tout l'argent qui entre et sort d'une entreprise pour savoir si elle gagne ou perd.\n\n**Principe:** Partie double - chaque opération a 2 côtés: Débit et Crédit\n**Documents:** Facture, Journal, Bilan (photo de ce que l'entreprise possède et doit)\n**But:** Savoir bénéfice = Produits - Charges\n**Logiciels:** Sage, SAP utilisés à Kinshasa" },
-{ keys: ["marketing"], def: "**MARKETING - Définition claire:**\nC'est tout ce qu'on fait pour comprendre ce que les clients veulent et leur vendre.\n\n**4P à retenir (Mix Marketing):**\n• Produit: qu'est-ce que je vends? (ex: jus sucré)\n• Prix: combien? (1000 FC)\n• Place: où je vends? (marché Gambela, boutique)\n• Promotion: comment je fais connaître? (affiche, Facebook)\n\n**Exemple RDC:** Vodacom fait marketing avec pub \"Meilleur réseau\"" },
-{ keys: ["douane","dgda"], def: "**DOUANE (DGDA) - Définition claire:**\nC'est la police des frontières pour les marchandises. Quand un container arrive à Matadi, la douane vérifie et fait payer taxes.\n\n**Rôles:**\n1. Faire payer droits (5-20% + TVA 16%)\n2. Protéger entreprises locales\n3. Lutter contre fraude (drogue, faux médicaments)\n**Document:** Déclaration douanière" },
-{ keys: ["incoterms"], def: "**INCOTERMS - Définition claire:**\nCe sont 11 mots courts qui disent qui paye quoi quand on achète à l'étranger.\n\n**Les plus utilisés RDC:**\n• FOB: vendeur amène au port Matadi, toi tu payes bateau\n• CIF: vendeur paye bateau + assurance jusqu'à Matadi\n**But:** Éviter disputes entre vendeur Chine et acheteur Kinshasa" },
-{ keys: ["bureautique"], def: "**BUREAUTIQUE - Définition claire:**\nC'est utiliser l'ordinateur pour travail de bureau.\n\n**3 logiciels essentiels:**\n• Word: écrire lettres, CV\n• Excel: faire calculs, tableaux (compta)\n• PowerPoint: faire présentations\n**Pour qui?** Secrétaire, comptable, tout bureau Kinshasa" },
-{ keys: ["alg
+{ keys: ["informatique"], def: "**INFORMATIQUE - Définition claire:**\nScience du traitement automatique de l'information.\nINFORmation + autoMATIQUE (1962).\n\n2 parties:\n• Hardware: écran, clavier, unité centrale\n• Software: Windows, Word, Sage\n\nSert à gérer compta, élèves, impôts DGI en RDC." },
+{ keys: ["impot","gaston","jeze"], def: "**IMPÔT selon Gaston Jèze:**\n> Prestation pécuniaire requise par voie d'autorité, à titre définitif et sans contrepartie, pour charges publiques.\n\nEn simple:\n• Tu payes en argent (FC)\n• Obligatoire (DGI force)\n• Définitif (pas remboursé)\n• Sans contrepartie directe\n• Pour routes, écoles, hôpitaux\n\nEx: TVA 16% sur crédit Vodacom." },
+{ keys: ["caractere","impot"], def: "**5 CARACTÈRES Impôt:**\n1. Pécuniaire (en argent)\n2. Obligatoire (Art.174 Constitution)\n3. Définitif (pas remboursé)\n4. Sans contrepartie\n5. Pour charges publiques\n\nAstuce: PEC-OBL-DEF-SANS-CHAR" },
+{ keys: ["tva"], def: "**TVA 16% RDC:**\nTaxe quand tu achètes. HT + 16% = TTC.\nEx: 1000 FC + 160 = 1160 FC TTC.\nCollectée par vendeur pour DGI." },
+{ keys: ["ohada"], def: "**OHADA:** Mêmes lois commerciales pour 17 pays Afrique dont RDC depuis 2012. 10 Actes Uniformes. But: confiance investisseurs." },
+{ keys: ["photosynthese"], def: "**PHOTOSYNTHÈSE:** Plantes fabriquent nourriture avec soleil.\n6CO2+6H2O+lumière -> Sucre+O2. Dans feuilles vertes (chlorophylle). Base vie." },
+{ keys: ["pythagore"], def: "**PYTHAGORE:** Triangle rectangle c²=a²+b². Ex: 3-4-5 car 25=9+16. Sert à vérifier mur droit à Kinshasa." },
+{ keys: ["cellule"], def: "**CELLULE:** Brique de base vie. Membrane, cytoplasme, noyau, mitochondrie (pile énergie). 37.000 milliards dans corps." },
+{ keys: ["adn"], def: "**ADN:** Livre instructions dans chaque cellule. Double hélice A-T C-G. 46 chromosomes. Dit couleur yeux, taille." },
+{ keys: ["compta"], def: "**COMPTABILITÉ:** Noter entrées/sorties argent entreprise. Partie double Débit/Crédit. Bilan, bénéfice = Produits - Charges. Logiciel Sage." },
+{ keys: ["marketing"], def: "**MARKETING 4P:** Produit, Prix, Place (Gambela), Promotion (pub). But comprendre client et vendre." },
+{ keys: ["douane"], def: "**DOUANE DGDA:** Police marchandises à Matadi. Fait payer 5-20% + TVA 16%, lutte fraude." },
+{ keys: ["incoterms"], def: "**INCOTERMS:** 11 mots qui disent qui paye quoi import. RDC: FOB (au port), CIF (bateau+assurance)." },
+{ keys: ["bureautique"], def: "**BUREAUTIQUE:** Travail bureau avec ordi: Word, Excel, PowerPoint. Essentiel secrétaire ISC." },
+{ keys: ["algorithme"], def: "**ALGORITHME:** Recette pour ordi. Étapes précises: début -> instructions -> fin. Ex: calcul moyenne notes." }
+];
+
+function findDef(q){
+ q=q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+ let best=null, scoreMax=0;
+ for(let c of COURS){
+   let score=0;
+   for(let k of c.keys){ if(q.includes(k)) score+=2; }
+   if(score>scoreMax){ scoreMax=score; best=c; }
+ }
+ return best ? best.def : null;
+}
+
+function addMsg(text, who){
+ const chat=document.getElementById('chat');
+ const div=document.createElement('div');
+ div.className='msg '+who;
+ div.textContent=text;
+ if(who==='bot'){
+   // permet le gras ** **
+   let html=text.replace(/\*\*(.*?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>');
+   div.innerHTML=(who==='bot'?'<span class="badge">V35 - Réponse</span><br>':'')+html;
+ } else {
+   div.textContent=text;
+ }
+ chat.appendChild(div);
+ chat.scrollTop=chat.scrollHeight;
+}
+
+function addBotHTML(html){
+ const chat=document.getElementById('chat');
+ const div=document.createElement('div');
+ div.className='msg bot';
+ div.innerHTML='<span class="badge">V35 - Réponse</span><br>'+html.replace(/\n/g,'<br>');
+ chat.appendChild(div);
+ chat.scrollTop=chat.scrollHeight;
+}
+
+function send(){
+ const inp=document.getElementById('q');
+ const txt=inp.value.trim();
+ if(!txt) return;
+ addMsg(txt,'user');
+ inp.value='';
+ 
+ let def=findDef(txt);
+ setTimeout(()=>{
+   if(def){
+     addBotHTML(def.replace(/\*\*(.*?)\*\*/g,'<b>$1</b>'));
+   } else {
+     addBotHTML('Je connais: informatique, impôt gaston jeze, caractères impôt, TVA, OHADA, photosynthèse, Pythagore, cellule, ADN, compta, marketing, douane, incoterms, bureautique, algorithme.<br><br>Tape juste le mot clé!');
+   }
+ }, 80);
+}
+
+// Répare bouton - 2 méthodes pour être sûr que ça marche sur mobile
+document.getElementById('sendBtn').addEventListener('click', send);
+document.getElementById('q').addEventListener('keydown', function(e){
+ if(e.key==='Enter'){ e.preventDefault(); send(); }
+});
+document.getElementById('q').addEventListener('focus', function(){ setTimeout(()=>{window.scrollTo(0,0);},300); });
+
+console.log('V35 bouton réparé chargé');
+</script>
+</body>
+  </html>
