@@ -2,87 +2,45 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deo IA V33 - Définition Informatique OK</title>
+<title>Deo IA V34 - Définitions Claires Tous Cours</title>
 <style>
 body{margin:0;background:#0a0a0a;color:#eee;font-family:system-ui;display:flex;flex-direction:column;height:100vh}
 #chat{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
-.msg{padding:13px;border-radius:16px;white-space:pre-wrap;line-height:1.6;font-size:14px}
+.msg{padding:14px;border-radius:18px;white-space:pre-wrap;line-height:1.7;font-size:14px}
 .user{background:#2a2a2a;align-self:flex-end}
 .bot{background:#181818;border:1px solid #2a2a2a;align-self:flex-start}
-.badge{font-size:10px;padding:3px 8px;border-radius:10px;background:#00e676;color:#000}
+.badge{font-size:10px;padding:4px 10px;border-radius:12px;background:#00e676;color:#000;font-weight:bold}
 #bar{display:flex;gap:8px;padding:10px;border-top:1px solid #222}
 #bar input{flex:1;padding:14px;border-radius:24px;border:1px solid #444;background:#1e1e1e;color:white}
 #bar button{background:#fff;color:#000;border:none;border-radius:50%;width:48px;height:48px}
 </style>
 </head>
 <body>
-<div id="chat"><div class="msg bot"><span class="badge">V33 - DÉFINITION INFORMATIQUE CORRIGÉE</span>
-<b>Maintenant définition informatique générale OK!</b>
+<div id="chat"><div class="msg bot"><span class="badge">V34 - DÉFINITIONS CLAIRES TOUS COURS</span>
+<b>Je connais toutes les définitions avec explication claire maintenant!</b>
 
-Tape: informatique -> définition générale
-Tape: informatique de gestion -> version ISC
-
-Teste aussi: bureautique, algorithme, internet, base de données
+Tape naturellement: 
+- définition impôt gaston jeze
+- définition informatique claire
+- c'est quoi la photosynthèse
+- explique la compta, le marketing, la douane
 </div></div>
-<div id="bar"><input id="q" placeholder="Ex: définition informatique..."><button onclick="send()">↑</button></div>
+<div id="bar"><input id="q" placeholder="Tape ta définition..."><button onclick="send()">↑</button></div>
 <script>
-const DICT = {
-// PRIORITÉ 1 - DÉFINITIONS GÉNÉRALES (placées en haut)
-"informatique": "**Informatique - Définition Générale:** Science du traitement automatique de l'information par ordinateur. Terme créé en 1962 par Philippe Dreyfus (INFORmation + autoMATIQUE).\n\n**Objectif:** Traiter, stocker, transmettre l'information.\n\n**2 parties:**\n1. Hardware (matériel): UC, écran, clavier, disque dur\n2. Software (logiciels): Windows, Word, Excel, Sage\n\n**4 branches:** Programmation, Réseaux, Base de données, Intelligence Artificielle.\n\n**En RDC:** Utilisée à DGI, DGDA, banques, UNIKIN, ISC, écoles. Indispensable pour comptabilité informatisée.",
-"bureautique": "**Bureautique:** Ensemble techniques pour automatiser travail de bureau. Logiciels: Word (traitement texte), Excel (tableur calculs), PowerPoint (présentation), Access (base données). Suite Microsoft Office. Essentiel pour secrétariat ISC et comptabilité.",
-"algorithme": "**Algorithme:** Suite d'instructions logiques pour résoudre problème. Ex: recette cuisine, mode d'emploi. En informatique: début -> instructions -> fin. Caractéristiques: fini, précis, entrée/sortie. Exemple: algorithme calcul moyenne notes ISC.",
-"internet": "**Internet:** Réseau mondial interconnectant millions d'ordinateurs. Services: Web (sites), Email, Réseaux sociaux. Protocoles: HTTP, TCP/IP. En RDC: fournisseurs Orange, Vodacom, Airtel 4G. Utilité: recherche, commerce en ligne, formation.",
-"base de donnees": "**Base de Données:** Ensemble organisé d'informations stockées. Ex: liste étudiants ISC, clients boutique. Logiciels: Access, MySQL, SQL Server, Oracle. Modélisation Merise: MCD (Modèle Conceptuel Données), MLD. Langage: SQL (SELECT, INSERT).",
-
-// ISC
-"informatique de gestion": "**Informatique de Gestion (ISC IG):** Section ISC. Cours: Algorithme, Programmation (VB, C#, Java, Python), Base données (Access, SQL Server, MySQL), Réseaux, Analyse Merise (MCD, MLD), Gestion projet, Sage Compta. Débouchés: analyste programmeur, admin BD, DSI Kinshasa. Diplôme: Graduat + Licence.",
-"isc": "**ISC:** Institut Supérieur de Commerce. Sections: Compta, Gestion, Commerce International, Douane, Marketing, Informatique Gestion, Secrétariat. Graduat 3 ans + Licence 2 ans. Fondé 1962.",
-"incoterms": "**Incoterms 2020:** 11 règles vente internationale. Groupes: E EXW, F FOB FCA, C CFR CIF, D DAP DDP. RDC: FOB port Matadi, CIF avec assurance.",
-"douane": "**Douane DGDA:** Perçoit droits douane RDC. Régimes: import, export, transit, entrepôt. Droits DD 5-20% + TVA 16%. Corridors Matadi-Kinshasa, Dar, Lobito.",
-"commerce international": "**Commerce International:** Echanges entre pays. Ricardo avantage comparatif, Smith avantage absolu. Balance = Export - Import. RDC export cuivre/cobalt.",
-"audit": "**Audit:** Contrôle indépendant comptes pour certifier. Types: financier (commissaire), interne, opérationnel. Normes ISA, ONEC RDC.",
-"controle gestion": "**Contrôle Gestion:** Pilote performance. Outils: budget, tableau bord, ABC, seuil rentabilité, balanced scorecard.",
-"marketing mix": "**Marketing Mix 4P:** Produit, Prix, Place, Promotion + Personnel Processus Preuve. Segmentation, ciblage.",
-"tva": "**TVA RDC 16%** depuis 2012. HT*0.16=TVA, TTC=HT+TVA. Collectée entreprises, reversée DGI.",
-"comptabilite ohada": "**Compta OHADA SYSCOHADA:** Bilan, Compte résultat, Flux trésorerie. Partie double, 8 classes. Logiciels Sage, SAP.",
-
-// SECONDAIRE + UNIKIN
-"photosynthese": "**Photosynthèse:** 6CO2+6H2O+lumière -> C6H12O6+6O2. Chloroplaste, chlorophylle.",
-"pythagore": "**Pythagore:** c²=a²+b² triangle rectangle. Ex 3-4-5.",
-"cellule": "**Cellule:** Unité vie. Membrane, cytoplasme, noyau, mitochondrie énergie.",
-"adn": "**ADN:** Double hélice A-T C-G, 46 chromosomes, info génétique.",
-"independance": "**Indépendance RDC 30 juin 1960:** Lumumba discours, Kasa-Vubu, fin colonisation belge 1885-1960.",
-"impot gaston": "**Impôt Gaston Jèze:** Prestation pécuniaire par autorité, définitive, sans contrepartie, charges publiques.",
-"ohada": "**OHADA:** 17 pays, 10 Actes Uniformes, RDC 2012."
-};
-
-function smart(q){
- q=q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
- // Si question exacte "informatique" seule, donne définition générale
- if(q.trim()==="informatique" || q.includes("definition de l'informatique") || q.includes("c est quoi l'informatique")) return DICT["informatique"];
- // Sinon cherche le plus précis d'abord (longueur clé)
- let keys = Object.keys(DICT).sort((a,b)=>b.length-a.length);
- for(let k of keys){ if(q.includes(k)) return DICT[k]; }
- return null;
-}
-function calc(q){
- let l=q.toLowerCase();
- if(l.includes("tva")){ let n=q.match(/\d+/g); if(n){ let ht=parseInt(n[0]); return `**TVA 16%** HT ${ht} => TVA ${ht*0.16} => TTC ${ht*1.16} FC`; } }
- return null;
-}
-function send(){
- const inp=document.getElementById('q'); const txt=inp.value.trim(); if(!txt) return;
- const chat=document.getElementById('chat');
- chat.innerHTML+=`<div class="msg user">${txt}</div>`; inp.value='';
- const id='a'+Date.now(); chat.innerHTML+=`<div class="msg bot" id="${id}">...</div>`;
- setTimeout(()=>{
-   let r=calc(txt)||smart(txt);
-   document.getElementById(id).innerHTML=r?`<span class="badge">V33 - Réponse</span><br>${r}`:`<span class="badge">Aide</span><br>Essaie: informatique, bureautique, algorithme, internet, base de données, incoterms, douane, audit`;
-   chat.scrollTop=chat.scrollHeight;
- },100);
- chat.scrollTop=chat.scrollHeight;
-}
-document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')send()});
-</script>
-</body>
-</html>
+const COURS = [
+{ keys: ["informatique","info"], def: "**INFORMATIQUE - Définition claire:**\nScience qui permet de traiter automatiquement l'information avec un ordinateur.\n\n**Origine:** INFORmation + autoMATIQUE (1962, Philippe Dreyfus).\n\n**2 parties:**\n• Hardware = parties qu'on touche (écran, clavier, unité centrale)\n• Software = programmes (Windows, Word, Sage)\n\n**À quoi ça sert en RDC?** Gérer les élèves d'une école, la compta d'une boutique à Kinshasa, les impôts à la DGI.\n\n**Exemple simple:** Quand tu tapes un texte dans Word, c'est l'informatique qui le traite." },
+{ keys: ["impot","gaston","jeze","jèze"], def: "**IMPÔT selon Gaston Jèze - Définition claire:**\nC'est une somme d'argent que l'Etat oblige tout le monde à payer pour faire fonctionner le pays.\n\n**Selon Gaston Jèze (prof français 1869-1953):**\n> \"Prestation pécuniaire requise par voie d'autorité, à titre définitif et sans contrepartie, en vue de couvrir les charges publiques.\"\n\n**En français simple:**\n• Prestation pécuniaire = tu payes en argent (FC)\n• Par voie d'autorité = c'est obligatoire, DGI te force\n• Définitif = on ne te rembourse pas\n• Sans contrepartie = tu ne reçois pas directement quelque chose en retour\n• Charges publiques = pour construire routes, écoles, hôpitaux\n\n**Exemple RDC:** TVA 16% quand tu achètes crédit Vodacom." },
+{ keys: ["caractere","caractère","impot"], def: "**5 CARACTÈRES de l'Impôt - Explication claire:**\n\n1. **Pécuniaire:** On paye en argent, pas en poule. Ex: 16.000 FC\n2. **Obligatoire:** DGI peut te poursuivre si tu ne payes pas. Art.174 Constitution RDC\n3. **Définitif:** L'argent ne revient pas. Pas comme une caution\n4. **Sans contrepartie directe:** Tu payes même si la route devant chez toi est trouée\n5. **Pour charges publiques:** L'argent sert à tous les Congolais\n\n**Astuce examen:** Retiens PEC-OBL-DEF-SANS-CHAR" },
+{ keys: ["fonction","impot"], def: "**4 FONCTIONS de l'Impôt - Clair:**\n\n1. **Financière (la plus importante):** Remplir la caisse de l'Etat. 70% du budget RDC vient des impôts\n2. **Économique:** L'Etat augmente ou baisse les impôts pour aider l'économie. Ex: baisse impôt pour entreprises qui créent emplois\n3. **Sociale:** Prendre aux riches pour aider les pauvres (redistribution). Ex: IPR progressif\n4. **Politique:** Montrer que l'Etat est puissant et souverain" },
+{ keys: ["tva"], def: "**TVA - Définition claire:**\nTaxe sur la Valeur Ajoutée. C'est l'impôt que tu payes chaque fois que tu achètes quelque chose.\n\n**Taux RDC:** 16% depuis 2012\n**Comment calculer:** Si pain = 1000 FC HT, TVA = 160 FC, tu payes 1160 FC TTC\n**Qui collecte?** Le vendeur (boutique) collecte pour la DGI\n**Pourquoi?** Impôt facile à collecter, rapporte beaucoup à l'Etat" },
+{ keys: ["ohada"], def: "**OHADA - Définition claire:**\nOrganisation qui a créé les mêmes lois commerciales pour 17 pays d'Afrique dont la RDC.\n\n**But:** Un investisseur à Dakar et à Kinshasa trouve les mêmes règles = confiance\n**Depuis quand RDC?** 2012\n**10 Actes Uniformes:** Droit commercial, Sociétés (SARL, SA), Sûretés, Procédures collectives, etc.\n**Cour:** Abidjan" },
+{ keys: ["photosynthese","photosynthèse"], def: "**PHOTOSYNTHÈSE - Définition claire (Biologie):**\nC'est comment les plantes fabriquent leur nourriture avec le soleil.\n\n**Formule simple:** Soleil + CO2 (air) + Eau -> Sucre + Oxygène\n**Où?** Dans les feuilles vertes, grâce à la chlorophylle (couleur verte)\n**Pourquoi important?** Sans ça, pas d'oxygène pour respirer, pas de nourriture. C'est la base de la vie.\n**Exemple RDC:** Manioc, maïs à Masina font photosynthèse" },
+{ keys: ["pythagore"], def: "**THÉORÈME PYTHAGORE - Définition claire (Maths):**\nDans un triangle avec un angle droit (90°), le grand côté (hypoténuse) au carré = somme des 2 petits côtés au carré.\n\n**Formule:** c² = a² + b²\n**Exemple le plus connu:** Triangle 3,4,5 car 5²=3²+4² (25=9+16)\n**À quoi ça sert à Kinshasa?** Vérifier si un mur est bien droit quand on construit maison" },
+{ keys: ["cellule"], def: "**CELLULE - Définition claire (Biologie):**\nC'est la plus petite brique qui compose tous les êtres vivants. Ton corps a 37.000 milliards de cellules!\n\n**Parties:** Membrane (peau), Cytoplasme (intérieur), Noyau (cerveau qui commande), Mitochondrie (pile qui donne énergie)\n**2 types:** Procaryote (bactérie, sans noyau) et Eucaryote (humain, avec noyau)" },
+{ keys: ["adn"], def: "**ADN - Définition claire:**\nC'est le livre d'instructions qui est dans chaque cellule de ton corps. Il dit si tu auras yeux noirs, taille grande.\n\n**Forme:** Double hélice (escalier en colimaçon)\n**Lettres:** A-T, C-G qui s'assemblent\n**Humain:** 46 chromosomes (23 de papa, 23 de maman)\n**Où?** Dans noyau cellule" },
+{ keys: ["compta","comptabilite","comptabilité"], def: "**COMPTABILITÉ - Définition claire (ISC/UNIKIN):**\nC'est noter tout l'argent qui entre et sort d'une entreprise pour savoir si elle gagne ou perd.\n\n**Principe:** Partie double - chaque opération a 2 côtés: Débit et Crédit\n**Documents:** Facture, Journal, Bilan (photo de ce que l'entreprise possède et doit)\n**But:** Savoir bénéfice = Produits - Charges\n**Logiciels:** Sage, SAP utilisés à Kinshasa" },
+{ keys: ["marketing"], def: "**MARKETING - Définition claire:**\nC'est tout ce qu'on fait pour comprendre ce que les clients veulent et leur vendre.\n\n**4P à retenir (Mix Marketing):**\n• Produit: qu'est-ce que je vends? (ex: jus sucré)\n• Prix: combien? (1000 FC)\n• Place: où je vends? (marché Gambela, boutique)\n• Promotion: comment je fais connaître? (affiche, Facebook)\n\n**Exemple RDC:** Vodacom fait marketing avec pub \"Meilleur réseau\"" },
+{ keys: ["douane","dgda"], def: "**DOUANE (DGDA) - Définition claire:**\nC'est la police des frontières pour les marchandises. Quand un container arrive à Matadi, la douane vérifie et fait payer taxes.\n\n**Rôles:**\n1. Faire payer droits (5-20% + TVA 16%)\n2. Protéger entreprises locales\n3. Lutter contre fraude (drogue, faux médicaments)\n**Document:** Déclaration douanière" },
+{ keys: ["incoterms"], def: "**INCOTERMS - Définition claire:**\nCe sont 11 mots courts qui disent qui paye quoi quand on achète à l'étranger.\n\n**Les plus utilisés RDC:**\n• FOB: vendeur amène au port Matadi, toi tu payes bateau\n• CIF: vendeur paye bateau + assurance jusqu'à Matadi\n**But:** Éviter disputes entre vendeur Chine et acheteur Kinshasa" },
+{ keys: ["bureautique"], def: "**BUREAUTIQUE - Définition claire:**\nC'est utiliser l'ordinateur pour travail de bureau.\n\n**3 logiciels essentiels:**\n• Word: écrire lettres, CV\n• Excel: faire calculs, tableaux (compta)\n• PowerPoint: faire présentations\n**Pour qui?** Secrétaire, comptable, tout bureau Kinshasa" },
+{ keys: ["alg
