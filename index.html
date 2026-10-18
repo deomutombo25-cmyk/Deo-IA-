@@ -2,9 +2,13 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deo IA V35 - Bouton Réparé</title>
+<title>Deo IA V36 - Deo IA Officiel</title>
 <style>
 body{margin:0;background:#0a0a0a;color:#eee;font-family:system-ui;display:flex;flex-direction:column;height:100vh}
+#header{background:#111;border-bottom:2px solid #00e676;padding:12px;text-align:center}
+#header h1{margin:0;font-size:24px;letter-spacing:2px}
+#header h1 span{color:#00e676}
+#header p{margin:2px 0 0;font-size:11px;color:#888}
 #chat{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
 .msg{padding:14px;border-radius:18px;white-space:pre-wrap;line-height:1.7;font-size:14px;max-width:92%}
 .user{background:#2a2a2a;align-self:flex-end}
@@ -12,106 +16,79 @@ body{margin:0;background:#0a0a0a;color:#eee;font-family:system-ui;display:flex;f
 .badge{font-size:10px;padding:4px 10px;border-radius:12px;background:#00e676;color:#000;font-weight:bold}
 #bar{display:flex;gap:8px;padding:12px;border-top:1px solid #222;align-items:center}
 #bar input{flex:1;padding:15px;border-radius:24px;border:1px solid #555;background:#1e1e1e;color:white;outline:none}
-#sendBtn{background:#fff;color:#000;border:none;border-radius:50%;width:50px;height:50px;font-size:20px;cursor:pointer}
-#sendBtn:active{transform:scale(0.9)}
+#sendBtn{background:#00e676;color:#000;border:none;border-radius:50%;width:50px;height:50px;font-size:22px;font-weight:bold;cursor:pointer}
 </style>
 </head>
 <body>
+<div id="header">
+<h1>DEO <span>IA</span> 🇨🇩</h1>
+<p>Intelligence Artificielle Congolaise - ISC + UNIKIN + Secondaire - V36</p>
+</div>
+
 <div id="chat">
-<div class="msg bot"><span class="badge">V35 - BOUTON RÉPARÉ ✅</span>
-<b>Bouton envoi réparé!</b>
+<div class="msg bot"><span class="badge">DEO IA V36 - OFFICIEL</span>
+<b>Bienvenue sur DEO IA! Je suis ton assistant 100% congolais!</b>
 
-Maintenant tape et clique sur ↑ ça marche!
+Je connais:
+• Toutes les définitions claires (informatique, impôt, photosynthèse...)
+• ISC, UNIKIN, Secondaire
+• Exemples RDC Kinshasa
 
-Teste: informatique, impôt gaston jeze, photosynthèse, Pythagore, TVA, OHADA, douane, marketing
+Tape ta question et clique ↑
+
+Créé par Deo Mutombo - Kinshasa
 </div>
 </div>
 
 <div id="bar">
-<input id="q" type="text" placeholder="Tape ta question ici..." autocomplete="off">
+<input id="q" type="text" placeholder="Pose ta question à Deo IA..." autocomplete="off">
 <button id="sendBtn">↑</button>
 </div>
 
 <script>
 const COURS = [
-{ keys: ["informatique"], def: "**INFORMATIQUE - Définition claire:**\nScience du traitement automatique de l'information.\nINFORmation + autoMATIQUE (1962).\n\n2 parties:\n• Hardware: écran, clavier, unité centrale\n• Software: Windows, Word, Sage\n\nSert à gérer compta, élèves, impôts DGI en RDC." },
-{ keys: ["impot","gaston","jeze"], def: "**IMPÔT selon Gaston Jèze:**\n> Prestation pécuniaire requise par voie d'autorité, à titre définitif et sans contrepartie, pour charges publiques.\n\nEn simple:\n• Tu payes en argent (FC)\n• Obligatoire (DGI force)\n• Définitif (pas remboursé)\n• Sans contrepartie directe\n• Pour routes, écoles, hôpitaux\n\nEx: TVA 16% sur crédit Vodacom." },
-{ keys: ["caractere","impot"], def: "**5 CARACTÈRES Impôt:**\n1. Pécuniaire (en argent)\n2. Obligatoire (Art.174 Constitution)\n3. Définitif (pas remboursé)\n4. Sans contrepartie\n5. Pour charges publiques\n\nAstuce: PEC-OBL-DEF-SANS-CHAR" },
-{ keys: ["tva"], def: "**TVA 16% RDC:**\nTaxe quand tu achètes. HT + 16% = TTC.\nEx: 1000 FC + 160 = 1160 FC TTC.\nCollectée par vendeur pour DGI." },
-{ keys: ["ohada"], def: "**OHADA:** Mêmes lois commerciales pour 17 pays Afrique dont RDC depuis 2012. 10 Actes Uniformes. But: confiance investisseurs." },
-{ keys: ["photosynthese"], def: "**PHOTOSYNTHÈSE:** Plantes fabriquent nourriture avec soleil.\n6CO2+6H2O+lumière -> Sucre+O2. Dans feuilles vertes (chlorophylle). Base vie." },
-{ keys: ["pythagore"], def: "**PYTHAGORE:** Triangle rectangle c²=a²+b². Ex: 3-4-5 car 25=9+16. Sert à vérifier mur droit à Kinshasa." },
-{ keys: ["cellule"], def: "**CELLULE:** Brique de base vie. Membrane, cytoplasme, noyau, mitochondrie (pile énergie). 37.000 milliards dans corps." },
-{ keys: ["adn"], def: "**ADN:** Livre instructions dans chaque cellule. Double hélice A-T C-G. 46 chromosomes. Dit couleur yeux, taille." },
-{ keys: ["compta"], def: "**COMPTABILITÉ:** Noter entrées/sorties argent entreprise. Partie double Débit/Crédit. Bilan, bénéfice = Produits - Charges. Logiciel Sage." },
-{ keys: ["marketing"], def: "**MARKETING 4P:** Produit, Prix, Place (Gambela), Promotion (pub). But comprendre client et vendre." },
-{ keys: ["douane"], def: "**DOUANE DGDA:** Police marchandises à Matadi. Fait payer 5-20% + TVA 16%, lutte fraude." },
-{ keys: ["incoterms"], def: "**INCOTERMS:** 11 mots qui disent qui paye quoi import. RDC: FOB (au port), CIF (bateau+assurance)." },
-{ keys: ["bureautique"], def: "**BUREAUTIQUE:** Travail bureau avec ordi: Word, Excel, PowerPoint. Essentiel secrétaire ISC." },
-{ keys: ["algorithme"], def: "**ALGORITHME:** Recette pour ordi. Étapes précises: début -> instructions -> fin. Ex: calcul moyenne notes." }
+{ keys: ["informatique"], def: "**DEO IA - INFORMATIQUE:**\nScience du traitement automatique de l'information.\nINFORmation + autoMATIQUE (1962).\nHardware (écran, clavier) + Software (Windows, Sage).\nSert à gérer compta boutique Kinshasa, impôts DGI." },
+{ keys: ["impot","gaston","jeze"], def: "**DEO IA - IMPÔT Gaston Jèze:**\n> Prestation pécuniaire par voie d'autorité, définitive, sans contrepartie, charges publiques.\nSimple: Argent obligatoire pour routes/écoles/hôpitaux. Ex: TVA 16% Vodacom." },
+{ keys: ["tva"], def: "**DEO IA - TVA 16% RDC:** HT + 16% = TTC. 1000 FC -> 1160 FC. Collectée pour DGI." },
+{ keys: ["ohada"], def: "**DEO IA - OHADA:** 17 pays même lois commerciales dont RDC 2012. 10 Actes Uniformes." },
+{ keys: ["photosynthese"], def: "**DEO IA - PHOTOSYNTHÈSE:** Plantes fabriquent nourriture avec soleil. 6CO2+6H2O -> Sucre+O2. Chlorophylle verte." },
+{ keys: ["pythagore"], def: "**DEO IA - PYTHAGORE:** c²=a²+b² triangle rectangle. 3-4-5 = 25=9+16." },
+{ keys: ["cellule"], def: "**DEO IA - CELLULE:** Brique vie. Membrane, cytoplasme, noyau, mitochondrie énergie." },
+{ keys: ["adn"], def: "**DEO IA - ADN:** Livre instructions corps. Double hélice A-T C-G. 46 chromosomes." },
+{ keys: ["compta"], def: "**DEO IA - COMPTABILITÉ:** Noter argent entreprise. Débit/Crédit, Bilan, bénéfice=Produits-Charges. Sage." },
+{ keys: ["marketing"], def: "**DEO IA - MARKETING 4P:** Produit, Prix, Place (Gambela), Promotion (pub)." },
+{ keys: ["douane"], def: "**DEO IA - DOUANE DGDA:** Police marchandises Matadi. Droits 5-20% + TVA 16%." },
+{ keys: ["incoterms"], def: "**DEO IA - INCOTERMS:** FOB port, CIF bateau+assurance. Qui paye quoi import." },
+{ keys: ["bureautique"], def: "**DEO IA - BUREAUTIQUE:** Word, Excel, PowerPoint pour bureau." },
+{ keys: ["algorithme"], def: "**DEO IA - ALGORITHME:** Recette ordi. Début->Instructions->Fin." }
 ];
 
 function findDef(q){
  q=q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
- let best=null, scoreMax=0;
- for(let c of COURS){
-   let score=0;
-   for(let k of c.keys){ if(q.includes(k)) score+=2; }
-   if(score>scoreMax){ scoreMax=score; best=c; }
- }
- return best ? best.def : null;
+ let best=null, sMax=0;
+ for(let c of COURS){ let s=0; for(let k of c.keys){ if(q.includes(k)) s+=2; } if(s>sMax){ sMax=s; best=c; } }
+ return best?best.def:null;
 }
-
-function addMsg(text, who){
- const chat=document.getElementById('chat');
- const div=document.createElement('div');
- div.className='msg '+who;
- div.textContent=text;
- if(who==='bot'){
-   // permet le gras ** **
-   let html=text.replace(/\*\*(.*?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>');
-   div.innerHTML=(who==='bot'?'<span class="badge">V35 - Réponse</span><br>':'')+html;
- } else {
-   div.textContent=text;
- }
- chat.appendChild(div);
- chat.scrollTop=chat.scrollHeight;
-}
-
 function addBotHTML(html){
  const chat=document.getElementById('chat');
  const div=document.createElement('div');
  div.className='msg bot';
- div.innerHTML='<span class="badge">V35 - Réponse</span><br>'+html.replace(/\n/g,'<br>');
- chat.appendChild(div);
- chat.scrollTop=chat.scrollHeight;
+ div.innerHTML='<span class="badge">DEO IA</span><br>'+html.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<b>$1</b>');
+ chat.appendChild(div); chat.scrollTop=chat.scrollHeight;
 }
-
+function addUser(t){
+ const chat=document.getElementById('chat');
+ const div=document.createElement('div'); div.className='msg user'; div.textContent=t;
+ chat.appendChild(div); chat.scrollTop=chat.scrollHeight;
+}
 function send(){
- const inp=document.getElementById('q');
- const txt=inp.value.trim();
- if(!txt) return;
- addMsg(txt,'user');
- inp.value='';
- 
- let def=findDef(txt);
- setTimeout(()=>{
-   if(def){
-     addBotHTML(def.replace(/\*\*(.*?)\*\*/g,'<b>$1</b>'));
-   } else {
-     addBotHTML('Je connais: informatique, impôt gaston jeze, caractères impôt, TVA, OHADA, photosynthèse, Pythagore, cellule, ADN, compta, marketing, douane, incoterms, bureautique, algorithme.<br><br>Tape juste le mot clé!');
-   }
- }, 80);
+ const inp=document.getElementById('q'); const txt=inp.value.trim(); if(!txt) return;
+ addUser(txt); inp.value='';
+ let d=findDef(txt);
+ setTimeout(()=>{ if(d) addBotHTML(d); else addBotHTML('Je suis DEO IA! Je connais: informatique, impôt gaston jeze, TVA, OHADA, photosynthèse, Pythagore, cellule, ADN, compta, marketing, douane, incoterms, bureautique, algorithme.'); },80);
 }
-
-// Répare bouton - 2 méthodes pour être sûr que ça marche sur mobile
 document.getElementById('sendBtn').addEventListener('click', send);
-document.getElementById('q').addEventListener('keydown', function(e){
- if(e.key==='Enter'){ e.preventDefault(); send(); }
-});
-document.getElementById('q').addEventListener('focus', function(){ setTimeout(()=>{window.scrollTo(0,0);},300); });
-
-console.log('V35 bouton réparé chargé');
+document.getElementById('q').addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); send(); } });
 </script>
 </body>
-  </html>
+</html>
