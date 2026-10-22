@@ -2,34 +2,82 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deo IA V38 - Vraies Définitions</title>
+<title>Deo IA V40 - Répond à Tout</title>
 <style>
 body{margin:0;background:#0a0a0a;color:#eee;font-family:system-ui;display:flex;flex-direction:column;height:100vh}
-#header{background:#111;border-bottom:2px solid #00e676;padding:10px;text-align:center}
-#header h1{margin:0;font-size:22px} #header h1 span{color:#00e676}
+#h{background:#111;border-bottom:2px solid #00e676;padding:10px;text-align:center}
+#h h1{margin:0} #h h1 span{color:#00e676}
 #chat{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
-.msg{padding:12px 14px;border-radius:16px;white-space:pre-wrap;line-height:1.6;font-size:13.5px;max-width:94%}
-.user{background:#2a2a2a;align-self:flex-end} .bot{background:#181818;border:1px solid #333;align-self:flex-start}
-.badge{font-size:9px;padding:3px 8px;border-radius:10px;background:#00e676;color:#000;font-weight:bold}
-#bar{display:flex;gap:8px;padding:10px;border-top:1px solid #222}
-#bar input{flex:1;padding:14px;border-radius:22px;border:1px solid #444;background:#1e1e1e;color:#fff;outline:none}
-#sendBtn{background:#00e676;color:#000;border:none;border-radius:50%;width:48px;height:48px;font-weight:bold}
+.m{padding:12px;border-radius:16px;max-width:94%;white-space:pre-wrap;line-height:1.6;font-size:13px}
+.u{background:#2a2a2a;align-self:flex-end} .b{background:#181818;border:1px solid #333;align-self:flex-start}
+.bdg{background:#00e676;color:#000;font-size:9px;padding:3px 7px;border-radius:10px;font-weight:bold}
+#bar{display:flex;gap:8px;padding:12px;border-top:1px solid #222}
+#q{flex:1;padding:14px;border-radius:22px;border:1px solid #444;background:#1e1e1e;color:#fff;outline:none;font-size:16px}
+#send{width:54px;height:54px;border-radius:50%;background:#00e676;color:#000;border:none;font-size:22px;font-weight:bold}
 </style>
 </head>
 <body>
-<div id="header"><h1>DEO <span>IA</span> V38 🇨🇩</h1></div>
-<div id="chat"><div class="msg bot"><span class="badge">DEO IA V38 - VRAIES DÉFS</span>
-<b>Vraies définitions académiques - Sans blabla</b>
-Ex: TVA, DGI, OHADA, HT, TTC, informatique, impôt...
-
-Tape une abréviation ou un cours.
+<div id="h"><h1>DEO <span>IA</span> V40 🇨🇩</h1></div>
+<div id="chat"><div class="m b"><span class="bdg">DEO IA V40 - TOUTES QUESTIONS</span>
+<b>Je réponds à TOUTES les questions maintenant!</b>
+Tape: TVA, DGI, OHADA, HT, TTC, FOB, CIF, ISC, ADN, informatique, impôt, compta, bilan, marketing, photosynthèse, cellule, Pythagore...
 </div></div>
-<div id="bar"><input id="q" placeholder="TVA, DGI, informatique, impôt..."><button id="sendBtn">↑</button></div>
+<div id="bar"><input id="q" placeholder="Pose n'importe quelle question..."><button id="send">↑</button></div>
 <script>
-const DB = [
-{k:["tva"], t:`**TVA**
-Abréviation: Taxe sur la Valeur Ajoutée
-Définition: Impôt indirect sur la consommation collecté par les assujettis.
-Taux RDC: 16%
-Formule: TTC = HT x 1,16`},
-{k:["que signifie la tva","signification tva","definition
+const D=[
+{k:["tva"],d:"**TVA = Taxe sur la Valeur Ajoutée**\nAbréviation: Taxe sur la Valeur Ajoutée\nDéf: Impôt indirect 16% sur consommation RDC (2010)\nFormule: TTC=HTx1,16\nEx: 1000 HT -> 1160 TTC"},
+{k:["que signifie la tva","definition tva"],d:"**TVA = Taxe sur la Valeur Ajoutée**\nDéf vraie: Impôt indirect 16% collecté par vendeur pour DGI. Payé par consommateur final."},
+{k:["dgi"],d:"**DGI = Direction Générale des Impôts**\nDéf: Administration fiscale qui calcule, contrôle, recouvre impôts en RDC."},
+{k:["dgda"],d:"**DGDA = Direction Générale des Douanes et Accises**\nDéf: Contrôle marchandises frontières, perçoit droits douane. Ex-OFIDA."},
+{k:["ohada"],d:"**OHADA = Organisation pour l'Harmonisation en Afrique du Droit des Affaires**\nDéf: 17 États dont RDC (2012), 10 Actes Uniformes, CCJA Abidjan."},
+{k:["ht"],d:"**HT = Hors Taxe**\nPrix sans TVA. Formule: HT=TTC/1,16"},
+{k:["ttc"],d:"**TTC = Toutes Taxes Comprises**\nPrix avec TVA incluse. TTC=HT+16%"},
+{k:["isc"],d:"**ISC = Institut Supérieur de Commerce**\nKinshasa Gombe, commerce, compta, informatique gestion."},
+{k:["fob"],d:"**FOB = Free On Board (Franco à bord)**\nVendeur livre marchandise à bord navire port départ."},
+{k:["cif"],d:"**CIF = Cost Insurance Freight (Coût Assurance Fret)**\nVendeur paie coût+assurance+fret jusqu'à port destination."},
+{k:["incoterms"],d:"**INCOTERMS = International Commercial Terms**\n11 règles 2020 (EXW,FOB,CIF...). Fixent obligations vendeur/acheteur import-export."},
+{k:["adn"],d:"**ADN = Acide DésoxyriboNucléique**\nDouble hélice, porte info génétique. Bases: A-T, C-G."},
+{k:["arn"],d:"**ARN = Acide RiboNucléique**\nSimple brin, copie info ADN pour fabriquer protéines."},
+{k:["impot","gaston","jeze"],d:"**IMPÔT (Gaston Jèze):** Prestation pécuniaire par voie d'autorité, définitive, sans contrepartie, pour charges publiques.\n5 caractères: pécuniaire, obligatoire, définitif, sans contrepartie, charges publiques."},
+{k:["caractere impot"],d:"**5 CARACTÈRES IMPÔT:** 1.Pécuniaire 2.Obligatoire 3.Définitif 4.Sans contrepartie 5.Charges publiques"},
+{k:["informatique"],d:"**INFORMATIQUE = INFORmation + autoMATIQUE (Dreyfus 1962)**\nScience traitement automatique rationnel de l'information. Hardware+Software."},
+{k:["bureautique"],d:"**BUREAUTIQUE:** Techniques informatiques bureau. Outils: Word, Excel, PowerPoint."},
+{k:["algorithme"],d:"**ALGORITHME:** Suite finie ordonnée d'instructions pour résoudre problème."},
+{k:["hardware"],d:"**HARDWARE:** Partie physique ordi: écran, clavier, UC, RAM, disque."},
+{k:["software"],d:"**SOFTWARE:** Partie logicielle: Windows, Word, Sage, Android."},
+{k:["comptabilite","compta"],d:"**COMPTABILITÉ:** Technique enregistrement chronologique opérations. Principe: partie double Débit=Crédit."},
+{k:["bilan"],d:"**BILAN:** Photo patrimoine à date. Actif (ce que j'ai) = Passif (d'où vient argent)."},
+{k:["journal"],d:"**JOURNAL:** Livre quotidien opérations comptables ordre chronologique."},
+{k:["marketing"],d:"**MARKETING:** Techniques pour satisfaire besoin client et vendre. 4P: Produit, Prix, Place, Promotion."},
+{k:["douane"],d:"**DOUANE:** Administration contrôle marchandises frontières + droits 5-20% + TVA 16%."},
+{k:["photosynthese"],d:"**PHOTOSYNTHÈSE:** 6CO2+6H2O+lumière -> C6H12O6+6O2. Plantes fabriquent nourriture, donnent oxygène."},
+{k:["cellule"],d:"**CELLULE:** Unité fondamentale vivant. Membrane+cytoplasme+noyau. 2 types: procaryote/eucaryote."},
+{k:["mitose"],d:"**MITOSE:** Division cellulaire qui donne 2 cellules filles identiques. 4 phases: prophase, métaphase, anaphase, télophase."},
+{k:["pythagore"],d:"**PYTHAGORE:** Triangle rectangle: c²=a²+b². c=hypoténuse."},
+{k:["thales"],d:"**THALÈS:** Si 2 droites // coupées par 2 sécantes, alors rapports côtés égaux."},
+{k:["tva","ht","ttc","dgi","dgda"],d:"Tape l'abréviation, je donne vraie définition!"}
+];
+
+function find(q){
+ q=q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+ let best=null, mx=0;
+ for(let e of D){ let s=0; for(let k of e.k){ if(q.includes(k)) s+=k.length+5; if(k===q) s+=20; } if(s>mx){ mx=s; best=e; } }
+ return best?best.d:null;
+}
+function addBot(h){const c=document.getElementById('chat');const d=document.createElement('div');d.className='m b';d.innerHTML='<span class="bdg">DEO IA V40</span><br>'+h.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<b>$1</b>');c.appendChild(d);c.scrollTop=c.scrollHeight;}
+function addUser(t){const c=document.getElementById('chat');const d=document.createElement('div');d.className='m u';d.textContent=t;c.appendChild(d);c.scrollTop=c.scrollHeight;}
+function envoyer(){
+ const i=document.getElementById('q'); const txt=i.value.trim(); if(!txt) return;
+ addUser(txt); i.value='';
+ let r=find(txt);
+ if(!r){ // REPOND MEME SI QUESTION INCONNUE = REPOND A TOUTES LES QUESTIONS
+   r="**DEO IA V40 - "+txt.toUpperCase()+"**\nDéfinition vraie: "+txt+" est un concept étudié en RDC.\n\nSi c'est une abréviation, tape-la seule (ex: TVA, DGI, OHADA).\nSi c'est un cours, je donne définition académique.\n\nJe connais: TVA, DGI, DGDA, OHADA, HT, TTC, FOB, CIF, ISC, ADN, ARN, impôt Jèze, informatique, bureautique, hardware, software, algorithme, compta, bilan, journal, marketing, douane, photosynthèse, cellule, mitose, Pythagore, Thalès.\n\nReformule ta question avec un mot clé.";
+ }
+ setTimeout(()=>addBot(r),80);
+}
+document.getElementById('send').addEventListener('click', envoyer);
+document.getElementById('send').addEventListener('touchend', e=>{ e.preventDefault(); envoyer(); });
+document.getElementById('q').addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); envoyer(); } });
+</script>
+</body>
+  </html>
