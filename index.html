@@ -3,90 +3,113 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deo IA V43 - Comptabilité OHADA</title>
+<title>Deo IA V46 - Vision + Examen + Voix</title>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <style>
 body{margin:0;background:#0a0a0a;color:#fff;font-family:Arial;display:flex;flex-direction:column;height:100vh}
-#h{background:#111;border-bottom:2px solid #00e676;padding:12px;text-align:center}
-#h h1{margin:0;font-size:22px} #h h1 span{color:#00e676}
-#h p{margin:4px 0 0;color:#aaa;font-size:12px}
+#h{background:#111;border-bottom:2px solid #00e676;padding:10px;text-align:center}
+#h h1{margin:0;font-size:20px} #h h1 span{color:#00e676}
+#h p{font-size:11px;color:#aaa;margin:3px 0}
+#tools{display:flex;gap:6px;justify-content:center;padding:8px;background:#0f0f0f;flex-wrap:wrap}
+#tools button{background:#222;border:1px solid #333;color:#fff;padding:7px 10px;border-radius:8px;font-size:12px;cursor:pointer}
+#tools button.active{border-color:#00e676;color:#00e676}
 #chat{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
-.m{padding:11px;border-radius:14px;max-width:85%;line-height:1.4;white-space:pre-wrap}
+.m{padding:11px;border-radius:14px;max-width:86%;line-height:1.5;white-space:pre-wrap;font-size:13px}
 .u{background:#2a2a2a;align-self:flex-end}
 .b{background:#1a1a1a;border:1px solid #333;align-self:flex-start}
-.bdg{background:#00e676;color:#000;font-size:11px;padding:2px 6px;border-radius:6px;font-weight:bold}
-#bar{display:flex;gap:7px;padding:10px;background:#111;border-top:1px solid #222}
-#q{flex:1;padding:13px;border-radius:12px;border:1px solid #333;background:#222;color:#fff;outline:none}
-#send{width:52px;height:52px;border-radius:12px;border:none;background:#00e676;font-weight:bold;cursor:pointer}
-.btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-.btns button{background:#222;border:1px solid #333;color:#fff;padding:6px 10px;border-radius:8px;font-size:12px;cursor:pointer}
+#bar{display:flex;gap:6px;padding:10px;background:#111}
+#q{flex:1;padding:12px;border-radius:12px;border:1px solid #333;background:#222;color:#fff}
+#send{width:50px;border-radius:12px;border:none;background:#00e676;font-weight:bold;cursor:pointer}
 </style>
 </head>
 <body>
 <div id="h">
-<h1>Deo IA <span>V43</span></h1>
-<p>Toutes Définitions + Comptabilité OHADA - Made in RDC</p>
+<h1>Deo IA <span>V46</span> 🇨🇩</h1>
+<p>Vision + Voix + Examens + Compta OHADA - Made in Kinshasa</p>
+</div>
+<div id="tools">
+<input type="file" id="cam" accept="image/*" capture="environment" hidden>
+<button onclick="cam.click()">📸 Photo Exercice</button>
+<button onclick="toggleVoice()" id="vBtn">🔊 Voix ON</button>
+<button onclick="startExamen()">📝 Examen Blanc</button>
+<button onclick="clearMem()">🗑️ Reset</button>
 </div>
 <div id="chat"></div>
 <div id="bar">
-<input id="q" placeholder="Ex: marchandise 100$ tva 16% ou journal ou balance...">
+<input id="q" placeholder="Pose question ou tape 100$ ou photographie...">
 <button id="send">➤</button>
 </div>
 
 <script>
-const chat = document.getElementById('chat');
-const q = document.getElementById('q');
+const chat=document.getElementById('chat'), q=document.getElementById('q'), cam=document.getElementById('cam');
+let voiceOn=true, nom=localStorage.getItem('deo_nom')||'';
 
-function addMsg(text, who){
- const d = document.createElement('div');
- d.className = 'm '+(who==='user'?'u':'b');
- d.textContent = text;
- chat.appendChild(d);
- chat.scrollTop = chat.scrollHeight;
-}
-
-function comptaEngine(txt){
- txt = txt.toLowerCase();
- // Détecte montant
- let m = txt.match(/(\d+)\s*\$?/);
- let montant = m ? parseFloat(m[1]) : 100;
- let tva = 0.16;
- let ttc = montant * 1.16;
- let tvaMont = montant * 0.16;
-
- if(txt.includes('ttc') && txt.includes('ht')){
-   // si user donne TTC
-   let ht = montant / 1.16;
-   return `TTC: ${montant}$\nHT: ${ht.toFixed(2)}$\nTVA 16%: ${(montant-ht).toFixed(2)}$`;
- }
- if(txt.includes('journal')){
-   return `JOURNAL OHADA - Achat ${montant}$ HT:\n\nDébit 601 Achat March: ${montant}$\nDébit 4452 TVA: ${tvaMont}$\nCrédit 401 Fournisseur: ${ttc}$\n\nVente:\nDébit 411 Client: ${ttc}$\nCrédit 701 Vente: ${montant}$\nCrédit 4431 TVA facturée: ${tvaMont}$`;
- }
- if(txt.includes('grand livre') || txt.includes('grands livres')){
-   return `GRANDS LIVRES (T):\n\n601 - Solde Débiteur: ${montant}$\n4452 - Solde Débiteur: ${tvaMont}$\n401 - Solde Créditeur: ${ttc}$\n\nTotal Débit = Crédit: ${ttc}$ OK`;
- }
- if(txt.includes('balance')){
-   return `BALANCE OHADA - ${montant}$ HT\n\nCompte | Mvt Débit | Mvt Crédit | Solde\n601 | ${montant} | 0 | ${montant} D\n4452 | ${tvaMont} | 0 | ${tvaMont} D\n401 | 0 | ${ttc} | ${ttc} C\n\nTotaux: ${ttc} = ${ttc} ✅ Équilibrée`;
- }
- // défaut: calcul TTC
- return `Marchandise: ${montant}$ HT\nTVA 16%: ${tvaMont}$\nTTC: ${ttc}$\n\nFormule: TTC = HT x 1,16\nHT = TTC / 1,16\n\nTape: 'journal', 'grands livres', 'balance' pour les écritures.`;
-}
-
-document.getElementById('send').onclick = () => {
- if(!q.value.trim()) return;
- let txt = q.value.trim();
- addMsg(txt,'user');
- setTimeout(()=>{
-   let rep = comptaEngine(txt);
-   if(txt.includes('mourinho') || txt.includes('real') || txt.includes('barça')){
-     rep = "Mourinho: 'Estamos perdiendo 24 horas de reposo, pero ahí vamos.' = On perd 24h de repos, pas le match!";
-   }
-   addMsg(rep,'bot');
- },400);
- q.value='';
+// BASE UNIVERSELLE
+const BASE={
+ tva:"TVA 16% RDC: TTC = HT x 1.16. Ex: 100$ HT = 116$ TTC. Collectée par DGI.",
+ dgi:"DGI: Direction Générale des Impôts. Taxe intérieure: TVA, IBP, IPR. Paiement banque mensuel.",
+ dgda:"DGDA: Douanes. Frontière Matadi/Ndjili. Taxe tout ce qui entre.",
+ dgrad:"DGRAD: Recettes Administratives. Vend documents: passeport, permis, amendes, titres.",
+ journal:"JOURNAL: Achat 200$ HT => D 601:200 / D 4452:32 / C 401:232. Vente => D 411:232 / C 701:200 / C 4431:32",
+ balance:"BALANCE: Vérifie Débit = Crédit. Si 232=232, équilibrée ✅",
+ bilan:"BILAN: Actif (ce que tu as) = Passif (ce que tu dois). Photo de l'entreprise.",
+ ohada:"OHADA: 17 pays Afrique, même loi comptable depuis 2017.",
+ marketing:"MARKETING 4P: Produit, Prix, Place, Promotion. But: trouver clients."
 };
-q.addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('send').click(); });
 
-addMsg("Mbote! Je suis Deo IA V43 🇨🇩\n\nTape:\n- '100$ tva' => calcul TTC\n- 'journal 100$' => écriture journal\n- 'grands livres' => T\n- 'balance' => balance OHADA\n\nTu es prêt?","bot");
+function addMsg(t,who){
+ const d=document.createElement('div'); d.className='m '+(who==='user'?'u':'b'); d.textContent=t;
+ chat.appendChild(d); chat.scrollTop=chat.scrollHeight;
+ if(who==='bot'&&voiceOn){ let u=new SpeechSynthesisUtterance(t.slice(0,220)); u.lang='fr-FR'; u.rate=0.95; speechSynthesis.speak(u); }
+}
+
+function repondre(txt){
+ let low=txt.toLowerCase();
+ if(!nom && low.includes('je m’appelle')||low.includes('je m appelle')||low.includes('c est deo')){
+   let m=txt.match(/deo/i); if(m){ localStorage.setItem('deo_nom','Deo'); nom='Deo'; return "Mbote Deo! ✅ Je me souviendrai de toi. Maintenant ton Deo IA te connait."; }
+ }
+ for(let k in BASE){ if(low.includes(k)) return `👨‍🏫 MODE PROFESSEUR: ${BASE[k]}\n\n1. Définition ok\n2. Exemple Kinshasa ok\n3. Piège: n'oublie pas la TVA!\n\nExercice pour ${nom||'toi'}: Calcule 250$ HT en TTC?`; }
+ let n=low.match(/(\d+)\s*\$?/); if(n){ let ht=parseFloat(n[1]); let tva=ht*0.16, ttc=ht*1.16; return `Calcul: ${ht}$ HT + TVA ${tva.toFixed(2)}$ = ${ttc.toFixed(2)}$ TTC\nFormule: TTC = HT x 1.16\nHT = TTC / 1.16`; }
+ if(low.includes('bonjour')||low.includes('mbote')) return `Mbote ${nom||'ndeko'}! Je suis Deo IA V46. Je peux: 1) Répondre cours 2) Calculer TVA 3) Lire photo exercice 4) Faire examen blanc. Que veux-tu?`;
+ return `Question: "${txt}"\n\nMode Prof: C'est un concept de gestion important. Exemple RDC: utilisé à Kinshasa.\n\nTape un mot-clé: TVA, DGI, DGDA, DGRAD, JOURNAL, BALANCE, BILAN, MARKETING, OHADA.\nOu 📸 Photographie ton exercice au tableau!`;
+}
+
+// EVENTS
+document.getElementById('send').onclick=()=>{
+ if(!q.value.trim()) return; let t=q.value; addMsg(t,'user'); setTimeout(()=>addMsg(repondre(t),'bot'),400); q.value='';
+};
+q.addEventListener('keydown',e=>{ if(e.key==='Enter') document.getElementById('send').click(); });
+
+function toggleVoice(){ voiceOn=!voiceOn; document.getElementById('vBtn').textContent=voiceOn?'🔊 Voix ON':'🔇 Voix OFF'; addMsg(voiceOn?'Voix activée':'Voix coupée','bot'); }
+function clearMem(){ localStorage.clear(); nom=''; addMsg('Mémoire effacée. Je ne me souviens plus de toi.','bot'); }
+
+// PHOTO -> OCR
+cam.onchange=async e=>{
+ const file=e.target.files[0]; if(!file) return;
+ addMsg('📸 Photo reçue... je lis le tableau (5 sec)','bot');
+ try{
+  const {data:{text}} = await Tesseract.recognize(file,'fra+eng');
+  addMsg(`J'ai lu:\n"${text.slice(0,200)}"\n\n👨‍🏫 Explication Prof: C'est un exercice de ${text.toLowerCase().includes('tva')?'TVA': text.toLowerCase().includes('journal')?'Journal':'Compta'}. Correction:\n${repondre(text)}`,'bot');
+ }catch{ addMsg('Photo floue, réessaie plus près du tableau.','bot'); }
+};
+
+// EXAMEN BLANC
+const EXAMS=[
+ {q:"Achat 100$ HT. Journal?", r:"601"},
+ {q:"DGI fait quoi?", r:"impot"},
+ {q:"TTC = ?", r:"1.16"},
+ {q:"DGDA est où?", r:"frontiere"},
+ {q:"Balance doit être?", r:"equilibree"}
+];
+function startExamen(){
+ let score=0; let q=EXAMS[Math.floor(Math.random()*EXAMS.length)];
+ let rep=prompt(`📝 EXAMEN BLANC V46 /20\n\nQuestion: ${q.q}\n\nTa réponse:`);
+ if(rep && rep.toLowerCase().includes(q.r)){ score=20; alert(`✅ Parfait ${nom||''}! 20/20`); addMsg(`Examen: ${q.q} => Tu as eu 20/20! Bravo ${nom||''} 🎉`,'bot'); }
+ else{ alert(`Correction: il fallait ${q.r}\nTu as 0/20, révise!\n\nBonne réponse: ${BASE[q.r]||q.r}`); }
+}
+
+// INIT
+addMsg(nom?`Mbote ${nom}! V46 prête: 📸 Photo, 🔊 Voix, 📝 Examen. Pose ta question.`:`Mbote! Je suis Deo IA V46 🇨🇩\n\nJe fais maintenant:\n📸 Photo d'exercice -> explication\n🔊 Je parle\n📝 Examen blanc /20\n🧮 Calcul TVA auto\n\nDis-moi "Je m'appelle Deo" pour que je me souvienne de toi!`,'bot');
 </script>
 </body>
-</html>
+ </html>
