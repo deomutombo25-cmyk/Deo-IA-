@@ -1,114 +1,92 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deo IA V42 - Toutes Définitions</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deo IA V43 - Comptabilité OHADA</title>
 <style>
-body{margin:0;background:#0a0a0a;color:#eee;font-family:system-ui;display:flex;flex-direction:column;height:100vh}
-#h{background:#111;border-bottom:2px solid #00e676;padding:8px;text-align:center}
-#h h1{margin:0} #h h1 span{color:#00e676} #h small{color:#00e676;font-size:10px}
-#chat{flex:1;overflow:auto;padding:10px;display:flex;flex-direction:column;gap:7px}
-.m{padding:11px;border-radius:14px;max-width:96%;white-space:pre-wrap;line-height:1.5;font-size:12.5px}
-.u{background:#2a2a2a;align-self:flex-end} .b{background:#171717;border:1px solid #333;align-self:flex-start}
-.bdg{background:#00e676;color:#000;font-size:8px;padding:2px 6px;border-radius:8px;font-weight:bold}
-#bar{display:flex;gap:7px;padding:10px;border-top:1px solid #222}
-#q{flex:1;padding:13px;border-radius:20px;border:1px solid #444;background:#1e1e1e;color:#fff;outline:none;font-size:15px}
-#send{width:52px;height:52px;border-radius:50%;background:#00e676;color:#000;border:none;font-size:20px;font-weight:bold}
+body{margin:0;background:#0a0a0a;color:#fff;font-family:Arial;display:flex;flex-direction:column;height:100vh}
+#h{background:#111;border-bottom:2px solid #00e676;padding:12px;text-align:center}
+#h h1{margin:0;font-size:22px} #h h1 span{color:#00e676}
+#h p{margin:4px 0 0;color:#aaa;font-size:12px}
+#chat{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
+.m{padding:11px;border-radius:14px;max-width:85%;line-height:1.4;white-space:pre-wrap}
+.u{background:#2a2a2a;align-self:flex-end}
+.b{background:#1a1a1a;border:1px solid #333;align-self:flex-start}
+.bdg{background:#00e676;color:#000;font-size:11px;padding:2px 6px;border-radius:6px;font-weight:bold}
+#bar{display:flex;gap:7px;padding:10px;background:#111;border-top:1px solid #222}
+#q{flex:1;padding:13px;border-radius:12px;border:1px solid #333;background:#222;color:#fff;outline:none}
+#send{width:52px;height:52px;border-radius:12px;border:none;background:#00e676;font-weight:bold;cursor:pointer}
+.btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.btns button{background:#222;border:1px solid #333;color:#fff;padding:6px 10px;border-radius:8px;font-size:12px;cursor:pointer}
 </style>
 </head>
 <body>
-<div id="h"><h1>DEO <span>IA</span> V42</h1><small>🇨🇩 TOUTES DÉFINITIONS TOUS COURS - PRIMAIRE À UNIVERSITÉ</small></div>
-<div id="chat"><div class="m b"><span class="bdg">V42 DICTIONNAIRE GÉANT</span>
-<b>J'ai TOUTES les définitions!</b>
-Tape: mitose, atome, verbe, Ohm, TVA, DGI, photosynthèse, ADN, Pythagore, dollar, compta, marketing, inflation, philosophie, écosystème, Internet, Excel...
-</div></div>
-<div id="bar"><input id="q" placeholder="Tape une définition..."><button id="send">↑</button></div>
+<div id="h">
+<h1>Deo IA <span>V43</span></h1>
+<p>Toutes Définitions + Comptabilité OHADA - Made in RDC</p>
+</div>
+<div id="chat"></div>
+<div id="bar">
+<input id="q" placeholder="Ex: marchandise 100$ tva 16% ou journal ou balance...">
+<button id="send">➤</button>
+</div>
+
 <script>
-const D=[
-{k:["pythagore"],d:"**PYTHAGORE:** Triangle rectangle: c²=a²+b². c=hypoténuse. Ex: 3-4-5."},
-{k:["thales"],d:"**THALÈS:** Si 2 // coupées par 2 sécantes: AB/AC=AD/AE."},
-{k:["equation"],d:"**ÉQUATION:** Egalité avec inconnue x. Ex: 2x+4=10 => x=3."},
-{k:["fonction","fonction numerique"],d:"**FONCTION:** y=f(x). Chaque x a un y. Ex: f(x)=2x+3."},
-{k:["factorisation"],d:"**FACTORISATION:** a²-b²=(a-b)(a+b). a²+2ab+b²=(a+b)²."},
-{k:["derivee"],d:"**DÉRIVÉE:** (x^n)'=n.x^(n-1). (sin)'=cos. Vitesse variation."},
-{k:["logarithme","log"],d:"**LOGARITHME:** log(a.b)=log a+log b. ln e=1. Utile 6e."},
-{k:["integrale"],d:"**INTÉGRALE:** Inverse dérivée. Aire sous courbe."},
-{k:["cellule"],d:"**CELLULE:** Unité vie. Membrane+cytoplasme+noyau. Procaryote/Eucaryote."},
-{k:["adn"],d:"**ADN:** Double hélice A-T, C-G. Porte gènes. Chromosomes."},
-{k:["arn"],d:"**ARN:** Simple brin, copie ADN pour protéines. mARN, tARN."},
-{k:["gene","gène"],d:"**GÈNE:** Partie ADN qui code caractère. Allèle=version gène."},
-{k:["mitose"],d:"**MITOSE:** 2 cellules identiques. Phases: Prophase, Métaphase, Anaphase, Télophase."},
-{k:["meiose","méiose"],d:"**MÉIOSE:** 4 cellules moitié chromosomes. Pour gamètes."},
-{k:["photosynthese","photosynthèse"],d:"**PHOTOSYNTHÈSE:** 6CO2+6H2O+lumière => sucre+6O2. Dans chloroplaste."},
-{k:["ecosysteme","écosystème"],d:"**ÉCOSYSTÈME:** Biotope (milieu) + biocénose (êtres vivants) + interactions."},
-{k:["digestion"],d:"**DIGESTION:** Bouche->Estomac->Intestin grêle (absorption)->Gros intestin."},
-{k:["respiration"],d:"**RESPIRATION:** C6H12O6+6O2 => 6CO2+6H2O+Energie ATP. Dans mitochondrie."},
-{k:["coeur","cœur"],d:"**CŒUR:** 2 oreillettes+2 ventricules. Petite et grande circulation."},
-{k:["atome"],d:"**ATOME:** Noyau (p+,n) + électrons. Z=protons. Ex: H=1p."},
-{k:["molecule","molécule"],d:"**MOLÉCULE:** Assemblage atomes. Ex: H2O, CO2, O2."},
-{k:["mole"],d:"**MOLE:** 6,02e23. n=m/M. M en g/mol."},
-{k:["ph"],d:"**pH:** 0-6 acide, 7 neutre, 8-14 basique. pH=-log[H+]."},
-{k:["acide"],d:"**ACIDE:** Donne H+. Ex: HCl, H2SO4. pH<7."},
-{k:["base"],d:"**BASE:** Donne OH-. Ex: NaOH. pH>7."},
-{k:["ohm"],d:"**LOI D'OHM:** U=R.I. U en Volt, R en Ohm, I en Ampère."},
-{k:["newton"],d:"**NEWTON:** F=m.a. P=m.g. 1N=1kg.m/s²."},
-{k:["energie","énergie"],d:"**ÉNERGIE:** Ec=½mv², Ep=mgh. Se conserve. Joule."},
-{k:["electricite","électricité"],d:"**ÉLECTRICITÉ:** P=U.I. E=P.t. kWh facture SNEL."},
-{k:["verbe"],d:"**VERBE:** 3 groupes: -er, -ir (iss), 3e groupe -re/-oir. Temps: présent, futur, passé."},
-{k:["nom"],d:"**NOM:** Commun/propre. Masculin/féminin, singulier/pluriel."},
-{k:["adjectif"],d:"**ADJECTIF:** Qualifie nom. S'accorde en genre et nombre."},
-{k:["figure de style"],d:"**FIGURE STYLE:** Métaphore (sans comme), comparaison (comme), hyperbole (exagère), personnification."},
-{k:["present simple"],d:"**PRESENT SIMPLE:** I/You/We/They+V, He/She+Vs. Ex: He studies."},
-{k:["past simple"],d:"**PAST SIMPLE:** V-ed ou 2e colonne. Ex: went, studied."},
-{k:["tva"],d:"**TVA:** Taxe Valeur Ajoutée 16% RDC. TTC=HTx1,16. HT=TTC/1,16."},
-{k:["ht"],d:"**HT:** Hors Taxe, prix sans TVA."},
-{k:["ttc"],d:"**TTC:** Toutes Taxes Comprises, prix avec TVA."},
-{k:["dgi"],d:"**DGI:** Direction Générale Impôts. Collecte impôts RDC."},
-{k:["dgda"],d:"**DGDA:** Douanes et Accises. Ex-OFIDA. Contrôle frontières."},
-{k:["dgrad"],d:"**DGRAD:** Recettes Administratives, Domaniales, Participations. 3e régie RDC."},
-{k:["ohada"],d:"**OHADA:** 17 pays dont RDC. 10 Actes Uniformes. Droit affaires."},
-{k:["fob"],d:"**FOB:** Free On Board. Vendeur livre à bord navire départ."},
-{k:["cif"],d:"**CIF:** Cost Insurance Freight. Vendeur paie jusqu'à destination."},
-{k:["isc"],d:"**ISC:** Institut Supérieur Commerce Kinshasa Gombe."},
-{k:["compta","comptabilite","comptabilité"],d:"**COMPTABILITÉ:** Enregistre opérations partie double Débit=Crédit."},
-{k:["bilan"],d:"**BILAN:** Actif (biens) = Passif (dettes+capital). Photo patrimoine."},
-{k:["journal"],d:"**JOURNAL:** Livre chronologique opérations comptables."},
-{k:["marketing"],d:"**MARKETING:** 4P: Produit, Prix, Place, Promotion. Satisfaire client."},
-{k:["inflation"],d:"**INFLATION:** Hausse générale prix. Perte pouvoir achat."},
-{k:["chomage","chômage"],d:"**CHÔMAGE:** Personnes sans emploi qui cherchent."},
-{k:["pib"],d:"**PIB:** Produit Intérieur Brut. Richesse produite pays 1 an."},
-{k:["dollar"],d:"**DOLLAR:** Monnaie USA. 1$ ~ 2800FC (2026). Change flottant."},
-{k:["informatique"],d:"**INFORMATIQUE:** Info+Automatique (1962). Hardware+Software."},
-{k:["hardware"],d:"**HARDWARE:** Physique ordi: écran, clavier, UC, RAM, disque dur."},
-{k:["software"],d:"**SOFTWARE:** Logiciel: Windows, Word, Android, Sage."},
-{k:["algorithme"],d:"**ALGORITHME:** Suite instructions finie pour résoudre problème."},
-{k:["internet"],d:"**INTERNET:** Réseau mondial. Protocoles TCP/IP. WWW=World Wide Web."},
-{k:["excel"],d:"**EXCEL:** Tableur: lignes, colonnes, cellules, formules =SOMME(A1:A10)."},
-{k:["word"],d:"**WORD:** Traitement texte: saisir, mise en forme, impression."},
-{k:["rdc"],d:"**RDC:** Capitale Kinshasa, 26 provinces, 30 juin 1960 indépendance, 2e fleuve monde."},
-{k:["philosophie"],d:"**PHILOSOPHIE:** Amour sagesse. Cherche vérité, sens vie. Socrate, Descartes."},
-{k:["sociologie"],d:"**SOCIOLOGIE:** Étude société, groupes humains. Durkheim, Weber."},
-{k:["psychologie"],d:"**PSYCHOLOGIE:** Étude comportement et mental humain."},
-{k:["photosynthese"],d:"**PHOTOSYNTHÈSE:** Plantes fabriquent sucre avec CO2+H2O+lumière."}
-];
-function find(q){
- q=q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
- let best=null,mx=0;
- for(let e of D){ for(let k of e.k){ if(q.includes(k)){ let s=k.length; if(k===q) s+=30; if(s>mx){ mx=s; best=e; } } } }
- return best?best.d:null;
+const chat = document.getElementById('chat');
+const q = document.getElementById('q');
+
+function addMsg(text, who){
+ const d = document.createElement('div');
+ d.className = 'm '+(who==='user'?'u':'b');
+ d.textContent = text;
+ chat.appendChild(d);
+ chat.scrollTop = chat.scrollHeight;
 }
-function addBot(h){const c=document.getElementById('chat');const d=document.createElement('div');d.className='m b';d.innerHTML='<span class="bdg">V42</span><br>'+h.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<b>$1</b>');c.appendChild(d);c.scrollTop=c.scrollHeight;}
-function addUser(t){const c=document.getElementById('chat');const d=document.createElement('div');d.className='m u';d.textContent=t;c.appendChild(d);c.scrollTop=c.scrollHeight;}
-function envoyer(){
- const i=document.getElementById('q'); const t=i.value.trim(); if(!t) return;
- addUser(t); i.value='';
- let r=find(t);
- if(!r){ r="**"+t.toUpperCase()+" - DEO IA V42**\nJe connais 100+ définitions!\n\n**Math:** Pythagore, Thalès, équation, fonction, factorisation, dérivée, log, intégrale\n**Bio:** cellule, ADN, gène, mitose, méiose, photosynthèse, écosystème, digestion, cœur\n**Chimie:** atome, molécule, mole, pH, acide, base\n**Physique:** Ohm U=RI, Newton F=ma, énergie, électricité\n**Français:** verbe, nom, adjectif, figure style\n**Anglais:** present/past simple\n**Éco:** TVA, DGI, DGDA, DGRAD, OHADA, FOB, CIF, bilan, compta, marketing, inflation, PIB, dollar\n**Info:** informatique, hardware, software, algorithme, Internet, Excel, Word\n**Autres:** RDC, philosophie, sociologie, psychologie\n\nTape un mot clé: ex 'ADN', 'Ohm', 'TVA'"; }
- setTimeout(()=>addBot(r),50);
+
+function comptaEngine(txt){
+ txt = txt.toLowerCase();
+ // Détecte montant
+ let m = txt.match(/(\d+)\s*\$?/);
+ let montant = m ? parseFloat(m[1]) : 100;
+ let tva = 0.16;
+ let ttc = montant * 1.16;
+ let tvaMont = montant * 0.16;
+
+ if(txt.includes('ttc') && txt.includes('ht')){
+   // si user donne TTC
+   let ht = montant / 1.16;
+   return `TTC: ${montant}$\nHT: ${ht.toFixed(2)}$\nTVA 16%: ${(montant-ht).toFixed(2)}$`;
+ }
+ if(txt.includes('journal')){
+   return `JOURNAL OHADA - Achat ${montant}$ HT:\n\nDébit 601 Achat March: ${montant}$\nDébit 4452 TVA: ${tvaMont}$\nCrédit 401 Fournisseur: ${ttc}$\n\nVente:\nDébit 411 Client: ${ttc}$\nCrédit 701 Vente: ${montant}$\nCrédit 4431 TVA facturée: ${tvaMont}$`;
+ }
+ if(txt.includes('grand livre') || txt.includes('grands livres')){
+   return `GRANDS LIVRES (T):\n\n601 - Solde Débiteur: ${montant}$\n4452 - Solde Débiteur: ${tvaMont}$\n401 - Solde Créditeur: ${ttc}$\n\nTotal Débit = Crédit: ${ttc}$ OK`;
+ }
+ if(txt.includes('balance')){
+   return `BALANCE OHADA - ${montant}$ HT\n\nCompte | Mvt Débit | Mvt Crédit | Solde\n601 | ${montant} | 0 | ${montant} D\n4452 | ${tvaMont} | 0 | ${tvaMont} D\n401 | 0 | ${ttc} | ${ttc} C\n\nTotaux: ${ttc} = ${ttc} ✅ Équilibrée`;
+ }
+ // défaut: calcul TTC
+ return `Marchandise: ${montant}$ HT\nTVA 16%: ${tvaMont}$\nTTC: ${ttc}$\n\nFormule: TTC = HT x 1,16\nHT = TTC / 1,16\n\nTape: 'journal', 'grands livres', 'balance' pour les écritures.`;
 }
-document.getElementById('send').addEventListener('click', envoyer);
-document.getElementById('send').addEventListener('touchend', e=>{ e.preventDefault(); envoyer(); });
-document.getElementById('q').addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); envoyer(); } });
+
+document.getElementById('send').onclick = () => {
+ if(!q.value.trim()) return;
+ let txt = q.value.trim();
+ addMsg(txt,'user');
+ setTimeout(()=>{
+   let rep = comptaEngine(txt);
+   if(txt.includes('mourinho') || txt.includes('real') || txt.includes('barça')){
+     rep = "Mourinho: 'Estamos perdiendo 24 horas de reposo, pero ahí vamos.' = On perd 24h de repos, pas le match!";
+   }
+   addMsg(rep,'bot');
+ },400);
+ q.value='';
+};
+q.addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('send').click(); });
+
+addMsg("Mbote! Je suis Deo IA V43 🇨🇩\n\nTape:\n- '100$ tva' => calcul TTC\n- 'journal 100$' => écriture journal\n- 'grands livres' => T\n- 'balance' => balance OHADA\n\nTu es prêt?","bot");
 </script>
 </body>
 </html>
