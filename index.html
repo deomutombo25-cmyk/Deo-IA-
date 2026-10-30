@@ -3,50 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Deo IA V52 - VRAIE IA Mondiale</title>
-<script src="https://js.puter.com/v2/"></script>
+<title>Deo IA V53 - VRAIE IA</title>
 <style>
 body{margin:0;background:#000;color:#fff;font-family:sans-serif;display:flex;flex-direction:column;height:100vh}
-#h{background:#111;padding:10px;border-bottom:2px solid #0f0;text-align:center}
-#h h1{margin:0;font-size:18px} #h h1 span{color:#0f0}
-#h p{font-size:10px;color:#0f0;margin:2px 0 0}
+#h{background:#111;padding:12px;border-bottom:2px solid #0f0;text-align:center}
+#h h1{margin:0;font-size:19px;color:#0f0}
 #chat{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
-.m{padding:11px;border-radius:14px;max-width:85%;line-height:1.4}
+.m{padding:11px;border-radius:14px;max-width:85%;line-height:1.4;white-space:pre-wrap}
 .user{background:#0a2a0a;align-self:flex-end;border:1px solid #0f0}
 .ai{background:#1a1a1a;align-self:flex-start;border:1px solid #333}
 #bar{display:flex;padding:8px;background:#111;gap:5px}
 #inp{flex:1;padding:12px;border-radius:20px;border:1px solid #333;background:#222;color:#fff}
-#send{background:#0f0;color:#000;border:none;padding:0 18px;border-radius:20px;font-weight:bold}
-#tools{display:flex;gap:5px;justify-content:center;padding:5px;background:#0a0a0a}
-#tools button{background:#222;border:1px solid #333;color:#fff;padding:4px 8px;border-radius:6px;font-size:11px}
+#send{background:#0f0;color:#000;border:none;padding:0 20px;border-radius:20px;font-weight:bold;font-size:18px}
 </style>
 </head>
 <body>
-<div id="h"><h1>Deo IA <span>V52</span> - VRAIE IA MONDIALE</h1><p>● En ligne - Gratuite - Puissante - Sans Clé API</p></div>
-<div id="tools">
-<button onclick="newChat()">+ Nouveau</button>
-<button onclick="document.getElementById('inp').value='Qui es-tu?'">Qui es-tu?</button>
-<button onclick="document.getElementById('inp').value='Explique moi comme si j avais 5 ans: '">Expliquer</button>
-</div>
-<div id="chat"><div class="m ai">Salut Deo ! 👋 Je suis Deo IA V52, ta VRAIE IA mondiale. Je ne suis plus une fausse réponse. Je suis connectée à une intelligence mondiale gratuite. Pose-moi n'importe quelle question !</div></div>
-<div id="bar"><input id="inp" placeholder="Pose ta question à Deo IA..."><button id="send">►</button></div>
+<div id="h"><h1>Deo IA V53 - VRAIE IA MONDIALE GRATUITE</h1></div>
+<div id="chat"><div class="m ai">Salut Deo ! 🚀 V53 est là, 100% gratuite, sans inscription, sans clé. Pose ta question !</div></div>
+<div id="bar"><input id="inp" placeholder="Pose ta question..."><button id="send">►</button></div>
 <script>
 const chat=document.getElementById('chat'), inp=document.getElementById('inp'), send=document.getElementById('send');
 function add(t,c){const d=document.createElement('div');d.className='m '+c;d.textContent=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;return d}
-function newChat(){chat.innerHTML='<div class="m ai">Nouveau chat Deo ! Je t écoute.</div>'}
 async function ask(){
 let q=inp.value.trim();if(!q)return;
 add(q,'user');inp.value='';
 let a=add('Deo IA réfléchit...','ai');
 try{
-const r=await puter.ai.chat(q,{model:'gpt-4o-mini'});
-a.textContent=r;
+let r=await fetch('https://text.pollinations.ai/'+encodeURIComponent(q));
+let t=await r.text();
+a.textContent=t;
 }catch(e){
-try{
-const r2=await fetch('https://text.pollinations.ai/'+encodeURIComponent(q));
-const t2=await r2.text();
-a.textContent=t2;
-}catch(e2){a.textContent='Erreur Deo: '+e.message+' - Réessaie, je suis là !';}
+a.textContent='Erreur réseau Deo, réessaie: '+e;
 }
 chat.scrollTop=chat.scrollHeight;
 }
