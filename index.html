@@ -2,103 +2,56 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deo IA V50 - IA Mondiale Gratuite</title>
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deo IA V52 - VRAIE IA Mondiale</title>
+<script src="https://js.puter.com/v2/"></script>
 <style>
-body{margin:0;background:#0a0a0a;color:#fff;font-family:Arial;display:flex;flex-direction:column;height:100vh}
-#h{background:#111;border-bottom:2px solid #00e676;padding:10px;text-align:center}
-#h h1{margin:0;font-size:19px} #h h1 span{color:#00e676}
-#h p{font-size:10px;color:#0f0;margin:2px}
-#tools{display:flex;gap:5px;justify-content:center;padding:7px;background:#0f0f0f;flex-wrap:wrap}
-#tools button{background:#222;border:1px solid #333;color:#fff;padding:6px 9px;border-radius:8px;font-size:11px;cursor:pointer}
+body{margin:0;background:#000;color:#fff;font-family:sans-serif;display:flex;flex-direction:column;height:100vh}
+#h{background:#111;padding:10px;border-bottom:2px solid #0f0;text-align:center}
+#h h1{margin:0;font-size:18px} #h h1 span{color:#0f0}
+#h p{font-size:10px;color:#0f0;margin:2px 0 0}
 #chat{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
-.m{padding:11px;border-radius:14px;max-width:88%;line-height:1.5;white-space:pre-wrap;font-size:13px}
-.u{background:#2a2a2a;align-self:flex-end}
-.b{background:#1a1a1a;border:1px solid #333;align-self:flex-start}
-#bar{display:flex;gap:6px;padding:10px;background:#111}
-#q{flex:1;padding:12px;border-radius:12px;border:1px solid #333;background:#222;color:#fff}
-#send{width:50px;border-radius:12px;border:none;background:#00e676;font-weight:bold;cursor:pointer}
-#status{font-size:10px;text-align:center;color:#666;padding:2px}
+.m{padding:11px;border-radius:14px;max-width:85%;line-height:1.4}
+.user{background:#0a2a0a;align-self:flex-end;border:1px solid #0f0}
+.ai{background:#1a1a1a;align-self:flex-start;border:1px solid #333}
+#bar{display:flex;padding:8px;background:#111;gap:5px}
+#inp{flex:1;padding:12px;border-radius:20px;border:1px solid #333;background:#222;color:#fff}
+#send{background:#0f0;color:#000;border:none;padding:0 18px;border-radius:20px;font-weight:bold}
+#tools{display:flex;gap:5px;justify-content:center;padding:5px;background:#0a0a0a}
+#tools button{background:#222;border:1px solid #333;color:#fff;padding:4px 8px;border-radius:6px;font-size:11px}
 </style>
 </head>
 <body>
-<div id="h">
-<h1>Deo IA <span>V50</span> - IA Mondiale 🇨🇩🌍</h1>
-<p>Connectée à une IA gratuite + Mode Offline ISC</p>
-</div>
+<div id="h"><h1>Deo IA <span>V52</span> - VRAIE IA MONDIALE</h1><p>● En ligne - Gratuite - Puissante - Sans Clé API</p></div>
 <div id="tools">
-<input type="file" id="cam" accept="image/*" capture="environment" hidden>
-<button onclick="cam.click()">📸 Photo</button>
-<button onclick="toggleVoice()" id="vBtn">🔊 Voix ON</button>
-<button onclick="startExamen()">📝 Examen</button>
-<button onclick="clearMem()">🗑️</button>
+<button onclick="newChat()">+ Nouveau</button>
+<button onclick="document.getElementById('inp').value='Qui es-tu?'">Qui es-tu?</button>
+<button onclick="document.getElementById('inp').value='Explique moi comme si j avais 5 ans: '">Expliquer</button>
 </div>
-<div id="chat"></div>
-<div id="status">V50 prête - Internet: vérification...</div>
-<div id="bar">
-<input id="q" placeholder="Pose N'IMPORTE QUELLE question...">
-<button id="send">➤</button>
-</div>
-
+<div id="chat"><div class="m ai">Salut Deo ! 👋 Je suis Deo IA V52, ta VRAIE IA mondiale. Je ne suis plus une fausse réponse. Je suis connectée à une intelligence mondiale gratuite. Pose-moi n'importe quelle question !</div></div>
+<div id="bar"><input id="inp" placeholder="Pose ta question à Deo IA..."><button id="send">►</button></div>
 <script>
-const chat=document.getElementById('chat'), q=document.getElementById('q'), cam=document.getElementById('cam'), statusEl=document.getElementById('status');
-let voiceOn=true, nom=localStorage.getItem('deo_nom')||'';
-
-// BASE OFFLINE (si pas d'internet à Masina)
-const BASE_OFFLINE={
- tva:"TVA 16%: TTC = HT x 1.16. 100$ HT = 116$ TTC. DGI.",
- dgi:"DGI: Impôts intérieurs TVA, IBP, IPR.",
- dgda:"DGDA: Douanes frontière.",
- dgrad:"DGRAD: Passeport, permis, amendes.",
- journal:"JOURNAL: Achat => D601 D4452 / C401. Vente => D411 / C701 C4431"
-};
-
-function addMsg(t,who){
- const d=document.createElement('div'); d.className='m '+(who==='user'?'u':'b'); d.textContent=t;
- chat.appendChild(d); chat.scrollTop=chat.scrollHeight;
- if(who==='bot'&&voiceOn){ let u=new SpeechSynthesisUtterance(t.slice(0,200)); u.lang='fr-FR'; speechSynthesis.speak(u); }
+const chat=document.getElementById('chat'), inp=document.getElementById('inp'), send=document.getElementById('send');
+function add(t,c){const d=document.createElement('div');d.className='m '+c;d.textContent=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;return d}
+function newChat(){chat.innerHTML='<div class="m ai">Nouveau chat Deo ! Je t écoute.</div>'}
+async function ask(){
+let q=inp.value.trim();if(!q)return;
+add(q,'user');inp.value='';
+let a=add('Deo IA réfléchit...','ai');
+try{
+const r=await puter.ai.chat(q,{model:'gpt-4o-mini'});
+a.textContent=r;
+}catch(e){
+try{
+const r2=await fetch('https://text.pollinations.ai/'+encodeURIComponent(q));
+const t2=await r2.text();
+a.textContent=t2;
+}catch(e2){a.textContent='Erreur Deo: '+e.message+' - Réessaie, je suis là !';}
 }
-
-// V50: APPELLE UNE VRAIE IA GRATUITE
-async function repondreMondiale(question){
- statusEl.textContent="🌍 Interrogation IA mondiale...";
- // 1. Essaie IA gratuite Pollinations (pas de clé)
- try{
-  let prompt = `Tu es Deo IA V50, un professeur congolais de l'ISC à Kinshasa. Réponds en français, court, avec exemple RDC. Question: ${question}`;
-  let res = await fetch('https://text.pollinations.ai/'+encodeURIComponent(prompt), {method:'GET'});
-  if(res.ok){
-   let text = await res.text();
-   statusEl.textContent="✅ Réponse IA mondiale + offline";
-   return text.slice(0,800); // limite pour téléphone
-  }
- }catch(e){ console.log('IA offline',e); }
- // 2. Fallback: base locale si pas d'internet
- statusEl.textContent="📴 Mode Offline ISC (pas d'internet)";
- let low=question.toLowerCase();
- for(let k in BASE_OFFLINE){ if(low.includes(k)) return `👨‍🏫 OFFLINE: ${BASE_OFFLINE[k]}`; }
- let n=low.match(/(\d+)\s*\$?/); if(n){ let ht=parseFloat(n[1]); return `Calcul OFFLINE: ${ht}$ HT = ${ (ht*1.16).toFixed(2)}$ TTC (TVA ${ (ht*0.16).toFixed(2)}$)`; }
- return `Je suis en mode Offline (pas d'internet). Je connais TVA, DGI, DGDA, DGRAD, JOURNAL. Reconnecte-toi pour questions mondiales.`;
+chat.scrollTop=chat.scrollHeight;
 }
-
-document.getElementById('send').onclick=async()=>{
- if(!q.value.trim()) return; let t=q.value; addMsg(t,'user'); q.value='';
- // petite mémoire nom
- if(t.toLowerCase().includes('je m') && t.toLowerCase().includes('deo')){ localStorage.setItem('deo_nom','Deo'); nom='Deo'; }
- let rep = await repondreMondiale(t);
- addMsg(rep,'bot');
-};
-q.addEventListener('keydown',e=>{ if(e.key==='Enter') document.getElementById('send').click(); });
-function toggleVoice(){ voiceOn=!voiceOn; document.getElementById('vBtn').textContent=voiceOn?'🔊 Voix ON':'🔇 Voix OFF'; }
-function clearMem(){ localStorage.clear(); addMsg('Mémoire effacée','bot'); }
-cam.onchange=async e=>{
- const file=e.target.files[0]; if(!file) return; addMsg('📸 Lecture photo...','bot');
- try{ const {data:{text}} = await Tesseract.recognize(file,'fra+eng'); let rep=await repondreMondiale(`Lis et explique cet exercice: ${text}`); addMsg(`Lu: "${text.slice(0,150)}"\n\n${rep}`,'bot'); }catch{ addMsg('Photo floue','bot'); }
-};
-function startExamen(){ let qs=["Achat 100$ HT journal?","DGI fait quoi?","TTC = HT x ?","DGDA où?"]; let qq=qs[Math.floor(Math.random()*qs.length)]; let r=prompt(`📝 EXAMEN V50\n\n${qq}`); if(r) addMsg(`Examen: ${qq}\nTa réponse: ${r}\nJe corrige...`,'user'); }
-
-addMsg(`Mbote ${nom||'Deo'}! V50 connectée 🌍\n\nNOUVEAUTÉ:\n✅ Maintenant je réponds à TOUTES les questions du monde (même hors compta) grâce à une IA gratuite\n✅ Si pas d'internet à Kinshasa, je repasse en mode Offline ISC\n\nTeste: "Explique la photosynthèse" ou "Qui est le président de la RDC" ou "100$"`, 'bot');
-fetch('https://text.pollinations.ai/hello').then(()=>statusEl.textContent="✅ Internet OK - IA Mondiale connectée").catch(()=>statusEl.textContent="📴 Mode Offline - IA locale ISC");
+send.onclick=ask;
+inp.onkeydown=e=>{if(e.key==='Enter')ask()};
 </script>
 </body>
- </html>
+</html>
