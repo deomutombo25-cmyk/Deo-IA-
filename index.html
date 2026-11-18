@@ -2,35 +2,43 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DEO IA - Répond à TOUT</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deo IA V53 - VRAIE IA</title>
 <style>
-body{margin:0;font-family:Arial;background:#0a0a15;color:white;text-align:center;padding:15px}
-header{padding:20px;background:linear-gradient(90deg,#0088ff,#00cc66);border-radius:20px}
-h1{margin:0}
-.box{background:#1c1c2e;margin:12px 0;padding:16px;border-radius:20px}
-button{padding:13px;border:none;border-radius:30px;background:#00cc66;color:white;font-weight:bold;margin:4px}
-input{width:90%;padding:14px;border-radius:15px;border:none;margin:8px;text-align:center;font-size:16px}
-#reponse{background:#2a2a45;padding:16px;border-radius:15px;text-align:left;min-height:80px;font-size:17px;line-height:1.6;border:2px solid #00cc66;white-space:pre-wrap}
-.petit{font-size:13px;color:#aaa}
+body{margin:0;background:#000;color:#fff;font-family:sans-serif;display:flex;flex-direction:column;height:100vh}
+#h{background:#111;padding:12px;border-bottom:2px solid #0f0;text-align:center}
+#h h1{margin:0;font-size:19px;color:#0f0}
+#chat{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
+.m{padding:11px;border-radius:14px;max-width:85%;line-height:1.4;white-space:pre-wrap}
+.user{background:#0a2a0a;align-self:flex-end;border:1px solid #0f0}
+.ai{background:#1a1a1a;align-self:flex-start;border:1px solid #333}
+#bar{display:flex;padding:8px;background:#111;gap:5px}
+#inp{flex:1;padding:12px;border-radius:20px;border:1px solid #333;background:#222;color:#fff}
+#send{background:#0f0;color:#000;border:none;padding:0 20px;border-radius:20px;font-weight:bold;font-size:18px}
 </style>
 </head>
 <body>
-
-<header><h1>🤖 DEO IA</h1><p>Assistante Personnelle pour Kinshasa 🇨🇩<br>Je réponds à TOUTES les questions!</p><p>Pour Deo Mutombo</p></header>
-
-<div class="box">
-<h3>💬 Pose-moi N'IMPORTE QUELLE question!</h3>
-<input type="text" id="question" placeholder="Ex: Qui est ton propriétaire? C'est quoi un volcan? Comment faire un gâteau?" onkeypress="if(event.key==='Enter') envoyer()">
-<br>
-<button onclick="envoyer()" style="background:#00cc66;font-size:18px;width:90%">💬 DEMANDER À DEO IA</button>
-<button onclick="ecouter()" style="background:#7b00ff">🔊 ÉCOUTER</button>
-<div id="reponse">👋 Bonjour Deo! Moi c'est DEO IA! Je peux répondre à TOUTES tes questions! Essaie-moi!</div>
-<p id="chargement" style="color:#ffcc00;display:none">⏳ DEO IA réfléchit...</p>
-</div>
-
-<div class="box">
-<h3>⚡ Essaie!</h3>
-<button onclick="tester('Quel est le nom de ton propriétaire?')">👑 Mon propriétaire?</button>
-<button onclick="tester('C est quoi un volcan?')">🌋 C'est quoi un volcan?</button>
-<button onclick="tester('Comment faire un gâteau au chocolat?')">🍰 Gâteau?</
+<div id="h"><h1>Deo IA V53 - VRAIE IA MONDIALE GRATUITE</h1></div>
+<div id="chat"><div class="m ai">Salut Deo ! 🚀 V53 est là, 100% gratuite, sans inscription, sans clé. Pose ta question !</div></div>
+<div id="bar"><input id="inp" placeholder="Pose ta question..."><button id="send">►</button></div>
+<script>
+const chat=document.getElementById('chat'), inp=document.getElementById('inp'), send=document.getElementById('send');
+function add(t,c){const d=document.createElement('div');d.className='m '+c;d.textContent=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;return d}
+async function ask(){
+let q=inp.value.trim();if(!q)return;
+add(q,'user');inp.value='';
+let a=add('Deo IA réfléchit...','ai');
+try{
+let r=await fetch('https://text.pollinations.ai/'+encodeURIComponent(q));
+let t=await r.text();
+a.textContent=t;
+}catch(e){
+a.textContent='Erreur réseau Deo, réessaie: '+e;
+}
+chat.scrollTop=chat.scrollHeight;
+}
+send.onclick=ask;
+inp.onkeydown=e=>{if(e.key==='Enter')ask()};
+</script>
+</body>
+  </html>
